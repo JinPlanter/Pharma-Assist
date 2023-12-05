@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
+import '../Styles/style.css';
+import Navbar from "../navbar"
 import Papa from 'papaparse';
 
 export default function ImportFile() {
@@ -50,13 +52,17 @@ export default function ImportFile() {
 
     return (
         <div>
-            <input type="file" accept=".json,.csv" onChange={handleFileUpload} />
-            <button onClick={handleParse}>Confirm</button>
-            <ul>
-                {Array.isArray(parsedData) ? parsedData.map((item, index) => (
-                    <li key={index}>{JSON.stringify(item)}</li>
-                )) : <li>{JSON.stringify(parsedData)}</li>}
-            </ul>
+            <Navbar />
+
+            <main>
+                <input type="file" accept=".json,.csv" onChange={handleFileUpload} />
+                <button onClick={handleParse}>Confirm</button>
+                <ul>
+                    {Array.isArray(parsedData) ? parsedData.map((item, index) => (
+                        <li key={index}>{JSON.stringify(item)}</li>
+                    )) : <li>{JSON.stringify(parsedData)}</li>}
+                </ul>
+            </main>
         </div>
     );
 }
