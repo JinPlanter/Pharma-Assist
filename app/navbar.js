@@ -3,7 +3,7 @@ import Link from 'next/link';
 import './Styles/style.css';
 
 export default function Navbar() {
-  const webPages = ["Login", "ClassStudentPage"];
+  const webPages = ["Login", "ClassStudentPage", "ImportFile"];
 
   return (
     <nav className="navbar">

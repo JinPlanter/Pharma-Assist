@@ -1,4 +1,5 @@
 import React from 'react'
+import '../Styles/style.css';
 import Navbar from "../navbar"
 
 export default function Page() {
