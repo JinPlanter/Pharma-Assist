@@ -1,0 +1,85 @@
+
+{
+  "criteria": [
+    {
+      "label": "Rx# ",
+      "type": "text",
+      "comment": false
+    },
+    {
+      "label": "Date ",
+      "type": "text",
+      "comment": false
+    },
+    {
+      "label": "Patient Name ",
+      "type": "text",
+      "comment": false
+    },
+    {
+      "label": "Selected wrong drug",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Patient profile/wrong patient",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Prescriber",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Sig",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Dispense quantity",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Repeats",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Days supply",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Billing procedure",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Auxiliary labels",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Accurate drug monograph",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Question",
+      "type": "checkbox",
+      "comment": true
+    },
+    {
+      "label": "Evaluation (total marks) ",
+      "type": "text",
+      "comment": false
+    },
+    {
+      "label": "Initials of checker ",
+      "type": "text",
+      "comment": false
+    }
+  ]
+}
