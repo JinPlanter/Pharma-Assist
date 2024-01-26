@@ -24,7 +24,7 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
       {/* Label for the dropdown menu */}
       <label
         htmlFor="classSelect"
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-custom-white"
       >
         Select a Class:
       </label>
@@ -34,7 +34,14 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
         id="classSelect"
         value={selectedClass}
         onChange={handleClassChange}
-        className="mt-1 p-2 border rounded-md cursor-pointer transition-all duration-300 hover:bg-yellow-200 w-full"
+        className="
+        mt-1 
+        p-2 
+        border 
+        rounded-md 
+        cursor-pointer 
+        w-full
+        bg-custom-green"
       >
         {/* Default option prompting the user to select a class */}
         <option value="" disabled>

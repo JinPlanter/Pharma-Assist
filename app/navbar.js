@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import './Styles/style.css';
+//import './Styles/style.css';
 
 export default function Navbar() {
   const webPages = ["Login", "ClassStudentPage", "ImportFile", "grading"];

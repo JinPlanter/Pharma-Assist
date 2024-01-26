@@ -9,8 +9,7 @@ import GradingForm from '../components/gradingForm';
 import DropdownMenu from '../components/dropdown';
 import classA from '../data/classA.json';
 import classB from '../data/classB.json';
-import '../Styles/style.css'; // Import styles
-import Navbar from '../navbar';
+//import '../Styles/style.css'; // Import styles
 
 // Grading component
 const Grading = () => {
@@ -44,30 +43,31 @@ const Grading = () => {
   return (
     <div>
       {/* Heading for the grading app */}
-      <h1>Grading App</h1>
+      <h1>Grading Page</h1>
       
-      {/* Navbar component */}
-      <Navbar />
       
       {/* DropdownMenu component for selecting a class */}
-      <DropdownMenu
-        classLists={['', 'Class A', 'Class B']} // Add more class lists if needed
-        onSelectClass={handleClassSelect}
-      />
-      
-      {/* Main content area with flex layout */}
-      <div style={{ display: 'flex' }}>
+      <div className='flex flex-row lg:flex-row mb-4 mx-4'>
+        <DropdownMenu
+          classLists={['', 'Class A', 'Class B']} // Add more class lists if needed
+          onSelectClass={handleClassSelect}
+        />
         
-        {/* Left section for rendering the class list */}
-        <div style={{ flex: 1 }}>
-          {renderClassList()}
-        </div>
-        
-        {/* Right section for rendering the grading form */}
-        <div style={{ flex: 2 }}>
-          {selectedStudent && <GradingForm student={selectedStudent} />}
+        {/* Main content area with flex layout */}
+        <div className="flex lg:w-full">
+          
+          {/* Left section for rendering the class list */}
+          <div className='lg:w-1/3'>
+            {renderClassList()}
+          </div>
+          
+          {/* Right section for rendering the grading form */}
+          <div className="lg:w-2/3 mt-4 lg:mt-0">
+            {selectedStudent && <GradingForm student={selectedStudent} />}
+          </div>
         </div>
       </div>
+      
     </div>
   );
 };
