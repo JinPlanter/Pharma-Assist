@@ -46,26 +46,29 @@ const Grading = () => {
       <h1>Grading Page</h1>
       
       
-      {/* DropdownMenu component for selecting a class */}
-      <div className='flex flex-row lg:flex-row mb-4 mx-4'>
-        <DropdownMenu
-          classLists={['', 'Class A', 'Class B']} // Add more class lists if needed
-          onSelectClass={handleClassSelect}
-        />
-        
-        {/* Main content area with flex layout */}
-        <div className="flex lg:w-full">
-          
+      <div className='flex flex-row mb-4 mx-4'>
+
+        {/* DropdownMenu component for selecting a class + class list */}
+        <div className='w-1/3'>
+          <DropdownMenu
+            classLists={['', 'Class A', 'Class B']} // Add more class lists if needed
+            onSelectClass={handleClassSelect}
+          />
+
           {/* Left section for rendering the class list */}
-          <div className='lg:w-1/3'>
-            {renderClassList()}
+          <div className=''>
+              {renderClassList()}
           </div>
-          
-          {/* Right section for rendering the grading form */}
-          <div className="lg:w-2/3 mt-4 lg:mt-0">
+        </div>
+        
+        {/* Right section for rendering the grading form */}
+        <div className="w-2/3">
+          <div className="mt-10">
             {selectedStudent && <GradingForm student={selectedStudent} />}
           </div>
         </div>
+        
+        
       </div>
       
     </div>
