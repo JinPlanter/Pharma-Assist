@@ -22,7 +22,7 @@
 
 
 body {
-  background-color: theme('colors.custom-black');
+  background-color: theme('colors.custom-blue');
   color: theme('colors.custom-white');
   align-items: center;
   justify-content: center;
