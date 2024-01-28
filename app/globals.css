@@ -29,4 +29,13 @@ body {
   
 }
 
+.navigation{
+  background-color: theme('colors.custom-green');
+  color: theme('colors.custom-white');
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 
