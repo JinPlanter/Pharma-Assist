@@ -1,0 +1,13 @@
+[
+    { "id": 1, "name": "John Doe", "class": "Class A" },
+    { "id": 2, "name": "Jane Smith", "class": "Class A" },
+    { "id": 3, "name": "Bob Johnson", "class": "Class A" },
+    { "id": 4, "name": "Alice Williams", "class": "Class A" },
+    { "id": 5, "name": "Charlie Brown", "class": "Class A" },
+    { "id": 6, "name": "Eva Martinez", "class": "Class B" },
+    { "id": 7, "name": "David Lee", "class": "Class B" },
+    { "id": 8, "name": "Grace Turner", "class": "Class B" },
+    { "id": 9, "name": "Frank White", "class": "Class B" },
+    { "id": 10, "name": "Helen Davis", "class": "Class B" }
+  ]
+  
