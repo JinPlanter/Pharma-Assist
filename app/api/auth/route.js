@@ -5,7 +5,7 @@ import clientPromise from "../../lib/mongodb";
 
 const saltRounds = 10;
 
-export async function POST(req, res) {
+export async function POST(req) {
   const { email, password, action, role } = await req.json();
   console.log(req.body);
   const client = await clientPromise;
