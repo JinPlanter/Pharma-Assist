@@ -29,7 +29,7 @@ export default function Navigation(){
 
 
     return(
-        <nav className="bg-custom-green p-4">
+        <nav className="bg-custom-neon-blue p-4">
             <div className="flex items-center justify-between">
                 {/* Hamburger Button for Small Screens */}
                 <button
@@ -46,7 +46,7 @@ export default function Navigation(){
 
                 {/* Drawer for Small Screens */}
                 {isDrawerOpen && (
-                    <div className="lg:hidden fixed top-0 left-0 h-full bg-custom-green w-64 z-50 shadow">
+                    <div className="lg:hidden fixed top-0 left-0 h-full bg-custom-neon-blue w-64 z-50 shadow">
                         <ul className="p-5 space-y-5">
                             <li>
                                 <Link href="/" onClick={toggleDrawer}>Home</Link>

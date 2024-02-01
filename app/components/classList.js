@@ -12,7 +12,7 @@ const ClassList = ({ classlist, onStudentClick }) => {
       {classlist.map((student) => (
         <li
           key={student.id}
-          className="flex-shrink-0 p-2 border bg-custom-light-blue rounded-md cursor-pointer transition-all duration-300 hover:bg-custom-yellow"
+          className="flex-shrink-0 p-2 border bg-custom-light-blue rounded-md cursor-pointer transition-all duration-300 hover:bg-custom-neon-blue"
           onClick={() => onStudentClick(student)}
         >
           {/* Display the name of the student */}

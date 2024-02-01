@@ -41,7 +41,7 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
         rounded-md 
         cursor-pointer 
         w-full
-        bg-custom-green"
+        bg-custom-neon-blue"
       >
         {/* Default option prompting the user to select a class */}
         <option value="" disabled>

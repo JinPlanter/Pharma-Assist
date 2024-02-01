@@ -22,19 +22,14 @@
 
 
 body {
-  background-color: theme('colors.custom-blue');
+  background-color: theme('colors.custom-black');
   color: theme('colors.custom-white');
   align-items: center;
   justify-content: center;
   
 }
 
-.navigation{
-  background-color: theme('colors.custom-green');
-  color: theme('colors.custom-white');
-  align-items: center;
-  justify-content: center;
-}
+
 
 
 

@@ -66,7 +66,7 @@ const GradingForm = ({ student }) => {
             {/* Label for text input */}
             <label
               htmlFor={criterion.label}
-              className="text-gray-300 font-bold"
+              className="text-custom-blue font-bold"
             >
               {criterion.label}
             </label>
@@ -76,7 +76,7 @@ const GradingForm = ({ student }) => {
               id={criterion.label}
               value={formValues[criterion.label] || ""}
               onChange={(e) => handleTextChange(criterion, e.target.value)}
-              className="w-full p-2 border border-gray-700 rounded-md"
+              className="w-full p-2 border border-gray-700 rounded-md text-custom-black bg-custom-light-gray"
             />
           </div>
         )}
@@ -88,12 +88,12 @@ const GradingForm = ({ student }) => {
               id={criterion.label}
               checked={formValues[criterion.label] || false}
               onChange={() => handleCheckboxChange(criterion)}
-              className="mr-2"
+              className="mr-2 text-custom-black bg-custom-light-gray"
             />
             {/* Label for checkbox */}
             <label
               htmlFor={criterion.label}
-              className="text-gray-300 font-bold"
+              className="text-custom-blue font-bold"
             >
               {criterion.label}
             </label>
@@ -105,7 +105,7 @@ const GradingForm = ({ student }) => {
             placeholder="Add comment..."
             value={comments[criterion.label] || ""}
             onChange={(e) => handleCommentChange(criterion, e.target.value)}
-            className="h-10 w-full p-2 border rounded-md resize-y"
+            className="text-custom-black h-10 w-full p-2 border rounded-md resize-y bg-custom-light-gray"
           />
         )}
       </div>
@@ -132,7 +132,7 @@ const GradingForm = ({ student }) => {
         {/* Submission button */}
         <div className="mt-6">
           <button
-            className="bg-green-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-green-600"
+            className="bg-custom-light-blue text-custom-white py-2 px-4 rounded-md cursor-pointer hover:bg-custom-neon-blue"
             type="submit"
           >
             Submit
@@ -149,7 +149,7 @@ const GradingForm = ({ student }) => {
             </p>
             {/* Button to close the success popup */}
             <button
-              className="mt-2 bg-green-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-green-600"
+              className="mt-2 bg-custom-light-blue text-custom-white py-2 px-4 rounded-md cursor-pointer hover:bg-custom-neon-blue"
               onClick={closeSuccessPopup}
             >
               Close
