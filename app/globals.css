@@ -29,6 +29,37 @@ body {
   
 }
 
+h1 {
+  /*font-family: Consolas; font-size: 40px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 40px; } h3 { font-family: Consolas, monaco, monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Consolas, monaco, monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Consolas, monaco, monospace; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Consolas, monaco, monospace; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5667px;*/
+  color: rgb(254, 149, 94);
+  font-family: Consolas;
+  text-align: center;
+  justify-content: center;
+  
+}
+
+h2 {
+  color: rgb(253, 79, 128);
+  font-family: Bahnschrift;
+  text-align: left;
+  justify-content: center;
+}
+
+h3 {
+  color: rgb(250, 44, 142);
+  font-family: Bahnschrift;
+  text-decoration: underline;
+  
+}
+
+
+
+p {
+  color: rgb(180, 180, 180);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  justify-content: center;
+}
+
 
 
 
