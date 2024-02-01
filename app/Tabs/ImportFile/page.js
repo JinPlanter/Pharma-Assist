@@ -1,8 +1,8 @@
 "use client";
 // Import necessary modules from the React library
 import React, { useState } from 'react';
-import '../Styles/style.css'; // Import styles
-import Navbar from '../navbar'; // Import Navbar component
+import '../../Styles/style.css'; // Import styles
+import Navbar from '../../navbar'; // Import Navbar component
 import Papa from 'papaparse'; // Import Papa library for CSV parsing
 
 // Import File component
@@ -67,24 +67,27 @@ export default function ImportFile() {
     // JSX rendering for the ImportFile component
     return (
         <div>
-            {/* Navbar component */}
-            <Navbar />
+            <div>
+                <Navbar />
+            </div>
 
-            {/* Main content area */}
-            <main>
-                {/* Input for file upload with accept attribute specifying allowed file types */}
-                <input type="file" accept=".json,.csv" onChange={handleFileUpload} />
+            <div>
+                <main>
+                    {/* Input for file upload with accept attribute specifying allowed file types */}
+                    <input type="file" accept=".json,.csv" onChange={handleFileUpload} />
 
-                {/* Button to manually trigger parsing */}
-                <button onClick={handleParse}>Confirm</button>
+                    {/* Button to manually trigger parsing */}
+                    <button onClick={handleParse}>Confirm</button>
 
-                {/* Render parsed data in an unordered list */}
-                <ul>
-                    {Array.isArray(parsedData) ? parsedData.map((item, index) => (
-                        <li key={index}>{JSON.stringify(item)}</li>
-                    )) : <li>{JSON.stringify(parsedData)}</li>}
-                </ul>
-            </main>
+                    {/* Render parsed data in an unordered list */}
+                    <ul>
+                        {Array.isArray(parsedData) ? parsedData.map((item, index) => (
+                            <li key={index}>{JSON.stringify(item)}</li>
+                        )) : <li>{JSON.stringify(parsedData)}</li>}
+                    </ul>
+                </main>
+            </div>
+
         </div>
     );
 }

@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import classListData from '../data/classList.json';
-import "../Styles/style.css";
-import Navbar from '../navbar';
+import classListData from '../../data/classList.json';
+// import '../../Styles/style.css'; // Import styles
+import Navbar from '../../navbar'; // Import Navbar component
 
 
-import GradingForm from '../components/gradingForm';
+import GradingForm from '../../components/gradingForm';
 
 
 const ClassList = () => {
@@ -33,20 +33,14 @@ const ClassList = () => {
         setSelectedStudent(student);
     };
 
-
-
     return (
         <div>
             <div>
-                <h1>Display Class List</h1>
                 <Navbar />
             </div>
 
             <div>
                 <button onClick={handleImport}>Import Class List</button>
-
-
-
                 {/* Display a dropdown menu to select a class. */}
                 {classList.length > 0 && (
                     <div>
@@ -58,8 +52,6 @@ const ClassList = () => {
                         </select>
                     </div>
                 )}
-
-
 
 
                 {/* Main content area with flex layout */}
@@ -81,9 +73,8 @@ const ClassList = () => {
                         {selectedStudent && <GradingForm student={selectedStudent} />}
                     </div>
                 </div>
-
-
             </div>
+
         </div>
     );
 };
