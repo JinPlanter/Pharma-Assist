@@ -29,8 +29,8 @@ export default function Navigation(){
 
 
     return(
-        <nav className="bg-custom-neon-blue p-4">
-            <div className="flex items-center justify-between">
+        <nav className="navigation">
+            <div className="navigationContainer">
                 {/* Hamburger Button for Small Screens */}
                 <button
                     className="lg:hidden"
@@ -40,28 +40,28 @@ export default function Navigation(){
                 </button>
 
                 {/* Logo */}
-                <div className="text-white">
+                <div className="logo">
                     Pharma Assist
                 </div>
 
                 {/* Drawer for Small Screens */}
                 {isDrawerOpen && (
-                    <div className="lg:hidden fixed top-0 left-0 h-full bg-custom-neon-blue w-64 z-50 shadow">
-                        <ul className="p-5 space-y-5">
-                            <li>
-                                <Link href="/" onClick={toggleDrawer}>Home</Link>
+                    <div className="lg:hidden navigationDrawer">
+                        <ul className="navigationDrawerUl">
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/" onClick={toggleDrawer}>Home</Link>
                             </li>
-                            <li>
-                                <Link href="/ClassStudentPage" onClick={toggleDrawer}>Class Student Page</Link>
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/ClassStudentPage" onClick={toggleDrawer}>Class Student Page</Link>
                             </li>
-                            <li>
-                                <Link href="/ImportFile" onClick={toggleDrawer}>Import File</Link>
+                            <li className='navigationDrawerLi'>
+                                <Link  className='navigationDrawerLink' href="/ImportFile" onClick={toggleDrawer}>Import File</Link>
                             </li>
-                            <li>
-                                <Link href="/grading" onClick={toggleDrawer}>Grading</Link>
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/grading" onClick={toggleDrawer}>Grading</Link>
                             </li>
-                            <li>
-                                <Link href="/Login" onClick={toggleDrawer}>Login</Link>
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/Login" onClick={toggleDrawer}>Login</Link>
                             </li>
                         </ul>
                     </div>
