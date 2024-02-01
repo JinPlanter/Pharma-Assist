@@ -1,8 +1,7 @@
 "use client";
-// Import necessary modules from the React library
 import React, { useState } from 'react';
-//import '../Styles/style.css'; // Import styles
-import Papa from 'papaparse'; // Import Papa library for CSV parsing
+import '../Styles/style.css'; 
+import Papa from 'papaparse'; 
 
 // Import File component
 export default function ImportFile() {

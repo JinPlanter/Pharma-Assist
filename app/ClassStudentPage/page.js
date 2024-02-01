@@ -1,5 +1,5 @@
 import React from 'react'
-//import '../Styles/style.css';
+import '../Styles/style.css';
 
 export default function Page() {
     return (

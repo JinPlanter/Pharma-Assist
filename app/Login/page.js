@@ -2,7 +2,7 @@
 
 // Import necessary modules from the React library
 import React, { useState } from 'react';
-//import '../Styles/style.css'; // Import styles
+import '../Styles/style.css'; // Import styles
 
 // LoginPage component
 export default function LoginPage() {
