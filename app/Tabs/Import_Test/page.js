@@ -10,7 +10,7 @@ const ImportButton = () => {
     const [students, setStudents] = useState([]);
 
     const handleImport = () => {
-        requires('/data/classList.json')
+        fetch('../data/classList.json')
             .then(response => {
                 if (!response.ok) {
                     console.error(response);

@@ -1,9 +1,11 @@
-import Navbar from "./navbar";
+import HomePage from "./Tabs/Login/page";
 
 export default function Home() {
-  return (
-    <main>
-      <Navbar />
-    </main>
-  );
+    return (
+        <div>
+            <main>
+                <HomePage />
+            </main>
+        </div>
+    );
 }
