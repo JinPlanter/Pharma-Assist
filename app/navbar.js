@@ -17,14 +17,14 @@ export default function Navbar() {
 
   return (
     <div className="flex">
-      <Image
-        src="/logo.png"
-        alt="logo"
-        width={72}
-        height={72}
-        href="/"
-        className="flex-none"
-      />
+      <Link href={"/"} className="flex-none">
+        <Image
+          src="/logo.png"
+          alt="logo"
+          width={72}
+          height={72}
+        />
+      </Link>
       <nav className="navbar flex-grow">
         <ul className="flex items-center justify-between space-x-4">
           {webPages.map((page) => (
