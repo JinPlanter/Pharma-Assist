@@ -9,7 +9,7 @@ import GradingForm from '../components/gradingForm';
 import DropdownMenu from '../components/dropdown';
 import classA from '../data/classA.json';
 import classB from '../data/classB.json';
-import '../Styles/style.css'; // Import styles
+//import '../Styles/style.css'; // Import styles
 
 // Grading component
 const Grading = () => {
