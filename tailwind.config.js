@@ -24,6 +24,7 @@ module.exports = {
         'custom-green': '#009e73',
         'custom-yellow': '#f0e442',
         'custom-light-gray':'#cecece',
+        'custom-dark-gray':'#2c3e50',
 
       },
     },
