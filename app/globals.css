@@ -1,7 +1,10 @@
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/*
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -14,16 +17,52 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}*/
-/*
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
-*/
+
+
+
+body {
+  background-color: theme('colors.custom-black');
+  color: theme('colors.custom-white');
+  align-items: center;
+  justify-content: center;
+  
+}
+
+h1 {
+  /*font-family: Consolas; font-size: 40px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 40px; } h3 { font-family: Consolas, monaco, monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Consolas, monaco, monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Consolas, monaco, monospace; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Consolas, monaco, monospace; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5667px;*/
+  padding: 2rem;
+  color: rgb(254, 149, 94);
+  font-family: Consolas;
+  text-align: center;
+  justify-content: center;
+  
+}
+
+h2 {
+  color: rgb(253, 79, 128);
+  font-family: Bahnschrift;
+  text-align: left;
+  justify-content: center;
+}
+
+h3 {
+  color: rgb(250, 44, 142);
+  font-family: Bahnschrift;
+  text-decoration: underline;
+  
+}
+
+
+
+p {
+  color: rgb(180, 180, 180);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  justify-content: center;
+}
+
+
+
+
+
 

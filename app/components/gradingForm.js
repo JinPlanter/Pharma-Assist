@@ -60,13 +60,13 @@ const GradingForm = ({ student }) => {
   // Function to render form elements based on gradingForm criteria
   const renderFormElement = (criterion) => {
     return (
-      <div key={criterion.label} className="mb-4">
+      <div key={criterion.label} className="gradingForm">
         {criterion.type === "text" && (
-          <div className="mb-2">
+          <div className="gradingFormText">
             {/* Label for text input */}
             <label
               htmlFor={criterion.label}
-              className="text-gray-300 font-bold"
+              className="gradingFormLabel"
             >
               {criterion.label}
             </label>
@@ -76,7 +76,7 @@ const GradingForm = ({ student }) => {
               id={criterion.label}
               value={formValues[criterion.label] || ""}
               onChange={(e) => handleTextChange(criterion, e.target.value)}
-              className="w-full p-2 border border-gray-700 rounded-md"
+              className="gradingFormInput"
             />
           </div>
         )}
@@ -88,12 +88,12 @@ const GradingForm = ({ student }) => {
               id={criterion.label}
               checked={formValues[criterion.label] || false}
               onChange={() => handleCheckboxChange(criterion)}
-              className="mr-2"
+              className="gradingFormCheckbox"
             />
             {/* Label for checkbox */}
             <label
               htmlFor={criterion.label}
-              className="text-gray-300 font-bold"
+              className="gradingFormLabel"
             >
               {criterion.label}
             </label>
@@ -105,7 +105,7 @@ const GradingForm = ({ student }) => {
             placeholder="Add comment..."
             value={comments[criterion.label] || ""}
             onChange={(e) => handleCommentChange(criterion, e.target.value)}
-            className="h-10 w-full p-2 border rounded-md resize-y"
+            className="gradingFormTextArea"
           />
         )}
       </div>
@@ -119,7 +119,7 @@ const GradingForm = ({ student }) => {
 
   // JSX rendering for the GradingForm component
   return (
-    <div className="mt-4 max-w-md mx-auto p-4 border rounded-md shadow-lg">
+    <div className="mt-4 max-w mx-4 p-4 border rounded-md shadow-lg">
       {/* Heading for the grading form */}
       <h2 className="text-gray-300 text-xl font-bold mb-4">
         Grading Form for {student.name}
@@ -132,7 +132,7 @@ const GradingForm = ({ student }) => {
         {/* Submission button */}
         <div className="mt-6">
           <button
-            className="bg-green-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-green-600"
+            className="gradingFormSubmit"
             type="submit"
           >
             Submit
@@ -149,7 +149,7 @@ const GradingForm = ({ student }) => {
             </p>
             {/* Button to close the success popup */}
             <button
-              className="mt-2 bg-green-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-green-600"
+              className="mt-2 bg-custom-light-blue text-custom-white py-2 px-4 rounded-md cursor-pointer hover:bg-custom-neon-blue"
               onClick={closeSuccessPopup}
             >
               Close

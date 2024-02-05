@@ -1,9 +1,7 @@
 "use client";
-// Import necessary modules from the React library
 import React, { useState } from 'react';
-import '../Styles/style.css'; // Import styles
-import Navbar from '../navbar'; // Import Navbar component
-import Papa from 'papaparse'; // Import Papa library for CSV parsing
+import '../Styles/style.css'; 
+import Papa from 'papaparse'; 
 
 // Import File component
 export default function ImportFile() {
@@ -67,9 +65,6 @@ export default function ImportFile() {
     // JSX rendering for the ImportFile component
     return (
         <div>
-            {/* Navbar component */}
-            <Navbar />
-
             {/* Main content area */}
             <main>
                 {/* Input for file upload with accept attribute specifying allowed file types */}

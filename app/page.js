@@ -1,9 +1,10 @@
-import Navbar from "./navbar";
+"use client";
+
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
+      This is the main page
     </main>
   );
 }
