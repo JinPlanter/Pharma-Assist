@@ -2,8 +2,8 @@
 
 // Import necessary modules from the React library
 import React, { useState } from 'react';
-import '../Styles/style.css'; // Import styles
-import Navbar from '../navbar'; // Import Navbar component
+// import '../Styles/style.css'; // Import styles
+import '../globals.css'
 
 // LoginPage component
 export default function LoginPage() {
@@ -37,9 +37,6 @@ export default function LoginPage() {
     // JSX rendering for the LoginPage component
     return (
         <div>
-            {/* Navbar component */}
-            <Navbar />
-
             {/* Main content area with a login form */}
             <main>
                 <form onSubmit={handleSubmit} className="flex flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mt-10 w-1/2 mx-auto">
