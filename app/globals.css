@@ -22,8 +22,8 @@
 
 
 body {
-  background-color: theme('colors.custom-white');
-  color: theme('colors.custom-black');
+  background-color: theme('colors.custom-mid-purple');
+  color: theme('colors.custom-white');
   align-items: center;
   justify-content: center;
   
@@ -92,11 +92,9 @@ p {
   align-items: center;
   padding: 0.5rem;
   cursor: pointer;
-  background-color: theme('colors.custom-neon-blue');
 }
-.classListStudent:hover {
-  background-color: theme('colors.custom-light-blue');
-}
+
+
 
 /*Dropdown component style*/
 
@@ -127,9 +125,6 @@ p {
 .classDropdownOption {
   padding: 1rem;
   cursor: pointer;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
 }
 
 .classDropdownOption:hover {
