@@ -1,11 +1,9 @@
-
 "use client"
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-
-
-export default function Navigation(){
+export default function Navigation() {
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -17,18 +15,18 @@ export default function Navigation(){
         setIsDrawerOpen(false);
     };
 
-    {/* Close Drawer when user clicks outside of it */}
+    {/* Close Drawer when user clicks outside of it */ }
     useEffect(() => {
-        if(isDrawerOpen){
+        if (isDrawerOpen) {
             document.addEventListener('click', closeDrawer);
         }
         return () => {
             document.removeEventListener('click', closeDrawer);
         };
-    },[isDrawerOpen]);
+    }, [isDrawerOpen]);
 
 
-    return(
+    return (
         <nav className="navigation">
             <div className="navigationContainer">
                 {/* Hamburger Button for Small Screens */}
@@ -52,16 +50,16 @@ export default function Navigation(){
                                 <Link className='navigationDrawerLink' href="/" onClick={toggleDrawer}>Home</Link>
                             </li>
                             <li className='navigationDrawerLi'>
-                                <Link className='navigationDrawerLink' href="/ClassStudentPage" onClick={toggleDrawer}>Class Student Page</Link>
-                            </li>
-                            <li className='navigationDrawerLi'>
-                                <Link  className='navigationDrawerLink' href="/ImportFile" onClick={toggleDrawer}>Import File</Link>
-                            </li>
-                            <li className='navigationDrawerLi'>
-                                <Link className='navigationDrawerLink' href="/grading" onClick={toggleDrawer}>Grading</Link>
-                            </li>
-                            <li className='navigationDrawerLi'>
                                 <Link className='navigationDrawerLink' href="/Login" onClick={toggleDrawer}>Login</Link>
+                            </li>
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/ImportFile" onClick={toggleDrawer}>Import File</Link>
+                            </li>
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/Students" onClick={toggleDrawer}>Students</Link>
+                            </li>
+                            <li className='navigationDrawerLi'>
+                                <Link className='navigationDrawerLink' href="/Grading" onClick={toggleDrawer}>Grading</Link>
                             </li>
                         </ul>
                     </div>
@@ -70,14 +68,12 @@ export default function Navigation(){
                 {/* Horizontal Navigation for Large Screens */}
                 <div className="hidden lg:flex space-x-4">
                     <Link href="/">Home</Link>
-                    <Link href="/ClassStudentPage">Class Student Page</Link>
-                    <Link href="/ImportFile">Import File</Link>
-                    <Link href="/grading">Grading</Link>
                     <Link href="/Login">Login</Link>
+                    <Link href="/ImportFile">Import File</Link>
+                    <Link href="/Students">Students</Link>
+                    <Link href="/Grading">Grading</Link>
                 </div>
 
-                
-            
             </div>
         </nav>
     )

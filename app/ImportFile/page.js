@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import '../Styles/style.css'; 
+// import '../Styles/style.css';
+import '../globals.css'
 import Papa from 'papaparse'; 
 
 // Import File component
