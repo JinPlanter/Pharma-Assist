@@ -85,6 +85,10 @@ p {
   background-color: theme('colors.custom-light-blue');
 }
 
+.classListItem.selected {
+  background-color: theme('colors.custom-light-blue');
+}
+
 .classListStudent {
   display: flex;
   flex-direction: row;
@@ -92,6 +96,11 @@ p {
   align-items: center;
   padding: 0.5rem;
   cursor: pointer;
+}
+
+.classListStudent.selected {
+  color: theme('colors.custom-black');
+  font-weight: 700;
 }
 
 
@@ -165,6 +174,7 @@ p {
   color: theme('colors.custom-black');
 }
 
+
 .gradingFormTextArea {
   padding: 0.5rem;
   border-width: 1px;
@@ -189,9 +199,12 @@ p {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 100ms;
 }
+
+
 .gradingFormSubmit:hover {
   background-color: theme('colors.custom-neon-blue');
 }
+
 
 
 /*Styles for navigation component*/
@@ -206,9 +219,13 @@ p {
   position: relative;
 }
 
+
+
 .logo {
   font-size: 1.5rem;
 }
+
+
 
 .hamburger-btn {
   display: block;
@@ -219,6 +236,7 @@ p {
   color: theme('colors.custom-white'); /* Use your desired text color */
   padding: 0;
 }
+
 
 /* Drawer Styles */
 .drawer {

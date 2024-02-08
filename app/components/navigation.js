@@ -37,7 +37,7 @@ export default function Navigation() {
       <div className={`drawer ${isDrawerOpen ? 'open' : ''}`}>
         <ul className="drawerUl">
           <li className="drawerLi">
-            <Link className="drawerLink" href="/" onClick={toggleDrawer}>
+            <Link className="drawerLink" href="/Home" onClick={toggleDrawer}>
               Home
             </Link>
           </li>

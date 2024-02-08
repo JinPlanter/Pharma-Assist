@@ -27,7 +27,7 @@ const ClassList = ({ classlist, onStudentClick }) => {
           onClick={() => handleClick(student)}
         >
           {/* Display the name of the student */}
-          <span className="classListStudent">
+          <span className={`classListStudent ${selectedStudent && selectedStudent.id === student.id ? "selected" : ""}`}>
             {student.name}
           </span>
         </li>

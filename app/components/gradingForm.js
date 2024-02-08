@@ -122,7 +122,7 @@ const GradingForm = ({ student }) => {
     <div className="mt-4 max-w mx-4 p-4 border rounded-md shadow-lg">
       {/* Heading for the grading form */}
       <h2 className="text-gray-300 text-xl font-bold mb-4">
-        Grading Form for {student.name}
+        Grading Form for <span className= "text-custom-orange">{student.name}</span>
       </h2>
 
       {/* Form for grading with criteria */}

@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {}
-
-module.exports = {
-    nextConfig,
+const nextConfig = {
     async redirects(){
         return [
             {
@@ -12,5 +9,8 @@ module.exports = {
                 permanent: true,
             },
         ]
-    }
 }
+
+}
+
+module.exports = nextConfig
