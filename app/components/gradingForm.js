@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react";
+
+import React, { useState, formRef} from "react";
+
 import generatePDF from "./pdfGenerator";
 import gradingForm from "../data/gradingForm.json";
+import { useFormValuesContext } from "../contexts/gradeform-context";
 
 const GradingForm = ({ student }) => {
-  const formRef = useRef(null);
-  const [formValues, setFormValues] = useState({});
-  const [comments, setComments] = useState({});
+  //const formRef = useRef(null);
+  const { formValues, setFormValues, comments, setComments } = useFormValuesContext();
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
 
   const handleCheckboxChange = (criterion) => {
@@ -35,16 +37,12 @@ const GradingForm = ({ student }) => {
     handleSubmission();
 
     setIsSuccessPopupOpen(true);
-
-    generatePDF(formRef.current, "gradedForm.pdf");
-
-    setFormValues({});
-    setComments({});
   };
 
   const handleSubmission = () => {
     console.log("Form submitted:", formValues, comments);
     // You can implement your logic for handling form submission here
+    console.log("form values in formValues context", formValues);
   };
 
   const renderFormElement = (criterion) => {
@@ -63,7 +61,7 @@ const GradingForm = ({ student }) => {
               id={criterion.label}
               value={formValues[criterion.label] || ""}
               onChange={(e) => handleTextChange(criterion, e.target.value)}
-              className="w-full p-2 border border-gray-700 rounded-md"
+              className="w-full p-2 border border-gray-700 rounded-md text-black"
             />
           </div>
         )}
@@ -74,7 +72,7 @@ const GradingForm = ({ student }) => {
               id={criterion.label}
               checked={formValues[criterion.label] || false}
               onChange={() => handleCheckboxChange(criterion)}
-              className="mr-2"
+              className="mr-2 text-black"
             />
             <label
               htmlFor={criterion.label}
@@ -89,7 +87,7 @@ const GradingForm = ({ student }) => {
             placeholder="Add comment..."
             value={comments[criterion.label] || ""}
             onChange={(e) => handleCommentChange(criterion, e.target.value)}
-            className="h-10 w-full p-2 border rounded-md resize-y"
+            className="h-10 w-full p-2 border rounded-md resize-y text-black"
           />
         )}
       </div>
