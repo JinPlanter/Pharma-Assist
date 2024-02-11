@@ -9,9 +9,9 @@ import GradingForm from '../components/gradingForm';
 import DropdownMenu from '../components/dropdown';
 import classA from '../data/classA.json';
 import classB from '../data/classB.json';
-// import '../Styles/style.css'; // Import styles
 import '../globals.css'
-
+import FormValuesProvider from '../contexts/gradeform-context';
+import PdfViewer from '../components/reactpdf';
 // Grading component
 const Grading = () => {
   // State variables to track selected class and student
@@ -42,6 +42,7 @@ const Grading = () => {
 
   // JSX rendering for the Grading component
   return (
+    <FormValuesProvider>
     <div>
       {/* Heading for the grading app */}
       <h1>Grading Page</h1>
@@ -68,11 +69,14 @@ const Grading = () => {
             {selectedStudent && <GradingForm student={selectedStudent} />}
           </div>
         </div>
-        
+
+        <PdfViewer>
+        </PdfViewer>
         
       </div>
       
     </div>
+    </FormValuesProvider>
   );
 };
 
