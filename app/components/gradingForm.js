@@ -1,7 +1,6 @@
 
 import React, { useState, formRef} from "react";
 
-import generatePDF from "./pdfGenerator";
 import gradingForm from "../data/gradingForm.json";
 import { useFormValuesContext } from "../contexts/gradeform-context";
 
