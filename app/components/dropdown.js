@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // DropdownMenu component that takes in classLists and onSelectClass as props
 const DropdownMenu = ({ classLists, onSelectClass }) => {
   // State to track the selected class
-  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedClass, setSelectedClass] = useState('');
 
   // Event handler for when the selected class changes
   const handleClassChange = (event) => {
