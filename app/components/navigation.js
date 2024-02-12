@@ -25,10 +25,33 @@ export default function Navigation() {
       document.removeEventListener("click", closeDrawer);
     };
   }, [isDrawerOpen]);
-  {/* TODO: Make the navbar collapsable on mobile devices */}
+  {
+    /* TODO: Make the navbar collapsable on mobile devices */
+  }
   return (
-    <nav className="navigation">
+    <nav className="navigation border border-white w-30%">
       <div className="navigationDrawer">
+        <div className="menuButtonWrapper">
+          <button
+            className="menuButton"
+            onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block w-5 h-5 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+            {isDrawerOpen ? "true" : "false"} {/*Debug*/}
+          </button>
+        </div>
         <ul className="navigationDrawerUl">
           <li className="navigationDrawerLi">
             <Link
