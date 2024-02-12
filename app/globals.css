@@ -1,3 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -197,12 +201,11 @@ p {
   min-width: 300px;
 }
 
-@media screen and (max-width: 700px) {
+@layer components {
   .navigation {
-    display: none;
+    @apply navbar;
   }
 }
-
 .navigationContainer {
   display: flex;
   align-items: center;
@@ -250,4 +253,40 @@ p {
   font-size: 1.5rem;
   font-weight: 700;
   color: theme("colors.custom-white");
+}
+/* Menu Button */
+
+.menuButton {
+  display: none;
+}
+@layer components {
+  .menuButton {
+    @apply flex-none btn btn-square btn-ghost;
+  }
+
+  .menuButtonWrapper {
+    @apply flex align-top;
+  }
+}
+/* Mobile View */
+
+@media screen and (max-width: 700px) {
+  .navigation {
+    width: 100px;
+    min-width: 100px;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  @layer components {
+    .navigation {
+      @apply flex-none;
+    }
+
+    .menuButton {
+      @apply align-top;
+    }
+  }
 }
