@@ -39,7 +39,7 @@ export default function Navigation() {
 
                 {/* Logo */}
                 <div className="logo">
-                    Pharma Assist
+                    <img src="C:\Capstone\Pharma-Assist\app\logo\Pharma Assist Logo.jpeg" alt="Pharma Assist" />
                 </div>
 
                 {/* Drawer for Small Screens */}
