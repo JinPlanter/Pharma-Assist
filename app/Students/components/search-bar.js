@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import styles from './search-bar.module.css'
 
 const SearchBar = ({ data }) => {
     const [searchInput, setSearchInput] = useState('');
@@ -38,18 +39,18 @@ const SearchBar = ({ data }) => {
 
 
     return (
-        <div>
+        <div className={styles.container}>
             <input 
-            className = "text-black" 
+            className = {`${styles.inputBox} "text-black` }
             type="text" 
             placeholder="Search..." 
             value={searchInput} 
             onChange={(event)=> setSearchInput(event.target.value)} 
             />
             {searchResults.length > 0 && (
-            <ul>
+            <ul className = {`${styles.searchResults}` }>
                 {searchResults.map((result) => (
-                    <li key={result.id}>
+                    <li className={styles.studentDetails} key={result.id}>
                         <div>
                             <p>{result.name}</p>
                             <p>{result.class}</p>

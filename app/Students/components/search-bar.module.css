@@ -1,0 +1,45 @@
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: aqua;
+    flex-direction: column;
+}
+
+.inputBox{
+    width: 80%;
+    height: 30px;
+    border: 1px solid black;
+    padding: 5px;
+    border-color: orange;
+    color: black;
+}
+
+
+.searchResults{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    border-color: orange;
+    width:80%;
+}
+
+.studentDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: aqua;
+    border-radius: 5px;
+    border: 1px solid black;
+    border-color: orange;
+    width: 100%;
+}
