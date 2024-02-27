@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styles from './search-bar.module.css'
+import Link from 'next/link';
 
 const SearchBar = ({ data }) => {
     const [searchInput, setSearchInput] = useState('');
@@ -50,13 +51,18 @@ const SearchBar = ({ data }) => {
             {searchResults.length > 0 && (
             <ul className = {`${styles.searchResults}` }>
                 {searchResults.map((result) => (
+                    <button className={styles.studentDetails} key={result.id} onClick={() => console.log(result)}>
                     <li className={styles.studentDetails} key={result.id}>
                         <div>
                             <p>{result.name}</p>
                             <p>{result.class}</p>
                             <p>{result.studentid}</p>
+                            <Link href={`/Students/${result.studentid}`}>
+                                View Profile
+                            </Link>
                         </div>
                     </li>
+                    </button>
                 ))}
             </ul>
         )}
