@@ -19,7 +19,7 @@ const authOptions = {
           placeholder: "john@example.com",
         },
         password: { label: "Password", type: "password" },
-        privileges: {label: "Privileges", type: "text"}
+        privileges: { label: "Privileges", type: "text" },
       },
       async authorize(credentials) {
         try {
@@ -62,7 +62,7 @@ const authOptions = {
           placeholder: "john@example.com",
         },
         password: { label: "Password", type: "password" },
-        privileges: {label: "Privileges", type: "text"}
+        privileges: { label: "Privileges", type: "text" },
       },
       async authorize(credentials) {
         try {
@@ -96,8 +96,23 @@ const authOptions = {
         }
       },
     }),
-
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.privileges = user.privileges;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.id = token.id;
+      session.user.email = token.email;
+      session.user.privileges = token.privileges;
+      return session;
+    },
+  },
   adapter: MongoDBAdapter(clientPromise),
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
