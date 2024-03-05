@@ -34,7 +34,11 @@ export default function Navigation() {
   return (
     <>
       {size.width < mobileMaxScreenSize ? (
-        <div className="menuButtonWrapper">
+        <div
+          className={
+            `menuButtonWrapper ` + (isDrawerOpen == false ? `mr-12` : null)
+          }
+        >
           <button className="menuButton" onClick={toggleDrawer}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
