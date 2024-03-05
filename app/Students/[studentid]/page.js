@@ -18,6 +18,7 @@ const StudentPage = () => {
         <button onClick={handleGoBack}>Go Back</button>
         <h1> Student Profile</h1>
         <p> render student details next: name, email, graded labs, in progress, ungraded labs</p>
+        <p>pull student details from db</p>
     </div>
   )
 }

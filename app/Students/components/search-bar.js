@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import styles from './search-bar.module.css'
+//import styles from './search-bar.module.css'
+
 import Link from 'next/link';
 
 const SearchBar = ({ data }) => {
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    
+
+
     useEffect(() => {
         handleSearchInput();
     }, [searchInput]);
@@ -25,51 +27,63 @@ const SearchBar = ({ data }) => {
     const handleSearchInput = () => {
         if (searchInput.length > 0) {
             const results = data
-            .map((val) => ({...val, score: calculateScore(val)}))
-            .filter((val) => val.score > 0)
-            .sort((a, b) => b.score - a.score);
+                .map((val) => ({...val, score: calculateScore(val)}))
+                .filter((val) => val.score > 0)
+                .sort((a, b) => b.score - a.score);
             setSearchResults(results);
-            console.log("search results: ",searchResults);
         }
         else{
             setSearchResults([]);
-        
         }
     };
 
 
 
+
+
     return (
-        <div className={styles.container}>
+    <div className="p-4 bg-custom-gray">
+        <label className="input input-bordered flex items-center gap-2">
             <input 
-            className = {`${styles.inputBox} "text-black` }
             type="text" 
-            placeholder="Search..." 
-            value={searchInput} 
-            onChange={(event)=> setSearchInput(event.target.value)} 
-            />
-            {searchResults.length > 0 && (
-            <ul className = {`${styles.searchResults}` }>
-                {searchResults.map((result) => (
-                    <button className={styles.studentDetails} key={result.id} onClick={() => console.log(result)}>
-                    <li className={styles.studentDetails} key={result.id}>
-                        <div>
-                            <p>{result.name}</p>
-                            <p>{result.class}</p>
-                            <p>{result.studentid}</p>
-                            <Link href={`/Students/${result.studentid}`}>
-                                View Profile
-                            </Link>
-                        </div>
-                    </li>
-                    </button>
-                ))}
-            </ul>
-        )}
+            className="grow" 
+            placeholder="Search"
+            onChange = {(event) => setSearchInput(event.target.value)} />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+        </label>
+
+      {searchResults.length > 0 && (
+        <div className="bg-custom-green">
+          <table className="table">
+            <thead className="">
+              <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Student ID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchResults.map((result) => (
+                  <tr className="hover">
+                    <td>{result.name}</td>
+                    <td>{result.class}</td>
+                    <td>{result.studentid}</td>
+                    <td>
+                        <Link 
+                        href={`/Students/${result.studentid}`}
+                        className='link link-hover'>
+                            View
+                        </Link>
+                    </td>
+                  </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        
-    )
-    
+      )}
+    </div>
+  )
 }
 
 export default SearchBar
