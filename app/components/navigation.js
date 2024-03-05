@@ -87,6 +87,24 @@ export default function Navigation() {
                     Grading
                   </Link>
                 </li>
+                <li className="navigationDrawerLi">
+                  <Link
+                    className="navigationDrawerLink"
+                    href="/signup"
+                    onClick={toggleDrawer}
+                  >
+                    Next Auth Test
+                  </Link>
+                </li>
+                <li className="navigationDrawerLi">
+                  <Link
+                    className="navigationDrawerLink"
+                    href="/uploadclasslist"
+                    onClick={toggleDrawer}
+                  >
+                    Database 
+                  </Link>
+                </li>
                 <SignOutButton />
               </ul>
             </div>
@@ -99,6 +117,8 @@ export default function Navigation() {
             <Link href="/ImportFile">Import File</Link>
             <Link href="/Students">Students</Link>
             <Link href="/Grading">Grading</Link>
+            <Link href="/signup">Next Auth Test</Link>
+            <Link href="/uploadclasslist">Database Upload Test</Link>
             <SignOutButton />
           </div>
         </div>
