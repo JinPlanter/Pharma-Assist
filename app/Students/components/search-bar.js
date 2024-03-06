@@ -7,7 +7,6 @@ const SearchBar = ({ data }) => {
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
-
     useEffect(() => {
         handleSearchInput();
     }, [searchInput]);
@@ -36,6 +35,8 @@ const SearchBar = ({ data }) => {
             setSearchResults([]);
         }
     };
+
+
 
 
 
@@ -72,7 +73,8 @@ const SearchBar = ({ data }) => {
                     <td>
                         <Link 
                         href={`/Students/${result.studentid}`}
-                        className='link link-hover'>
+                        className='link link-hover'
+                        >
                             View
                         </Link>
                     </td>
