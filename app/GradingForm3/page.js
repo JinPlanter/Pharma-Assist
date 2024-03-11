@@ -50,27 +50,33 @@ function MyForm() {
 
     return (
         <form>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div id="column1a" style={{ display: 'flex', flexDirection: 'column' }}>
-                    {formData.filter(field => !field.comment).map((field, index) => (
-                        <label key={index}>
-                            {field.label}
-                        </label>
-                    ))}
-                </div>
 
-                <div id="column2a" style={{ display: 'flex', flexDirection: 'column' }}>
-                    {formData.filter(field => !field.comment).map((field, index) => (
-                        <input
-                            type="text"
-                            name={field.label}
-                            value={formValues[field.label] || ''}
-                            onChange={handleChange}
-                            key={index}
-                        />
-                    ))}
+            <div id="TypeA">
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+
+                    <div id="Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {formData.filter(field => !field.comment).map((field, index) => (
+                            <label key={index}>
+                                {field.label}
+                            </label>
+                        ))}
+                    </div>
+
+                    <div id="Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {formData.filter(field => !field.comment).map((field, index) => (
+                            <input
+                                type="text"
+                                name={field.label}
+                                value={formValues[field.label] || ''}
+                                onChange={handleChange}
+                                key={index}
+                            />
+                        ))}
+                    </div>
+
                 </div>
             </div>
+
 
 
 
@@ -83,28 +89,44 @@ function MyForm() {
 
 
 
+            <div id="TypeB">
 
-            {/* <div>
-                <div id="column1a" style={{ display: 'flex', flexDirection: 'column' }}>
-                    {formData.filter(field => !field.comment).map((field, index) => (
-                        <label key={index}>
-                            {field.label}
-                        </label>
-                    ))}
-                </div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
 
-                <div id="column2a" style={{ display: 'flex', flexDirection: 'column' }}>
-                    {formData.filter(field => !field.comment).map((field, index) => (
-                        <input
+                    <div id="Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {formData.filter(field => field.type === 'checkbox').map((field, index) => (
+                            <label key={index}>
+                                <input
+                                    type="checkbox"
+                                    name={field.label}
+                                //onChange={handleChange}
+                                // `onChange={handleChange}` prints the value "on" into the comment form field.
+                                />
+
+                                {field.label}
+                                <br/>
+
+                                <input
+                                    type="text"
+                                />
+                                
+                            </label>
+                            
+
+                            /* <input
                             type="text"
                             name={field.label}
-                            value={formValues[field.label] || ''}
-                            onChange={handleChange}
-                            key={index}
-                        />
-                    ))}
+                            //onChange={handleChange}
+                            // `onChange={handleChange}` prints the value "on" into the comment form field.
+                            /> */
+                        ))}
+                    </div>
+
                 </div>
-            </div> */}
+
+            </div>
+
+
 
 
 
