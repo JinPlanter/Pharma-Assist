@@ -1,18 +1,17 @@
-
 {
   "criteria": [
     {
-      "label": "Rx# ",
+      "label": "Rx#",
       "type": "text",
       "comment": false
     },
     {
-      "label": "Date ",
+      "label": "Date",
       "type": "text",
       "comment": false
     },
     {
-      "label": "Patient Name ",
+      "label": "Patient Name",
       "type": "text",
       "comment": false
     },
@@ -72,12 +71,12 @@
       "comment": true
     },
     {
-      "label": "Evaluation (total marks) ",
+      "label": "Evaluation (total marks)",
       "type": "text",
       "comment": false
     },
     {
-      "label": "Initials of checker ",
+      "label": "Initials of checker",
       "type": "text",
       "comment": false
     }

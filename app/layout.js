@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <AuthProvider>
-        <body className="m-5 {inter.className}">
+        <body className={'m-5 ${inter.className}'}>
           <Navigation />
 
           <div>{children}</div>
