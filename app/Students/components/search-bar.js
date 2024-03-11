@@ -44,7 +44,7 @@ const SearchBar = ({ data }) => {
 
     return (
     <div className="p-4 bg-custom-gray">
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2 text-custom-beige ">
             <input 
             type="text" 
             className="grow" 
@@ -55,8 +55,8 @@ const SearchBar = ({ data }) => {
 
       {searchResults.length > 0 && (
         <div className="bg-custom-green">
-          <table className="table">
-            <thead className="">
+          <table className="table text-custom-beige">
+            <thead className="font-extrabold">
               <tr>
                 <th>Name</th>
                 <th>Class</th>
@@ -66,7 +66,7 @@ const SearchBar = ({ data }) => {
             </thead>
             <tbody>
               {searchResults.map((result) => (
-                  <tr className="hover">
+                  <tr className="hover text-custom-beige">
                     <td>{result.name}</td>
                     <td>{result.class}</td>
                     <td>{result.studentid}</td>

@@ -17,6 +17,7 @@ module.exports = {
         'custom-yellow': '#f0e442',
         'custom-light-gray': '#cecece',
         'custom-gray':'b0c1c3',
+        'custom-beige': 'faf3dd',
       }
     }
   },
