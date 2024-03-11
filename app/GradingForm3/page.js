@@ -32,7 +32,7 @@ function MyForm() {
         */
 
         fetchFormData().then(data => setFormData(data));
-        setFormValues(prevValues => ({ ...prevValues, 'Date ': currentDate }));
+        setFormValues(prevValues => ({ ...prevValues, 'Date': currentDate }));
         /*
         `prevValues` is the previous state of `formValues` that gets spread into the new state.
         The 'Date' form field is then autofilled with the value of `currentDate`.
@@ -51,22 +51,100 @@ function MyForm() {
     return (
         <form>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div id="column1a" style={{ display: 'flex', flexDirection: 'column' }}>
+                    {formData.filter(field => !field.comment).map((field, index) => (
+                        <label key={index}>
+                            {field.label}
+                        </label>
+                    ))}
+                </div>
+
+                <div id="column2a" style={{ display: 'flex', flexDirection: 'column' }}>
+                    {formData.filter(field => !field.comment).map((field, index) => (
+                        <input
+                            type="text"
+                            name={field.label}
+                            value={formValues[field.label] || ''}
+                            onChange={handleChange}
+                            key={index}
+                        />
+                    ))}
+                </div>
+            </div>
+
+
+
+
+
+
+            <br /><br /><br /><br />
+
+
+
+
+
+
+            {/* <div>
+                <div id="column1a" style={{ display: 'flex', flexDirection: 'column' }}>
+                    {formData.filter(field => !field.comment).map((field, index) => (
+                        <label key={index}>
+                            {field.label}
+                        </label>
+                    ))}
+                </div>
+
+                <div id="column2a" style={{ display: 'flex', flexDirection: 'column' }}>
+                    {formData.filter(field => !field.comment).map((field, index) => (
+                        <input
+                            type="text"
+                            name={field.label}
+                            value={formValues[field.label] || ''}
+                            onChange={handleChange}
+                            key={index}
+                        />
+                    ))}
+                </div>
+            </div> */}
+
+
+
+
+
+            <br /><br /><br /><br />
+
+
+
+
+
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
 
                 <div style={{ marginRight: '20px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         {formData.filter(field => field.type === 'checkbox').map((field, index) => (
-                            field.comment ? (
+                            <label key={index}>
+                                {field.label}
+                                <input
+                                    type="checkbox"
+                                    name={field.label}
+                                //onChange={handleChange}
+                                // `onChange={handleChange}` prints the value "on" into the comment form field.
+                                />
+                            </label>
+
+                            /* field.comment ? (
+                                <br key={index} />
+                            ) : (
                                 <label key={index}>
                                     {field.label}
                                     <input
                                         type="checkbox"
                                         name={field.label}
-                                        // onChange={handleChange}
-                                        // `onChange={handleChange}` prints the value "on" into the comment form field.
+                                        onChange={handleChange}
+                                    // `onChange={handleChange}` prints the value "on" into the comment form field.
                                     />
                                 </label>
-                            ) : (<br key={index} />
-                            )))}
+                                ) */
+                        ))}
                     </div>
                 </div>
 
