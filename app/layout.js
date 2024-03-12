@@ -15,7 +15,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className="">
       <body className="{inter.className}">
         <div className="flex h-screen w-screen ">
-          <Navigation />
           <div className="flex-grow">{children}</div>
         </div>
       </body>
