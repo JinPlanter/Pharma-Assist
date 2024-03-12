@@ -203,7 +203,7 @@ p {
 
 @layer components {
   .navigation {
-    @apply navbar grid grid-cols-1;
+    @apply navbar grid grid-cols-1 h-full;
   }
 }
 .navigationContainer {
