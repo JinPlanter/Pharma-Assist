@@ -6,6 +6,8 @@ import useWindowSize from "../lib/useWindowSize";
 
 export default function Navigation() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const pages = ["/", "/Login", "/ImportFile", "/Students", "/Grading"];
+  const pageNames = ["Home", "Login", "Import File", "Students", "Grading"];
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -60,51 +62,19 @@ export default function Navigation() {
         <nav className="navigation ">
           <div className="navigationDrawer">
             <ul className="navigationDrawerUl">
-              <li className="navigationDrawerLi">
-                <Link
-                  className="navigationDrawerLink"
-                  href="/"
-                  onClick={toggleDrawer}
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="navigationDrawerLi">
-                <Link
-                  className="navigationDrawerLink"
-                  href="/Login"
-                  onClick={toggleDrawer}
-                >
-                  Login
-                </Link>
-              </li>
-              <li className="navigationDrawerLi">
-                <Link
-                  className="navigationDrawerLink"
-                  href="/ImportFile"
-                  onClick={toggleDrawer}
-                >
-                  Import File
-                </Link>
-              </li>
-              <li className="navigationDrawerLi">
-                <Link
-                  className="navigationDrawerLink"
-                  href="/Students"
-                  onClick={toggleDrawer}
-                >
-                  Students
-                </Link>
-              </li>
-              <li className="navigationDrawerLi">
-                <Link
-                  className="navigationDrawerLink"
-                  href="/Grading"
-                  onClick={toggleDrawer}
-                >
-                  Grading
-                </Link>
-              </li>
+              {pages.map((page, i) => {
+                return (
+                  <li className="navigationDrawerLi">
+                    <Link
+                      className="navigationDrawerLink"
+                      href={page}
+                      onClick={toggleDrawer}
+                    >
+                      {pageNames[i]}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </nav>
