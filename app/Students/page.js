@@ -1,26 +1,35 @@
 
-"use client";
-import React from 'react'
-// import '../Styles/style.css';
+"use client"
+import React, {useState, useEffect} from 'react'
 import '../globals.css'
-import classA from '../data/classA.json';
-import classB from '../data/classB.json';
 import SearchBar from './components/search-bar';
 
 
 
 export default function Page() {
-    
-    return (
-        <div>
-            <main>
-                <h1>ClassStudentPage</h1>
-                <SearchBar 
-                data={[...classA, ...classB]}
-                />
 
-            </main>
-        </div>
-       
-    )
+    // state to hold fetched data
+    const [students, setStudents] = useState([]);
+
+    // Fetch data from MongoDB when component mounts
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/Students");
+      const data = await response.json();
+      setStudents(data); // Assuming data is an array of student objects
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Student Search</h1>
+      <SearchBar data={students} />
+    </div>
+  );
 }
