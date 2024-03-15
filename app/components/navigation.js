@@ -1,13 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import useWindowSize from "../lib/useWindowSize";
 
-export default function Navigation() {
+export default function Navigation({ onNavigationClick }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const pages = ["/", "/Login", "/ImportFile", "/Students", "/Grading"];
-  const pageNames = ["Home", "Login", "Import File", "Students", "Grading"];
+
+  const pages = [
+    { path: "/", name: "Home" },
+    { path: "/Login", name: "Login" },
+    { path: "/ImportFile", name: "Import File" },
+    { path: "/Students", name: "Students" },
+    { path: "/Grading", name: "Grading" },
+  ];
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -65,13 +70,12 @@ export default function Navigation() {
               {pages.map((page, i) => {
                 return (
                   <li className="navigationDrawerLi">
-                    <Link
+                    <button
                       className="navigationDrawerLink"
-                      href={page}
-                      onClick={toggleDrawer}
+                      onClick={() => onNavigationClick(page.name)}
                     >
-                      {pageNames[i]}
-                    </Link>
+                      {page.name}
+                    </button>
                   </li>
                 );
               })}
