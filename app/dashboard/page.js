@@ -29,10 +29,10 @@ function Dashboard() {
   };
 
   return (
-    <div className="h-screen flex flex-row w-full">
+    <div className="h-screen bg-accent flex flex-row w-full ">
       <p className="absolute">{activeComponent}</p> {/* Debug */}
       <Navigation onNavigationClick={handleNavigationClick} />
-      <div className="overflow-auto bg-accent">{renderComponent()}</div>
+      <div className="overflow-auto">{renderComponent()}</div>
     </div>
   );
 }
