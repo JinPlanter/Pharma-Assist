@@ -14,7 +14,7 @@ export const GET = async (request) => {
 
         // fetch data from collection
         const data = await db
-        .collection("gradingForm")
+        .collection("classList")
         .find({})
         .toArray();
 
