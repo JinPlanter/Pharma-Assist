@@ -2,10 +2,10 @@
 //path: app/api/Students/route.js
 
 import clientPromise from "../../lib/mongodb";
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse } from "next/server";
 
 
-export const GET = async (request) => {
+export const GET = async (request,response) => {
 
     try{
         // connect to db
@@ -30,11 +30,22 @@ export const GET = async (request) => {
         }
         //console.log('data after parsing:',parsedData);
         //console.log('unparsed data:',data);
-        return NextResponse.json(parsedData);
         
+       //return new Response(JSON.stringify(data), { status: 200 });
+        //return new Response(JSON.stringify(parsedData), { status: 200 });
+        return NextResponse.json(parsedData);
     
     } catch (error){
-        response.status(500).json({error: "Unable to fetch data from gradingForm collection"});
-        console.error("Error:", error);
+        /*
+        return new Response(
+            JSON.stringify({ 
+                error: "Unable to fetch data from classList collection" 
+            }), { status: 500 }
+        );
+        */
+        return NextResponse.error(
+            new Error("Unable to fetch data from classList collection"),
+            { status: 500 }
+        );
     }
 }

@@ -11,10 +11,7 @@ export default function Page() {
     // state to hold fetched data
     const [students, setStudents] = useState([]);
 
-    // Fetch data from MongoDB when component mounts
-  useEffect(() => {
-    fetchData();
-  }, []);
+    
 
   const fetchData = async () => {
     try {
@@ -26,6 +23,11 @@ export default function Page() {
       console.error("Error fetching data:", error);
     }
   };
+
+  // Fetch data from MongoDB when component mounts
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>

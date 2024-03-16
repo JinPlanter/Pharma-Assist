@@ -7,9 +7,9 @@ const SearchBar = ({ data }) => {
 
   
   // Function to filter initial Data of api route based on search input
-  const filterInitialData = () => {
+  const filterInitialData = (theData) => {
     // filter the data based on the search input
-    return data.filter((student) =>
+    return theData.filter((student) =>
       student.hasOwnProperty('id') &&
       student.hasOwnProperty('name') &&
       student.hasOwnProperty('class') &&
@@ -31,23 +31,29 @@ const SearchBar = ({ data }) => {
   }
 
   // use calculateScore on filteredData to sort the results
-  const sortData = () => {
-    const filteredData = filterInitialData();
+  const sortData = (filteredData) => {
     // calculate the score for each item in the filteredData and add it to the object
-    filteredData.forEach((item) => {
-      item.score = calculateScore(item);
+    const dataWithScore = filteredData.map((val) => {
+      return {
+        ...val,
+        score: calculateScore(val),
+      };
     });
+
     // sort the filteredData based on the score
-    return filteredData.sort((a, b) => b.score - a.score);
+    return dataWithScore.sort((a, b) => b.score - a.score);
   };
 
   // useEffect to update searchResults when searchInput changes
   useEffect(() => {
     if (searchInput.length > 0) {
-      const sortedData = sortData();
+      const filteredData = filterInitialData(data);
+      const sortedData = sortData(filteredData);
       setSearchResults(sortedData);
+    }else{
+      setSearchResults([]);
     }
-  }, [searchInput]);
+  }, [searchInput, data]);
 
 
   return (
