@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { flightRouterStateSchema } from "next/dist/server/app-render/types";
 
 const SearchBar = ({ data }) => {
-  const [initialData, setInitialData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   
   // Function to filter initial Data of api route based on search input
   const filterInitialData = () => {
-    const filteredData = data.filter((student) => {
-      if (student.fileContentJson && 
-        Array.isArray(student.fileContentJson)) {
-        return student.fileContentJson.some(
-          (item) =>
-            item.hasOwnProperty('id') &&
-            item.hasOwnProperty('name') &&
-            item.hasOwnProperty('class') &&
-            item.name.toLowerCase().includes(searchInput.toLowerCase()) || 
-            item.class.toLowerCase().includes(searchInput.toLowerCase())
-        );
-      }
-      return false; // Skip if the structure doesn't match
-    });
-    console.log("filteredData: ",filteredData);
-    setInitialData(filteredData);
+    // filter the data based on the search input
+    return data.filter((student) =>
+      student.hasOwnProperty('id') &&
+      student.hasOwnProperty('name') &&
+      student.hasOwnProperty('class') &&
+      (
+        student.name.toLowerCase().includes(searchInput.toLowerCase()) || 
+        student.class.toLowerCase().includes(searchInput.toLowerCase()) ||
+        searchInput.includes(student.id)
+        )
+    );
   };
 
 
@@ -33,33 +26,28 @@ const SearchBar = ({ data }) => {
   const calculateScore = (val) => {
     const nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
     const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
-    const idScore = val.id?.includes(searchInput) ? 3 : 0;
+    const idScore = searchInput.includes(val.id) ? 3 : 0;
     return nameScore + classScore + idScore;
   }
 
-  //useEffect to filter results when the search term changes or data changes
-  useEffect(() => {
-    if(searchInput.length > 0){
-      filterInitialData();
-    }
-  }, [searchInput,]);
-
-  //sort initial Data based on the score
+  // use calculateScore on filteredData to sort the results
   const sortData = () => {
-    const sortedData = initialData.sort((a, b) => {
-      return calculateScore(b) - calculateScore(a);
+    const filteredData = filterInitialData();
+    // calculate the score for each item in the filteredData and add it to the object
+    filteredData.forEach((item) => {
+      item.score = calculateScore(item);
     });
-    setSearchResults(sortedData);
+    // sort the filteredData based on the score
+    return filteredData.sort((a, b) => b.score - a.score);
   };
 
-  //useEffect to sort results when the initial data changes
+  // useEffect to update searchResults when searchInput changes
   useEffect(() => {
-    if(initialData.length > 0){
-      sortData();
+    if (searchInput.length > 0) {
+      const sortedData = sortData();
+      setSearchResults(sortedData);
     }
-  }, [initialData]);
-
-  console.log("searchResults: ",searchResults);
+  }, [searchInput]);
 
 
   return (
@@ -89,9 +77,8 @@ const SearchBar = ({ data }) => {
                * an array of objects from the search results
                * with the structure: {id, name, class}
               */}
-              {searchResults.map((item) => (
-                item.fileContentJson.map((student) => (
-                  <tr className="hover text-custom-beige">
+              {searchResults.map((student) => (
+                  <tr key={student.id} className="hover text-custom-beige">
                     <td>{student.name}</td>
                     <td>{student.class}</td>
                     <td>{student.id}</td>
@@ -104,7 +91,6 @@ const SearchBar = ({ data }) => {
                         </Link>
                     </td>
                   </tr>
-                ))
               ))}
             </tbody>
           </table>
