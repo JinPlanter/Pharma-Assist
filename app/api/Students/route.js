@@ -18,31 +18,17 @@ export const GET = async (request,response) => {
         .find({})
         .toArray();
 
-        //before returning data, parse the data to only get the student arrays,
-        //and not the entire object
-        //console.log('first array of data fr api',data[0]);
-        //console.log('fileContentJson: ',data[0].fileContentJson);
         
         // variable to hold parsed data
         let parsedData = [];
         for (let i = 0; i < data.length; i++){
             parsedData = parsedData.concat(data[i].fileContentJson);
         }
-        //console.log('data after parsing:',parsedData);
-        //console.log('unparsed data:',data);
-        
-       //return new Response(JSON.stringify(data), { status: 200 });
-        //return new Response(JSON.stringify(parsedData), { status: 200 });
+
+
         return NextResponse.json(parsedData);
     
     } catch (error){
-        /*
-        return new Response(
-            JSON.stringify({ 
-                error: "Unable to fetch data from classList collection" 
-            }), { status: 500 }
-        );
-        */
         return NextResponse.error(
             new Error("Unable to fetch data from classList collection"),
             { status: 500 }

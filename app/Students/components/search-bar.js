@@ -79,10 +79,6 @@ const SearchBar = ({ data }) => {
               </tr>
             </thead>
             <tbody>
-              {/** note that search results is not clean clean; so must extract
-               * an array of objects from the search results
-               * with the structure: {id, name, class}
-              */}
               {searchResults.map((student) => (
                   <tr key={student.id} className="hover text-custom-beige">
                     <td>{student.name}</td>

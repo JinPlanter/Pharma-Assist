@@ -10,10 +10,9 @@ const getStudentData = async (id) => {
 
 const StudentPage = async ({ params }) => {
   const { id } = params;
-  //console.log(id);
-  //console.log('params: ', params)
   const student = await getStudentData(parseInt(id));
-  //console.log('student: ', student);
+  // student is an array of one object, so we can access the object at index 0
+  // could change if database is collection / document changes
   return (
     <div>
       <h1>{student[0].name}</h1>
