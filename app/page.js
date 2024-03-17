@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import LoginPage from "./Login/page.js";
+import Link from "next/link.js";
 
 export default function Home() {
   const [showLoginPage, setShowLoginPage] = useState(false);
@@ -27,16 +28,23 @@ export default function Home() {
           interface tailored to the specific needs of instructors and students
           within the Pharmacy Assistant program.
         </p>
-        {showGetStartedButton && (
-          <button className="btn btn-primary" onClick={handleGetStartedClick}>
-            Get Started
-          </button>
-        )}
-        {showLoginPage && (
-          <div>
-            <LoginPage />
-          </div>
-        )}
+        <div className="flex flex-col items-center justify-center gap-2">
+          {showGetStartedButton && (
+            <button className="btn btn-primary w-32" onClick={handleGetStartedClick}>
+              Get Started
+            </button>
+          )}
+          {showLoginPage && (
+            <div className="w-full">
+              <LoginPage />
+            </div>
+          )}
+
+          {/*THIS BUTTON IS TEMPORARY, WE SHOULD REDIRECT TO THE DASHBOARD UPON LOGIN */}
+          <Link className="btn btn-primary w-32" href="/dashboard">
+            Dashboard
+          </Link>
+        </div>
       </div>
     </section>
   );
