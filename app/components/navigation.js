@@ -69,7 +69,7 @@ export default function Navigation({ onNavigationClick }) {
             <ul className="navigationDrawerUl">
               {pages.map((page, i) => {
                 return (
-                  <li className="navigationDrawerLi">
+                  <li className="navigationDrawerLi" key={i}>
                     <button
                       className="navigationDrawerLink"
                       onClick={() => onNavigationClick(page.name)}
