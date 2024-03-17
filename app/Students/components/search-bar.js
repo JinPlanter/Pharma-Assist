@@ -1,60 +1,69 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
+
+// some functions to filter the data and calculate the score of the search results
+
+ // Function to filter initial Data of api route based on search input
+ const filterInitialData = (theData) => {
+  // filter the data based on the search input
+  return theData.filter((student) =>
+    student.hasOwnProperty('id') &&
+    student.hasOwnProperty('name') &&
+    student.hasOwnProperty('class')
+  );
+};
+
+
+// function to calculate the score of the search results
+const calculateScore = (val, searchInput) => {
+  let nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
+  // increase nameScore if the search input is included in the first part of the name
+  if (val.name?.toLowerCase().startsWith(searchInput.toLowerCase())) {
+    nameScore += 1;
+  }
+
+  const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
+  const idScore = searchInput.includes(val.id) ? 3 : 0;
+  return nameScore + classScore + idScore;
+};
+
+
+
+
+
+// SearchBar component
 const SearchBar = ({ data }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  
-  // Function to filter initial Data of api route based on search input
-  const filterInitialData = (theData) => {
-    // filter the data based on the search input
-    return theData.filter((student) =>
-      student.hasOwnProperty('id') &&
-      student.hasOwnProperty('name') &&
-      student.hasOwnProperty('class') &&
-      (
-        student.name.toLowerCase().includes(searchInput.toLowerCase()) || 
-        student.class.toLowerCase().includes(searchInput.toLowerCase()) ||
-        searchInput.includes(student.id)
-        )
-    );
+
+  //function to handle the search input
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
   };
 
 
-  // function to calculate the score of the search results
-  const calculateScore = (val) => {
-    const nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-    const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
-    const idScore = searchInput.includes(val.id) ? 3 : 0;
-    return nameScore + classScore + idScore;
-  }
-
-  // use calculateScore on filteredData to sort the results
-  const sortData = (filteredData) => {
-    // calculate the score for each item in the filteredData and add it to the object
-    const dataWithScore = filteredData.map((val) => {
-      return {
-        ...val,
-        score: calculateScore(val),
-      };
-    });
-
-    // sort the filteredData based on the score
-    return dataWithScore.sort((a, b) => b.score - a.score);
-  };
-
-  // useEffect to update searchResults when searchInput changes
   useEffect(() => {
-    if (searchInput.length > 0) {
-      const filteredData = filterInitialData(data);
-      const sortedData = sortData(filteredData);
-      setSearchResults(sortedData);
-    }else{
+    
+    // calculate the score of the search results each time
+    const filteredData = filterInitialData(data);
+    if (searchInput.length > 0){
+      const scoredData = filteredData.map((val) => ({
+      ...val,
+      score: calculateScore(val, searchInput)
+      }));
+      //sort scoredData based on score
+      const sortedResults = scoredData
+      .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3)
+      .sort((a, b) => b.score - a.score);
+
+      setSearchResults(sortedResults);
+    }
+    else{
       setSearchResults([]);
     }
-  }, [searchInput, data]);
-
+  },[data, searchInput]);
 
   return (
     <div className="p-4 focus:border-primary-600 dark:focus:ring-blue-500 dark:focus:border-blue-500">
