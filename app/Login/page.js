@@ -1,83 +1,144 @@
 "use client";
 
 // Import necessary modules from the React library
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import '../Styles/style.css'; // Import styles
-import '../globals.css'
+import "../globals.css";
 
 // LoginPage component
 export default function LoginPage() {
-    // State variables for username and password
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+  // State variables for username and password
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    // Event handler for form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  // Event handler for form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-        // Log the entered username and password to the console
-        console.log(`Username: ${username}, Password: ${password}`);
+    // Log the entered username and password to the console
+    console.log(`Username: ${username}, Password: ${password}`);
 
-        // Create a Blob containing the user input as JSON
-        const blob = new Blob([JSON.stringify({ username, password }, null, 2)], { type: 'application/json' });
+    // Create a Blob containing the user input as JSON
+    const blob = new Blob([JSON.stringify({ username, password }, null, 2)], {
+      type: "application/json",
+    });
 
-        // Create a download link and trigger a click to download the JSON file
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'user-input.json';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    // Create a download link and trigger a click to download the JSON file
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "user-input.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
-        // Clear the username and password fields after submission
-        setUsername('');
-        setPassword('');
-    };
+    // Clear the username and password fields after submission
+    setUsername("");
+    setPassword("");
+  };
 
-    // JSX rendering for the LoginPage component
-    return (
-        <div>
-            {/* Main content area with a login form */}
-            <main>
-                <form onSubmit={handleSubmit} className="flex flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mt-10 w-1/2 mx-auto">
-                    {/* Username input field */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                            Username
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="username"
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
+  // JSX rendering for the LoginPage component
+  return (
+    <div>
+      {/* Main content area with a login form */}
+      <main>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col shadow-md rounded px-8 py-4 mt-10 w-1/2 mx-auto"
+        >
+          <section class="bg-gray-50 dark:bg-gray-900">
+            <div class="flex flex-col items-center justify-center px-3 py-8 mx-auto md:h-screen lg:py-0">
+              <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                  <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Sign in to your account
+                  </h1>
+                  <form class="space-y-4 md:space-y-6" action="#">
+                    <div>
+                      <label
+                        for="email"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Your email
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="firstname.lastname@sait.ca"
+                        required=""
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
                     </div>
-                    
-                    {/* Password input field */}
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                            id="password"
-                            type="password"
-                            placeholder="******************"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                    <div>
+                      <label
+                        for="password"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="••••••••"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required=""
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
                     </div>
-                    
-                    {/* Sign In button */}
-                    <div className="flex items-center justify-between">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                            Sign In
-                        </button>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="remember"
+                            aria-describedby="remember"
+                            type="checkbox"
+                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                            required=""
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="remember"
+                            class="text-gray-500 dark:text-gray-300"
+                          >
+                            Remember me
+                          </label>
+                        </div>
+                      </div>
+                      <a
+                        href="#"
+                        class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      >
+                        Forgot password?
+                      </a>
                     </div>
-                </form>
-            </main>
-        </div>
-    );
+                    <button
+                      type="submit"
+                      class=" btn btn-primary w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
+                      Sign in
+                    </button>
+                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                      Don’t have an account yet?{" "}
+                      <a
+                        href="#"
+                        class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      >
+                        Sign up
+                      </a>
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+          ;
+        </form>
+      </main>
+    </div>
+  );
 }
