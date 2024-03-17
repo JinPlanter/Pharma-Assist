@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import LoginPage from "./Login/page.js";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const [showLoginPage, setShowLoginPage] = useState(false);
@@ -18,6 +19,7 @@ export default function Home() {
       className={`min-h-full bg-center bg-no-repeat bg-[url('/pharmacy.jpg')] bg-gray-700 bg-blend-multiply`}
     >
       <div className="px-4 mx-auto max-w-screen-xl text-center py-10 lg:py-40">
+        <Image className="mx-auto block" src="/logo.png" width={500} height={50} alt="Pharmassist logo" />
         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           Welcome to Pharma Assist
         </h1>
