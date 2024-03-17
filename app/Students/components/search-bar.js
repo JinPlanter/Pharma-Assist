@@ -18,11 +18,14 @@ import Link from "next/link";
 // function to calculate the score of the search results
 const calculateScore = (val, searchInput) => {
   let nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-  // increase nameScore if the search input is included in the first part of the name
   if (val.name?.toLowerCase().startsWith(searchInput.toLowerCase())) {
     nameScore += 1;
   }
 
+  // check if the search input is included in the first name
+  if (val.name?.toLowerCase().split(" ")[0].includes(searchInput.toLowerCase())) {
+    nameScore += 1;
+  }
   const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
   const idScore = searchInput.includes(val.id) ? 3 : 0;
   return nameScore + classScore + idScore;
@@ -38,11 +41,6 @@ const SearchBar = ({ data }) => {
   const [searchResults, setSearchResults] = useState([]);
 
 
-  //function to handle the search input
-  const handleSearchInput = (event) => {
-    setSearchInput(event.target.value);
-  };
-
 
   useEffect(() => {
     
@@ -55,8 +53,10 @@ const SearchBar = ({ data }) => {
       }));
       //sort scoredData based on score
       const sortedResults = scoredData
+      .sort((a, b) => b.score - a.score)
       .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3)
-      .sort((a, b) => b.score - a.score);
+      .sort((a, b) => a.name.localeCompare(b.name));
+      
 
       setSearchResults(sortedResults);
     }
