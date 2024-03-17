@@ -57,20 +57,20 @@ const SearchBar = ({ data }) => {
 
 
   return (
-    <div className="p-4 bg-custom-gray">
-        <label className="input input-bordered flex items-center gap-2 text-custom-beige ">
+    <div className="p-4 focus:border-primary-600 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <label className="input flex items-center gap-2 text-gray-900 sm:text-sm rounded-lg  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white light:text-black ">
             <input 
             type="text" 
-            className="grow" 
+            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white light:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" 
             placeholder="Search by name, class or student ID"
             onChange = {(event) => setSearchInput(event.target.value)} />
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
         </label>
 
       {searchResults.length > 0 && (
-        <div className="bg-custom-green">
-          <table className="table text-custom-beige">
-            <thead className="font-extrabold">
+        <div className="mt-2">
+          <table className="bg-primary table">
+            <thead className="font-extrabold text-custom-white">
               <tr>
                 <th>Name</th>
                 <th>Class</th>
@@ -80,7 +80,7 @@ const SearchBar = ({ data }) => {
             </thead>
             <tbody>
               {searchResults.map((student) => (
-                  <tr key={student.id} className="hover text-custom-beige">
+                  <tr key={student.id} className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800">
                     <td>{student.name}</td>
                     <td>{student.class}</td>
                     <td>{student.id}</td>

@@ -30,8 +30,8 @@ export default function Page() {
   }, []);
 
   return (
-    <div>
-      <h1>Student Search</h1>
+    <div className='bg-custom-black'>
+      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white">Student Search Page</h1>
       <SearchBar data={students} />
     </div>
   );
