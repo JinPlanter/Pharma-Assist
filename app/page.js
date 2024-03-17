@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import LoginPage from "./Login/page.js";
-import Link from "next/link.js";
+import Link from "next/link";
 
 export default function Home() {
   const [showLoginPage, setShowLoginPage] = useState(false);
@@ -14,7 +14,9 @@ export default function Home() {
   };
 
   return (
-    <section className="min-h-full bg-center bg-no-repeat bg-[url('https://sundancecollege.com/uploads/Blog/community-pharmacy-in-Calgary.jpg')] bg-gray-700 bg-blend-multiply">
+    <section
+      className={`min-h-full bg-center bg-no-repeat bg-[url('/pharmacy.jpg')] bg-gray-700 bg-blend-multiply`}
+    >
       <div className="px-4 mx-auto max-w-screen-xl text-center py-10 lg:py-40">
         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           Welcome to Pharma Assist
@@ -30,7 +32,10 @@ export default function Home() {
         </p>
         <div className="flex flex-col items-center justify-center gap-2">
           {showGetStartedButton && (
-            <button className="btn btn-primary w-32" onClick={handleGetStartedClick}>
+            <button
+              className="btn btn-primary w-32"
+              onClick={handleGetStartedClick}
+            >
               Get Started
             </button>
           )}
