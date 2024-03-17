@@ -9,7 +9,7 @@ console.log("Parsed JSON content:", fileContentJson); // Debug
     // Save the file content JSON to the database
     const client = await clientPromise;
     const db = client.db("capstone");
-    const collection = db.collection("gradingForm");
+    const collection = db.collection("classlist");
 
     // Example: Save file content JSON to MongoDB
     await collection.insertOne({ fileContentJson });

@@ -1,6 +1,5 @@
 // UploadClassList.js
 "use client";
-// UploadClassList.js
 import React, { useState } from "react";
 
 export default function UploadClassList() {
@@ -19,17 +18,27 @@ export default function UploadClassList() {
       fileReader.onload = async () => {
         try {
           const fileContentString = fileReader.result;
-          const fileContentJson = JSON.parse(fileContentString);
 
-          console.log("Parsed JSON content:", fileContentJson); // Debug
+          // Convert CSV string to an array of objects
+          const csvData = fileContentString
+            .trim()
+            .split("\n")
+            .slice(1) // Skip the header row
+            .map((row) => {
+              const cells = row.split(",");
+              const [username, lastName, firstName, email] = cells;
+              return { username, lastName, firstName, email };
+            });
 
-          // Send fileContentJson to the server as JSON
+          console.log("Parsed CSV data:", csvData); // Debug
+
+          // Send csvData to the server as JSON
           const response = await fetch("/api/upload", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(fileContentJson), // Send the JSON content directly
+            body: JSON.stringify(csvData), // Send the CSV data as JSON
           });
 
           if (response.ok) {
@@ -51,7 +60,12 @@ export default function UploadClassList() {
   return (
     <div>
       <h1>Upload Class List</h1>
-      <input type="file" name="file" onChange={handleFileChange} />
+      <input
+        type="file"
+        name="file"
+        accept=".csv"
+        onChange={handleFileChange}
+      />
       <button onClick={handleUpload}>Upload</button>
     </div>
   );
