@@ -32,8 +32,12 @@ function Form() {
     useEffect(() => {
         const initializeFormStates = async () => {
             const formFields = await fetchFormFields();
-            const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
-    
+            const date = new Date();
+            const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+            const currentDate = localDate.toISOString().slice(0, 10);
+            // const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
+            console.log('currentDate:', currentDate);
+
             const updatedFormStates = formFields.reduce((acc, curr) => {
                 if (curr.label === 'Date') {
                     acc[curr.label] = currentDate; // Set the current date
@@ -42,7 +46,7 @@ function Form() {
                 }
                 return acc;
             }, {});
-    
+
             setFormValues(updatedFormStates);
         };
         initializeFormStates();
