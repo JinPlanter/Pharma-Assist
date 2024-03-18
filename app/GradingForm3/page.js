@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import FormFields from '../data/gradingForm.json';
 
-async function fetchFormData() {
+async function fetchFormFields() {
     /* try {
         const response = await fetch('../data/gradingForm.json');
         if (!response.ok) {
@@ -20,8 +20,13 @@ async function fetchFormData() {
 }
 
 function MyForm() {
-    const [formValues, setFormValues] = useState({});
-    const [formData, setFormData] = useState(null);
+    const [formValues, setFormValues] = useState({
+        'Evaluation (total marks)': 3
+    });
+    const [formFields, setFormFields] = useState(null);
+    // const [toggledItems, setToggledItems] = useState({});
+    // const [isToggled, setIsToggled] = useState(false);
+    // const [marks, setMarks] = useState(3);
 
     useEffect(() => {
         const currentDate = new Date().toISOString().slice(0, 10);
@@ -31,7 +36,7 @@ function MyForm() {
         `.slice(0, 10)` extracts the date and removes the time.
         */
 
-        fetchFormData().then(data => setFormData(data));
+        fetchFormFields().then(data => setFormFields(data));
         setFormValues(prevValues => ({ ...prevValues, 'Date': currentDate }));
         /*
         `prevValues` is the previous state of `formValues` that gets spread into the new state.
@@ -46,24 +51,42 @@ function MyForm() {
         });
     };
 
-    if (!formData) return null;
+    const handleToggle = (e, isActive) => {
+        if (e.target.type === 'checkbox' && isActive) {
+            setFormValues(prevValues => {
+
+
+                let newMarks = e.target.checked ?
+                    (prevValues['Evaluation (total marks)'] - 1) :
+                    Math.min(prevValues['Evaluation (total marks)'] + 1, 3);
+
+                return {
+                    ...prevValues,
+                    'Evaluation (total marks)': newMarks
+                };
+            });
+        }
+        console.log(e.target.name);
+    };
+
+    if (!formFields) return null;
 
     return (
         <form>
+            <div>
 
-            <div id="TypeA">
+
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-
-                    <div id="Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formData.filter(field => !field.comment).map((field, index) => (
+                    <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {formFields.filter(field => !field.comment).map((field, index) => (
                             <label key={index}>
                                 {field.label}
                             </label>
                         ))}
                     </div>
 
-                    <div id="Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formData.filter(field => !field.comment).map((field, index) => (
+                    <div id="TypeA_Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {formFields.filter(field => !field.comment).map((field, index) => (
                             <input
                                 type="text"
                                 name={field.label}
@@ -73,118 +96,29 @@ function MyForm() {
                             />
                         ))}
                     </div>
-
                 </div>
-            </div>
 
-
-
-
-
-
-
-            <br /><br /><br /><br />
-
-
-
-
-
-            <div id="TypeB">
+                <br />
 
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-
-                    <div id="Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formData.filter(field => field.type === 'checkbox').map((field, index) => (
+                    <div id="TypeB_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {formFields.filter(field => field.type === 'checkbox').map((field, index) => (
                             <label key={index}>
                                 <input
                                     type="checkbox"
                                     name={field.label}
-                                //onChange={handleChange}
-                                // `onChange={handleChange}` prints the value "on" into the comment form field.
+                                    onChange={handleToggle}
                                 />
-
-                                {field.label}
-                                <br/>
-
-                                <input
-                                    type="text"
-                                />
-                                
-                            </label>
-                            
-
-                            /* <input
-                            type="text"
-                            name={field.label}
-                            //onChange={handleChange}
-                            // `onChange={handleChange}` prints the value "on" into the comment form field.
-                            /> */
-                        ))}
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-
-
-
-
-            <br /><br /><br /><br />
-
-
-
-
-
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-
-                <div style={{ marginRight: '20px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formData.filter(field => field.type === 'checkbox').map((field, index) => (
-                            <label key={index}>
-                                {field.label}
-                                <input
-                                    type="checkbox"
-                                    name={field.label}
-                                //onChange={handleChange}
-                                // `onChange={handleChange}` prints the value "on" into the comment form field.
-                                />
-                            </label>
-
-                            /* field.comment ? (
-                                <br key={index} />
-                            ) : (
-                                <label key={index}>
-                                    {field.label}
-                                    <input
-                                        type="checkbox"
-                                        name={field.label}
-                                        onChange={handleChange}
-                                    // `onChange={handleChange}` prints the value "on" into the comment form field.
-                                    />
-                                </label>
-                                ) */
-                        ))}
-                    </div>
-                </div>
-
-                <div>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formData.map((field, index) => (
-                            <label key={index}>
-                                {field.label}:
-                                <input
-                                    type="text"
-                                    name={field.label}
-                                    value={formValues[field.label] || ''}
-                                    onChange={handleChange}
+                                {field.label}<br />
+                                <textarea
+                                    placeholder="Add comment..."
+                                    className="h-10 w-full p-2 border rounded-md resize"
                                 />
                             </label>
                         ))}
                     </div>
                 </div>
+
 
             </div>
         </form>

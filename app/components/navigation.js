@@ -111,7 +111,16 @@ export default function Navigation() {
                     href="/GradingForm3"
                     onClick={toggleDrawer}
                   >
-                    Grading
+                    GradingForm3
+                  </Link>
+                </li>
+                <li className="navigationDrawerLi">
+                  <Link
+                    className="navigationDrawerLink"
+                    href="/GradingForm4"
+                    onClick={toggleDrawer}
+                  >
+                    GradingForm4
                   </Link>
                 </li>
                 <SignOutButton />
@@ -129,6 +138,7 @@ export default function Navigation() {
             <Link href="/signup">Next Auth Test</Link>
             <Link href="/uploadclasslist">Database Upload Test</Link>
             <Link href="/GradingForm3">Grading Form 3</Link>
+            <Link href="/GradingForm4">Grading Form 4</Link>
             <SignOutButton />
           </div>
         </div>

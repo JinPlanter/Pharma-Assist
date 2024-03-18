@@ -1,63 +1,96 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import FormFields from '../data/FormFields.json';
+import FormFields from '../data/gradingForm.json';
 
 async function fetchFormFields() {
-    // Fetch form fields from the server
+    /* try {
+        const response = await fetch('../data/gradingForm.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data.criteria;
+    } catch (error) {
+        console.error('Fetch failed, using local data:', error);
+        return FormFields.criteria;
+    } */
 
+    // current debug statement
     return FormFields.criteria;
 }
 
 function Form() {
-    const [formValues, setFormValues] = useState(fetchFormFields);
+    const [formValues, setFormValues] = useState(() => {
+        const initialFormStates = FormFields.criteria.reduce((acc, curr) => {
+            acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
+            return acc;
+        }, {});
+        return initialFormStates;
+    });
 
     useEffect(() => {
-        const totalMarks = Object.values(formValues).filter(value => value === true).length;
-        setFormValues(prevValues => ({ ...prevValues, 'Evaluation (total marks)': totalMarks }));
-
-
-        fetchFormFields().then(data => setFormFields(data));
-        
-        const currentDate = new Date().toISOString().slice(0, 10);
-        setFormValues(prevValues => ({ ...prevValues, 'Date': currentDate }));
-    }, [formValues]);
+        const initializeFormStates = async () => {
+            const formFields = await fetchFormFields();
+            const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
+    
+            const updatedFormStates = formFields.reduce((acc, curr) => {
+                if (curr.label === 'Date') {
+                    acc[curr.label] = currentDate; // Set the current date
+                } else {
+                    acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
+                }
+                return acc;
+            }, {});
+    
+            setFormValues(updatedFormStates);
+        };
+        initializeFormStates();
+    }, []);
 
     const handleChange = (event) => {
-        const { name, type, checked } = event.target;
-        setFormValues(prevValues => ({ ...prevValues, [name]: type === 'checkbox' ? checked : prevValues[name] }));
+        const { name, type, checked, value } = event.target;
+        let newFormValues = { ...formValues, [name]: type === 'checkbox' ? checked : value };
+
+        // If the form field type is checkbox, adjust the "Evaluation (total marks)" value based on checkbox selection.
+        if (type === 'checkbox') {
+            let evaluationTotalMarks = Number(newFormValues['Evaluation (total marks)']);
+            if (isNaN(evaluationTotalMarks)) {
+                evaluationTotalMarks = 0;
+            }
+            newFormValues['Evaluation (total marks)'] = checked ? evaluationTotalMarks - 1 : evaluationTotalMarks + 1;
+        }
+
+        setFormValues(newFormValues);
     };
 
     return (
-        <form>
-            <label>
-                Selected wrong drug
-                <input
-                    type="checkbox"
-                    name="Selected wrong drug"
-                    checked={formValues['Selected wrong drug']}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Patient profile/wrong patient
-                <input
-                    type="checkbox"
-                    name="Patient profile/wrong patient"
-                    checked={formValues['Patient profile/wrong patient']}
-                    onChange={handleChange} />
-            </label>
-            {/* Add other fields as needed */}
-            <label>
-                Evaluation (total marks)
-                <input
-                    type="text"
-                    name="Evaluation (total marks)"
-                    value={formValues['Evaluation (total marks)']}
-                    readOnly
-                />
-            </label>
-        </form>
+        <div>
+            <div style={{ display: 'flex' }}>
+                {FormFields.criteria.filter(field => ["Rx#", "Date", "Patient Name"].includes(field.label)).map((field, index) => (
+                    <label key={index}>
+                        {field.label}
+                        <input type="text" name={field.label} value={formValues[field.label]} onChange={handleChange} />
+                    </label>
+                ))}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {FormFields.criteria.filter(field => !["Rx#", "Date", "Patient Name"].includes(field.label)).map((field, index) => (
+                    <label key={index}>
+                        {field.label}
+                        {field.type === 'checkbox' ? (
+                            <input type="checkbox" name={field.label} checked={formValues[field.label]} onChange={handleChange} />
+                        ) : (
+                            field.label === 'Evaluation (total marks)' ? (
+                                <p>{Math.max(0, formValues[field.label])}</p>
+                            ) : (
+                                <input type="text" name={field.label} value={formValues[field.label]} onChange={handleChange} />
+                            )
+                        )}
+                    </label>
+                ))}
+            </div>
+        </div>
     );
 }
 
