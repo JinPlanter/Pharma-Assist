@@ -89,7 +89,10 @@ const SearchBar = ({ data }) => {
             </thead>
             <tbody>
               {searchResults.map((student) => (
-                  <tr key={student.id} className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800">
+                  <tr 
+                  key={student.id} 
+                  className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800"
+                  onClick={()=> window.location.href=`/Students/${student.id}`}>
                     <td>{student.name}</td>
                     <td>{student.class}</td>
                     <td>{student.id}</td>
