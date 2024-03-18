@@ -54,8 +54,7 @@ const SearchBar = ({ data }) => {
       //sort scoredData based on score
       const sortedResults = scoredData
       .sort((a, b) => b.score - a.score)
-      .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3)
-      .sort((a, b) => a.name.localeCompare(b.name));
+      .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3);
       
 
       setSearchResults(sortedResults);
