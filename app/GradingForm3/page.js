@@ -16,32 +16,20 @@ async function fetchFormFields() {
         return FormFields.criteria;
     } */
 
+    // current debug statement
     return FormFields.criteria;
 }
 
-function MyForm() {
+function Form() {
     const [formValues, setFormValues] = useState({
         'Evaluation (total marks)': 3
     });
     const [formFields, setFormFields] = useState(null);
-    // const [toggledItems, setToggledItems] = useState({});
-    // const [isToggled, setIsToggled] = useState(false);
-    // const [marks, setMarks] = useState(3);
 
     useEffect(() => {
         const currentDate = new Date().toISOString().slice(0, 10);
-        /*
-        `new Date()` creates a new date object.
-        `toISOString()` converts the date to a string in ISO format (YYYY-MM-DDTHH:mm:ss.sssZ).
-        `.slice(0, 10)` extracts the date and removes the time.
-        */
-
         fetchFormFields().then(data => setFormFields(data));
         setFormValues(prevValues => ({ ...prevValues, 'Date': currentDate }));
-        /*
-        `prevValues` is the previous state of `formValues` that gets spread into the new state.
-        The 'Date' form field is then autofilled with the value of `currentDate`.
-        */
     }, []);
 
     const handleChange = (e) => {
@@ -54,8 +42,6 @@ function MyForm() {
     const handleToggle = (e, isActive) => {
         if (e.target.type === 'checkbox' && isActive) {
             setFormValues(prevValues => {
-
-
                 let newMarks = e.target.checked ?
                     (prevValues['Evaluation (total marks)'] - 1) :
                     Math.min(prevValues['Evaluation (total marks)'] + 1, 3);
@@ -74,8 +60,6 @@ function MyForm() {
     return (
         <form>
             <div>
-
-
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
                         {formFields.filter(field => !field.comment).map((field, index) => (
@@ -98,8 +82,6 @@ function MyForm() {
                     </div>
                 </div>
 
-                <br />
-
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div id="TypeB_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
                         {formFields.filter(field => field.type === 'checkbox').map((field, index) => (
@@ -118,11 +100,9 @@ function MyForm() {
                         ))}
                     </div>
                 </div>
-
-
             </div>
         </form>
     );
 }
 
-export default MyForm;
+export default Form;

@@ -52,6 +52,8 @@ function Form() {
         initializeFormStates();
     }, []);
 
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
+
     const handleChange = (event) => {
         const { name, type, checked, value } = event.target;
         let newFormValues = { ...formValues, [name]: type === 'checkbox' ? checked : value };
@@ -63,38 +65,69 @@ function Form() {
                 evaluationTotalMarks = 0;
             }
             newFormValues['Evaluation (total marks)'] = checked ? evaluationTotalMarks - 1 : evaluationTotalMarks + 1;
+
+            // Update the selectedCheckboxes state
+            setSelectedCheckboxes({ ...selectedCheckboxes, [name]: checked });
         }
 
         setFormValues(newFormValues);
     };
 
     return (
-        <div>
-            <div style={{ display: 'flex' }}>
-                {FormFields.criteria.filter(field => ["Rx#", "Date", "Patient Name"].includes(field.label)).map((field, index) => (
-                    <label key={index}>
-                        {field.label}
-                        <input type="text" name={field.label} value={formValues[field.label]} onChange={handleChange} />
-                    </label>
-                ))}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {FormFields.criteria.filter(field => !["Rx#", "Date", "Patient Name"].includes(field.label)).map((field, index) => (
-                    <label key={index}>
-                        {field.label}
-                        {field.type === 'checkbox' ? (
-                            <input type="checkbox" name={field.label} checked={formValues[field.label]} onChange={handleChange} />
-                        ) : (
+        <form>
+            <div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {FormFields.criteria.filter(field => field.type !== 'checkbox').map((field, index) => (
+                            <label key={index}>
+                                {field.label}
+                            </label>
+                        ))}
+                    </div>
+
+                    <div id="TypeA_Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {FormFields.criteria.filter(field => field.type !== 'checkbox').map((field, index) => (
                             field.label === 'Evaluation (total marks)' ? (
-                                <p>{Math.max(0, formValues[field.label])}</p>
+                                <p key={index}>{Math.max(0, formValues[field.label])}</p>
                             ) : (
-                                <input type="text" name={field.label} value={formValues[field.label]} onChange={handleChange} />
+                                <input
+                                    type={field.type}
+                                    name={field.label}
+                                    value={formValues[field.label] || ''}
+                                    onChange={handleChange}
+                                    key={index}
+                                />
                             )
-                        )}
-                    </label>
-                ))}
+                        ))}
+                    </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div id="TypeB_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                        {FormFields.criteria.filter(field => field.type === 'checkbox').map((field, index) => (
+                            <label key={index}>
+                                <input
+                                    type="checkbox"
+                                    name={field.label}
+                                    checked={formValues[field.label]}
+                                    onChange={handleChange}
+                                />
+                                {field.label}<br />
+                                {formValues[field.label] &&
+                                    <textarea
+                                        name={`${field.label}-input`}
+                                        value={formValues[`${field.label}-input`] || ''}
+                                        onChange={handleChange}
+                                        placeholder="Add comment..."
+                                        className="h-10 w-full p-2 border rounded-md resize"
+                                    />
+                                }
+                            </label>
+                        ))}
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     );
 }
 
