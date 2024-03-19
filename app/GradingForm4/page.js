@@ -94,28 +94,28 @@ function Form() {
 
   return (
     <form>
-      <div class="min-h-screen p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex items-center justify-center text-black">
-        <div class="container max-w-screen-lg mx-auto">
+      <div className="min-h-screen p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex items-center justify-center text-black">
+        <div className="container max-w-screen-lg mx-auto">
           <div>
-            <h2 class="font-bold text-5xl text-gray-600 mb-3">Grading Form</h2>
+            <h2 className="font-bold text-5xl text-white mb-3">Grading Form</h2>
 
-            <div class="bg-neutral rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-              <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                <div class="text-gray-600">
-                  <p class="font-medium text-lg">Lab Details</p>
-                  <p>Please fill out all the fields.</p>
+            <div className="bg-neutral rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+              <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                <div className="text-gray-600">
+                  <p className="font-medium text-lg text-gray-500">Lab Details</p>
+                  <p className="text-gray-400">Please fill out all the fields.</p>
                 </div>
 
-                <div class="lg:col-span-2">
-                  <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                <div className="lg:col-span-2">
+                  <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     
 
-                    <div class="md:col-span-5" id="TypeA_Row1_Column2">
+                    <div className="md:col-span-5" id="TypeA_Row1_Column2">
                       {FormFields.criteria
                         .filter((field) => field.type !== "checkbox")
                         .map((field, index) => (
-                          <div key={index} class="flex items-center mb-3 text-l">
-                            <label class="mr-2">{field.label}</label>
+                          <div key={index} className="flex items-center mb-3 text-l">
+                            <label className="mr-2">{field.label}</label>
                             {field.label === "Evaluation (total marks)" ? (
                               <p>{Math.max(0, formValues[field.label])}</p>
                             ) : (
@@ -131,12 +131,12 @@ function Form() {
                         ))}
                     </div>
 
-                    <div class="md:col-span-3" id="TypeB_Row1_Column1">
+                    <div className="md:col-span-3" id="TypeB_Row1_Column1">
                       {FormFields.criteria
                         .filter((field) => field.type === "checkbox")
                         .map((field, index) => (
                           <div key={index} class="flex items-center mb-2">
-                            <label class="mr-2">
+                            <label className="mr-2">
                               <input
                                 type="checkbox"
                                 name={field.label}
@@ -158,9 +158,9 @@ function Form() {
                         ))}
                     </div>
 
-                    <div class="md:col-span-5 text-right">
-                      <div class="inline-flex items-end">
-                        <button class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded">
+                    <div className="md:col-span-5 text-right">
+                      <div className="inline-flex items-end">
+                        <button className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded">
                           Submit
                         </button>
                       </div>
