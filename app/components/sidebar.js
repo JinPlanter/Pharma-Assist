@@ -8,8 +8,10 @@ import LogOutIcon from "./icons/logOutIcon";
 function Sidebar({ onNavigationClick }) {
   const pages = [
     { path: "/ImportFile", name: "Import File", icon: <ImportFileIcon /> },
+    { path: "/ImportClassList", name: "Class List Import", icon: <ImportFileIcon /> },
     { path: "/Students", name: "Students", icon: <StudentsIcon /> },
     { path: "/Grading", name: "Grading", icon: <GradingIcon /> },
+    { path: "/GradingForm4", name: "FunctionalGradingForm", icon: <GradingIcon /> },
     { path: "/LogOut", name: "Log Out", icon: <LogOutIcon /> },
   ];
 
