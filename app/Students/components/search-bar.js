@@ -5,7 +5,7 @@ import Link from "next/link";
 // some functions to filter the data and calculate the score of the search results
 
  // Function to filter initial Data of api route based on search input
- const filterInitialData = (theData) => {
+ export const filterInitialData = (theData) => {
   // filter the data based on the search input
   return theData.filter((student) =>
     student.hasOwnProperty('id') &&
@@ -16,7 +16,7 @@ import Link from "next/link";
 
 
 // function to calculate the score of the search results
-const calculateScore = (val, searchInput) => {
+export const calculateScore = (val, searchInput) => {
   let nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
   // increase nameScore if the search input is included in the first part of the name
   if (val.name?.toLowerCase().startsWith(searchInput.toLowerCase())) {

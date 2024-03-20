@@ -5,6 +5,8 @@ import '@testing-library/jest-dom';
 import Page from '../app/Students/page';
 
 
+jest.setTimeout(10000);
+
 
 // Mocking the fetch function
 global.fetch = jest.fn(() =>
@@ -43,6 +45,8 @@ describe('Page component', () => {
         render(<Page />);
         const heading = screen.getByText(/Student Search Page/i);
         expect(heading).toBeInTheDocument();
+
+        
     });
 
 
@@ -55,6 +59,9 @@ describe('Page component', () => {
         });
 
         expect(component.getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
+    
+        //use data-testid to get the search bar
+        expect(screen.getByTestId('search-bar')).toBeInTheDocument();
     });
 
 
@@ -71,6 +78,23 @@ describe('Page component', () => {
             fireEvent.change(searchBar, { target: { value: 'John' } });
         });
         expect(searchBar.value).toBe('John');
+    });
+
+
+
+    //3. test that the page handles fetch error as expected
+    test('handles fetch error', async() => {
+        global.fetch.mockImplementationOnce(() => Promise.reject("Fetch error"));
+       
+        // spy on console.error
+        const errorSpy = jest.spyOn(console,'error');
+
+
+        await act(async () => {
+            render(<Page />);
+        });
+
+        expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
     });
 
 });
