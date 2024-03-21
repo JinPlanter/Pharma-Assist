@@ -15,7 +15,7 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/Students");
+      const response = await fetch("/api/Students");
       const data = await response.json();
       
       setStudents(data); // Assuming data is an array of student objects
