@@ -1,7 +1,7 @@
 
 // test functions in search bar component
 
-import SearchBar from '../app/Students/components/search-bar';
+import SearchBar from '../../../../app/Students/components/search-bar';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 

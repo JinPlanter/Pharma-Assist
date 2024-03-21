@@ -1,6 +1,6 @@
 // tests the function used in the search bar component: calculateScore
 
-import { calculateScore } from '../app/Students/components/search-bar';
+import { calculateScore } from '../../../../app/Students/components/search-bar';
 
 
 

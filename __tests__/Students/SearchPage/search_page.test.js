@@ -2,7 +2,7 @@
 
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Page from '../app/Students/page';
+import Page from '../../../app/Students/page';
 
 
 jest.setTimeout(10000);

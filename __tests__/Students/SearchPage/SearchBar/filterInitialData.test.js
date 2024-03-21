@@ -1,7 +1,7 @@
 
 // tests the function used in the search bar component: filterInitialData
 
-import { filterInitialData } from '../app/Students/components/search-bar';
+import { filterInitialData } from '../../../../app/Students/components/search-bar';
 
 
     // 1. Returns an empty array if theData is empty (Edge case)
