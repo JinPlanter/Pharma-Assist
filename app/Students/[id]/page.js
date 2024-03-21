@@ -2,6 +2,17 @@
 import React from 'react';
 
 
+//metadata
+export const generateMetadata = async ({ params }) => {
+  const { id } = params;
+  const student = await getStudentData(parseInt(id));
+  return {
+    title: `Pharmacy Assistant Grading Tool: ${student[0].name}`,
+    description: `Student: ${student[0].name}`
+  }
+};
+
+
 //get student data from api route
 const getStudentData = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Students/${id}`);
