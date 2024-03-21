@@ -8,7 +8,7 @@ export const generateMetadata = async ({ params }) => {
   const student = await getStudentData(parseInt(id));
   return {
     title: `Pharmacy Assistant Grading Tool: ${student[0].name}`,
-    description: `Student: ${student[0].name}`
+    description: `Student Page: ${student[0].name}`
   }
 };
 
