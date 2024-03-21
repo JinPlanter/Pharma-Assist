@@ -1,44 +1,52 @@
 
 // test functions in search bar component
 
-import { filterInitialData, calculateScore } from '../app/Students/components/search-bar';
-
-    // 1. Returns an empty array if theData is empty (Edge case)
-    test('should return an empty array when theData is empty', () => {
-        const theData = [];
-  
-        const result = filterInitialData(theData);
-  
-        expect(result).toEqual([]);
-      });
+import SearchBar from '../app/Students/components/search-bar';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 
 
+// 1. Renders the SearchBar component with label and input field
+test('should render the SearchBar component with label and input field', () => {
+  const data = [];
+  render (<SearchBar data={data} />);
 
-    // 2. Filters out objects without id, name, or class properties
-    test('should filter out objects without id, name, or class properties', () => {
-    const theData = [
-        { id: 1, name: 'John', class: 'A' },
-        { id: 2, class: 'B' },
-        { name: 'Jane', class: 'C' },
-        { id: 3, name: 'Doe' }
-    ];
+  const input = screen.getByPlaceholderText('Search by name, class or student ID');
 
-    const result = filterInitialData(theData);
+  expect(input).toBeInTheDocument();
+  expect(input).toHaveAttribute('type', 'text');
+  expect(input).toHaveValue('');
 
-    expect(result).toEqual([{ id: 1, name: 'John', class: 'A' }]);
-    });
+});
 
 
-    // 3. Returns filtered data
-    test('should return the filtered data when theData contains valid student objects', () => {
-        const theData = [
-            { id: 1, name: 'John Doe', class: 'Math' },
-            { id: 2, name: 'Jane Smith', class: 'Science' },
-            { id: 3, name: 'Bob Johnson', class: 'English' }
-        ];
+// 2. Handles empty search input and clears the search results
+test('should handle empty search input and clear the search results', () => {
+  const data = [];
+  render (<SearchBar data={data} />);
+
+  const input = screen.getByPlaceholderText('Search by name, class or student ID');
+  expect(input).toBeInTheDocument();
+
+  expect(screen.queryByTestId('search-results')).toBeNull();
+  expect(input).toHaveValue('');
+
+  // type in the search input
+  fireEvent.change(input, { target: { value: 'john' } });
+  expect(input).toHaveValue('john');
+
+  // clear the search input
+  fireEvent.change(input, { target: { value: '' } });
+  expect(input).toHaveValue('');
+
+  expect(screen.queryByTestId('search-results')).toBeNull();
+
+});
+
+
+
+
     
-        const result = filterInitialData(theData);
+
+
     
-        expect(result).toEqual(theData);
-    });
