@@ -18,11 +18,14 @@ import Link from "next/link";
 // function to calculate the score of the search results
 export const calculateScore = (val, searchInput) => {
   let nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-  // increase nameScore if the search input is included in the first part of the name
   if (val.name?.toLowerCase().startsWith(searchInput.toLowerCase())) {
     nameScore += 1;
   }
 
+  // check if the search input is included in the first name
+  if (val.name?.toLowerCase().split(" ")[0].includes(searchInput.toLowerCase())) {
+    nameScore += 1;
+  }
   const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
   const idScore = searchInput.includes(val.id) ? 3 : 0;
   return nameScore + classScore + idScore;
@@ -38,11 +41,6 @@ const SearchBar = ({ data }) => {
   const [searchResults, setSearchResults] = useState([]);
 
 
-  //function to handle the search input
-  const handleSearchInput = (event) => {
-    setSearchInput(event.target.value);
-  };
-
 
   useEffect(() => {
     
@@ -55,8 +53,9 @@ const SearchBar = ({ data }) => {
       }));
       //sort scoredData based on score
       const sortedResults = scoredData
-      .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3)
-      .sort((a, b) => b.score - a.score);
+      .sort((a, b) => b.score - a.score)
+      .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3);
+      
 
       setSearchResults(sortedResults);
     }
@@ -69,7 +68,8 @@ const SearchBar = ({ data }) => {
     <div className="p-4 focus:border-primary-600 dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <label className="input flex items-center gap-2 text-gray-900 sm:text-sm rounded-lg  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white light:text-black ">
             <input
-            data-testid="search-bar" 
+            data-testid="search-bar"
+            /* id = "search-input" */
             type="text" 
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white light:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" 
             placeholder="Search by name, class or student ID"
@@ -90,7 +90,10 @@ const SearchBar = ({ data }) => {
             </thead>
             <tbody>
               {searchResults.map((student) => (
-                  <tr key={student.id} className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800">
+                  <tr 
+                  key={student.id} 
+                  className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800"
+                  onClick={()=> window.location.href=`/Students/${student.id}`}>
                     <td>{student.name}</td>
                     <td>{student.class}</td>
                     <td>{student.id}</td>

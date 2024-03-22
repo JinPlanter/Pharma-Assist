@@ -43,10 +43,7 @@ const Grading = () => {
   // JSX rendering for the Grading component
   return (
     <FormValuesProvider>
-    <div>
-      {/* Heading for the grading app */}
-      <h1>Grading Page</h1>
-      
+    <div>    
       
       <div className='flex flex-row mb-4 mx-4'>
 
