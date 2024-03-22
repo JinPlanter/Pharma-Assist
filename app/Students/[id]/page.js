@@ -4,7 +4,7 @@ import React from 'react';
 
 //get student data from api route
 const getStudentData = async (id) => {
-  const res = await fetch(`http://localhost:3000/api/Students/${id}`);
+  const res = await fetch(`/api/Students/${id}`);
   return res.json();  
 }
 
