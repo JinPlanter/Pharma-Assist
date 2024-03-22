@@ -17,15 +17,18 @@ import Link from "next/link";
 
 // function to calculate the score of the search results
 export const calculateScore = (val, searchInput) => {
-  let nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
+  const nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
   // increase nameScore if the search input is included in the first part of the name
+  let nameScore2;
   if (val.name?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-    nameScore += 1;
+    nameScore2 = nameScore + 1;
+  }else{
+    nameScore2 = nameScore;
   }
 
   const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
   const idScore = searchInput.includes(val.id) ? 3 : 0;
-  return nameScore + classScore + idScore;
+  return nameScore2 + classScore + idScore;
 };
 
 
