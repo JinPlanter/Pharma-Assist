@@ -4,7 +4,6 @@ name: Test App
 on:
   push:
     branches:
-      - master
       - test-cypress
   pull_request:
     branches:
