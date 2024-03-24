@@ -27,7 +27,3 @@ jobs:
         run: npm ci
       - name: Run unit tests
         run: npm run test:coverage
-      - name: Finding coverage
-        uses: actions/checkout@v2
-      - name: Upload coverage
-        uses: ArtiomTr/jest-coverage-report-action@v2
