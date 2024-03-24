@@ -24,7 +24,6 @@ export const GET = async (request,response) => {
         for (let i = 0; i < data.length; i++){
             parsedData = parsedData.concat(data[i].fileContentJson);
         }
-
         
         // remove duplicate data
         // once input validation in the db is implemented, this code will be removed

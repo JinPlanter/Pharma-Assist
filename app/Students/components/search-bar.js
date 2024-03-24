@@ -5,7 +5,7 @@ import Link from "next/link";
 // some functions to filter the data and calculate the score of the search results
 
  // Function to filter initial Data of api route based on search input
- const filterInitialData = (theData) => {
+ export const filterInitialData = (theData) => {
   // filter the data based on the search input
   return theData.filter((student) =>
     student.hasOwnProperty('id') &&
@@ -16,19 +16,19 @@ import Link from "next/link";
 
 
 // function to calculate the score of the search results
-const calculateScore = (val, searchInput) => {
-  let nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
+export const calculateScore = (val, searchInput) => {
+  const nameScore = val.name?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
+  // increase nameScore if the search input is included in the first part of the name
+  let nameScore2;
   if (val.name?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-    nameScore += 1;
+    nameScore2 = nameScore + 1;
+  }else{
+    nameScore2 = nameScore;
   }
 
-  // check if the search input is included in the first name
-  if (val.name?.toLowerCase().split(" ")[0].includes(searchInput.toLowerCase())) {
-    nameScore += 1;
-  }
   const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
   const idScore = searchInput.includes(val.id) ? 3 : 0;
-  return nameScore + classScore + idScore;
+  return nameScore2 + classScore + idScore;
 };
 
 
@@ -68,7 +68,8 @@ const SearchBar = ({ data }) => {
     <div className="p-4 focus:border-primary-600 dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <label className="input flex items-center gap-2 text-gray-900 sm:text-sm rounded-lg  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white light:text-black ">
             <input
-            id = "search-input"
+            data-testid="search-bar"
+            /* id = "search-input" */
             type="text" 
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white light:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" 
             placeholder="Search by name, class or student ID"
@@ -77,7 +78,7 @@ const SearchBar = ({ data }) => {
         </label>
 
       {searchResults.length > 0 && (
-        <div className="mt-2">
+        <div className="mt-2" data-testid= "search-results">
           <table className="bg-primary table">
             <thead className="font-extrabold text-custom-white">
               <tr>
