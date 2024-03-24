@@ -7,7 +7,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('Tests for the SearchBar component', () => {
 
-// Test case 1. Renders the SearchBar component with label and input field
+  // Test case 1. Renders the SearchBar component with label and input field
   test('should render the SearchBar component with label and input field', () => {
     const data = [];
     render (<SearchBar data={data} />);
@@ -44,7 +44,8 @@ describe('Tests for the SearchBar component', () => {
 
   });
 
-});
+
+}); 
 
 
 

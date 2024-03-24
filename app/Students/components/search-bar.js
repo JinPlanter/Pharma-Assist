@@ -78,7 +78,7 @@ const SearchBar = ({ data }) => {
         </label>
 
       {searchResults.length > 0 && (
-        <div className="mt-2">
+        <div className="mt-2" data-testid= "search-results">
           <table className="bg-primary table">
             <thead className="font-extrabold text-custom-white">
               <tr>

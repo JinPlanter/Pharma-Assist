@@ -32,7 +32,7 @@ export default function Page() {
   return (
     <div className='bg-custom-black'>
       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white">Student Search Page</h1>
-      <SearchBar datatest-id="search-bar" data={students} />
+      <SearchBar data-testid="search-bar" data={students} />
     </div>
   );
 }
