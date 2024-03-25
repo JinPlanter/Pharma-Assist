@@ -5,7 +5,7 @@ async function handler(res) {
   try {
     const client = await clientPromise;
     const db = client.db("capstone");
-    const collection = db.collection("gradingForm");
+    const collection = db.collection("classlist");
 
     // Find all documents in the collection
     const gradingForms = await collection.find({}).toArray();
