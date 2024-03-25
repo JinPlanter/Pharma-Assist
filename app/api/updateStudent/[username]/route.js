@@ -2,21 +2,32 @@
 import clientPromise from "../../../lib/mongodb";
 
 async function handler(req, res) {
-  const { method, body } = req;
-  // Manually parse the URL to extract the username
-  const urlParts = req.url.split("/");
-  const username = urlParts[urlParts.length - 1]; // Assuming the username is the last part of the URL
+  const { method } = req;
+  // Decode the username
+  const username = decodeURIComponent(req.url.split("/").pop());
+
   try {
+    // Parse the request body
+    const body = await req.json();
+
     const client = await clientPromise;
     const db = client.db("capstone");
     const collection = db.collection("classlist");
 
     if (method === "PUT") {
+      // Target the object within the 'fileContentJson' array where the 'username' matches
       const updatedStudent = await collection.updateOne(
-        { username },
-        { $set: body }
+        { "fileContentJson.username": username },
+        {
+          $set: {
+            "fileContentJson.$.lastName": body.lastName,
+            "fileContentJson.$.firstName": body.firstName,
+            "fileContentJson.$.email": body.email,
+            // Include other fields you want to update
+          },
+        }
       );
-
+      console.log("Update result:", updatedStudent);
       if (updatedStudent.modifiedCount === 1) {
         return new Response(
           JSON.stringify({ message: "Student updated successfully" }),

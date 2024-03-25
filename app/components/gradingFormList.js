@@ -81,11 +81,7 @@ const GradingFormList = () => {
                     <li key={idx}>
                       {editingStudent === student ? (
                         <div>
-                          <input
-                            type="text"
-                            value={editedData.username}
-                            onChange={(e) => handleInputChange(e, "username")}
-                          />
+                          <p>Username: {student.username} First Name: {student.firstName} Last Name: {student.lastName} Email: {student.email}</p>
                           <input
                             type="text"
                             value={editedData.firstName}
@@ -105,10 +101,10 @@ const GradingFormList = () => {
                         </div>
                       ) : (
                         <div>
-                          <span>{student.username}</span>
-                          <span>{student.firstName}</span>
-                          <span>{student.lastName}</span>
-                          <span>{student.email}</span>
+                          <span>Username: {student.username} </span>
+                          <span>First Name: {student.firstName} </span>
+                          <span>Last Name: {student.lastName} </span>
+                          <span>Email: {student.email} </span>
                           <button onClick={() => handleEditStudent(student)}>
                             Edit
                           </button>
