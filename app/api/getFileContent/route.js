@@ -26,4 +26,5 @@ async function handler(res) {
         throw new Error("fetch failed");
     }
 }
+export const dynamic = "force-dynamic";
 export { handler as GET };
