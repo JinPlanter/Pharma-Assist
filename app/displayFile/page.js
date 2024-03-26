@@ -3,5 +3,5 @@
 import GradingFormList from "../components/gradingFormList";
 
 export default function DisplayFilePage() {
-  return <GradingFormList />;
+    return <GradingFormList />;
 }
