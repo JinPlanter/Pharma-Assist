@@ -6,13 +6,13 @@ import "../globals.css";
 import FormValuesProvider from "../contexts/gradeform-context";
 
 const App = () => {
-  return (
-    <FormValuesProvider>
-    <div>
-      <PdfViewer />
-    </div>
-    </FormValuesProvider>
-  );
+    return (
+        <FormValuesProvider>
+            <div>
+                <PdfViewer />
+            </div>
+        </FormValuesProvider>
+    );
 };
 
 export default App;
