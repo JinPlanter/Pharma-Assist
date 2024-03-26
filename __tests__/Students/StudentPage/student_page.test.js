@@ -4,7 +4,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom'; // For additional matchers like .toBeInTheDocument()
-import StudentPage from '../../../app/Students/[id]/page'; // Adjust the import path as per your project structure
+import StudentPage from '../../../app/Students/[username]/page'; // Adjust the import path as per your project structure
 
 
 // global mock fetch

@@ -5,15 +5,19 @@ import React, { useState, useEffect } from 'react';
 
 
 //get student data from api route
-export const getStudentData = async (id) => {
-    const res = await fetch(`/api/Students/${id}`);
+export const getStudentData = async (username) => {
+    const res = await fetch(`/api/Students/${username}`);
     return res.json();
 };
 
 
 
 const StudentPage = ({ params }) => {
-    const { id } = params;
+
+    //test what are in params
+    console.log(params);
+
+    const { username } = params;
     const [student, setStudent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -22,7 +26,7 @@ const StudentPage = ({ params }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getStudentData(id);
+                const data = await getStudentData(username);
                 setStudent(data[0]);
                 // student is an array of one object, so we can access the object at index 0
                 // could change if database is collection / document changes
@@ -41,7 +45,7 @@ const StudentPage = ({ params }) => {
             setLoading(true);
             setError(null);
         };
-    }, [id]);
+    }, [username]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -55,10 +59,10 @@ const StudentPage = ({ params }) => {
         <div className="bg-custom-black">
             <h1
                 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white ">
-                {student.name}</h1>
+                {student.firstName}{student.lastName}</h1>
             <div className="text-center align-middle flex flex-col">
                 <p>Class: {student.class}</p>
-                <p>Id: {student.id}</p>
+                <p>Id: {student.username}</p>
             </div>
 
         </div>
