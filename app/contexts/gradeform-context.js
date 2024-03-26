@@ -15,38 +15,38 @@ export const useFormValuesContext = () => {
 
 }
 
-export default function FormValuesProvider({children}){
+export default function FormValuesProvider({ children }) {
 
     const { criteria } = gradingForm;
-    
+
     // use the criteria labels from gradingForm.json
-    const initialValues = criteria.reduce((acc, { label })=>{
+    const initialValues = criteria.reduce((acc, { label }) => {
         acc[label] = "";
         return acc;
     }, {});
 
     // create the initial comments object
     const initialComments = criteria
-    .filter(({ comment }) => comment)
-    .reduce((acc, { label })=>{
-        acc[label] = "";
-        return acc;
-    }, {});
+        .filter(({ comment }) => comment)
+        .reduce((acc, { label }) => {
+            acc[label] = "";
+            return acc;
+        }, {});
 
-    
+
     const [formValues, setFormValues] = useState(initialValues);
-    
+
     const [comments, setComments] = useState(initialComments);
-    
+
     useEffect(() => {
         console.log("form values updated", formValues);
         console.log("comments updated", comments);
     }, [formValues, comments]);
-    
-    return(
-        <FormValuesContext.Provider value={{formValues, setFormValues, comments, setComments}}>
+
+    return (
+        <FormValuesContext.Provider value={{ formValues, setFormValues, comments, setComments }}>
             {children}
         </FormValuesContext.Provider>
-        
+
     )
 }

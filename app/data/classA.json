@@ -1,12 +1,62 @@
 [
-  { "id": 1, "name": "John Doe", "class": "Class A", "studentid": "00001"},
-  { "id": 2, "name": "Jane Smith", "class": "Class A" , "studentid": "00002"},
-  { "id": 3, "name": "Bob Johnson", "class": "Class A" , "studentid": "00003"},
-  { "id": 4, "name": "Alice Williams", "class": "Class A" , "studentid": "00004"},
-  { "id": 5, "name": "Charlie Brown", "class": "Class A" , "studentid": "00005"},
-  { "id": 6, "name": "Eva Martinez", "class": "Class A" , "studentid": "00006"},
-  { "id": 7, "name": "David Lee", "class": "Class A" , "studentid": "00007"},
-  { "id": 8, "name": "Grace Turner", "class": "Class A" , "studentid": "00008"},
-  { "id": 9, "name": "Frank White", "class": "Class A" , "studentid": "00009"},
-  { "id": 10, "name": "Helen Davis", "class": "Class A" , "studentid": "000010"}
+    {
+        "id": 1,
+        "name": "John Doe",
+        "class": "Class A",
+        "studentid": "00001"
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "class": "Class A",
+        "studentid": "00002"
+    },
+    {
+        "id": 3,
+        "name": "Bob Johnson",
+        "class": "Class A",
+        "studentid": "00003"
+    },
+    {
+        "id": 4,
+        "name": "Alice Williams",
+        "class": "Class A",
+        "studentid": "00004"
+    },
+    {
+        "id": 5,
+        "name": "Charlie Brown",
+        "class": "Class A",
+        "studentid": "00005"
+    },
+    {
+        "id": 6,
+        "name": "Eva Martinez",
+        "class": "Class A",
+        "studentid": "00006"
+    },
+    {
+        "id": 7,
+        "name": "David Lee",
+        "class": "Class A",
+        "studentid": "00007"
+    },
+    {
+        "id": 8,
+        "name": "Grace Turner",
+        "class": "Class A",
+        "studentid": "00008"
+    },
+    {
+        "id": 9,
+        "name": "Frank White",
+        "class": "Class A",
+        "studentid": "00009"
+    },
+    {
+        "id": 10,
+        "name": "Helen Davis",
+        "class": "Class A",
+        "studentid": "000010"
+    }
 ]

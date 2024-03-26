@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 // import '../Styles/style.css';
 import '../globals.css'
-import Papa from 'papaparse'; 
+import Papa from 'papaparse';
 
 // Import File component
 export default function ImportFile() {
