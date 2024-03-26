@@ -1,7 +1,7 @@
 
 
 // tests the getStudentData function used in the student page
-import { getStudentData } from '../../../app/Students/[id]/page';
+import { getStudentData } from '../../../app/Students/[username]/page';
 
 
 describe('Tests for getStudentData function', () => {

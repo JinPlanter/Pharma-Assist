@@ -14,7 +14,7 @@ export const GET = async (request, response) => {
 
         // fetch data from collection
         const data = await db
-            .collection("classList")
+            .collection("classlist")
             .find({})
             .toArray();
 
