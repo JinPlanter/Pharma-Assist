@@ -28,7 +28,7 @@ export const GET = async (request, response) => {
         }
 
         //get the student array that 
-        //match the id
+        //match the id / username
         let studentData = [];
         for (let i = 0; i < parsedData.length; i++) {
             if (parsedData[i].username.includes(username)) {
