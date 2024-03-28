@@ -154,7 +154,7 @@ const Grading = () => {
                     {/* DropdownMenu component for selecting a class + class list */}
                     <div className='w-1/3'>
                         <DropdownMenu
-                            classLists={["Class 1", "Class 2"]} // Add more class lists if needed
+                            classLists={classNames} // Add more class lists if needed
                             onSelectClass={handleClassSelect}
                         />
 
