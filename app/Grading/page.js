@@ -32,10 +32,6 @@ export const getClassData = async () => {
             parsedData = parsedData.concat([data[i].fileContentJson]);
         }
 
-        // remove duplicate data
-        // once input validation in the db is implemented, this code will be removed
-        //parsedData = [...new Set(parsedData.map(JSON.stringify))].map(JSON.parse);
-
         console.log(parsedData);
 
         return parsedData;
@@ -89,19 +85,14 @@ const Grading = () => {
 
                 // Fetch class data and set classLists state variable
                 setClassLists(data);
-                //classLists.push(data);
-
-                //check if data is added to classLists
-                console.log('class lists: ', classLists);
+                //console.log('class lists: ', classLists);
 
                 // generate class names based
                 // on the number of class lists
                 const names = generateClassNames(data);
-                //const namesTest = generateClassNames([1,1]);
-                //console.log('testing generateClassNames: ', namesTest);
-                console.log('names: ', names);
+                //console.log('names: ', names);
                 setClassNames(names);
-                //classNames.push(names);
+                
                 //check if data is added to classNames
                 console.log('class names: ', classNames);
 
@@ -135,12 +126,28 @@ const Grading = () => {
 
     // Function to render the appropriate ClassList based on the selected class
     const renderClassList = () => {
-        if (selectedClass === 'Class A') {
-            return <ClassList classlist={classA} onStudentClick={handleStudentClick} />;
-        } else if (selectedClass === 'Class B') {
-            return <ClassList classlist={classB} onStudentClick={handleStudentClick} />;
+        // find index of selected class in classNames
+        const classIndex = classNames.indexOf(selectedClass);
+        console.log('class index: ', classIndex);
+        console.log('selected class: ', selectedClass);
+        console.log('class names: ', classNames);
+
+        // if selected class is found in classNames
+        if (classIndex !== -1) {
+            // get the class list data for the selected class
+            const classListData = classLists[classIndex];
+            console.log('class list data: ', classListData);
+
+            // render the ClassList component with the class list data
+            return (
+                <ClassList
+                    classList={classListData}
+                    onStudentClick={handleStudentClick}
+                />
+            );
         }
-        // Add more conditions if you have additional class lists
+
+        // return null otherwise
         return null;
     };
 
