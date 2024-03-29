@@ -10,9 +10,9 @@ describe('Tests for the calculateScore function', () => {
     const searchInput = 'John';
 
     const result = calculateScore(val, searchInput);
-    // score += 2 if the search input is included in the first name
-    // score += 1 if the first name starts with the search input
-    expect(result).toBe(3);
+    // score += 1 if the search input is included in the first name
+    // score += 3 if the first name starts with the search input
+    expect(result).toBe(4);
   });
 
   // Test case 2. Returns the correct score when the search input is included in the last name
@@ -35,7 +35,7 @@ describe('Tests for the calculateScore function', () => {
     // score += 3 if the search input is included in the username
     // score += 1 if the username starts with the search input
 
-    expect(result).toBe(4);
+    expect(result).toBe(5);
   });
 
   // Test case 4. Returns the correct score when the search input is not included in the name, class, or id

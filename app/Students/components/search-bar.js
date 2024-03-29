@@ -19,35 +19,26 @@ export const filterInitialData = (theData) => {
 export const calculateScore = (val, searchInput) => {
     let score = 0;
 
-    // increase score if search input is included in the student's first name
-    // increase more if student's first name starts with the search input
-    if (val.firstName?.toLowerCase().includes(searchInput.toLowerCase())) {
-        score += 2;
-
-        if (val.firstName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-            score += 1;
-        }
+    // check if the username starts with the search input
+    if (val.username.toLowerCase().startsWith(searchInput.toLowerCase())) {
+        score += 4;
     }
-
-    
-    // increase score if search input is included in the student's last name
-    // increase more if student's last name starts with the search input
-    if (val.lastName?.toLowerCase().includes(searchInput.toLowerCase())) {
-        score += 2;
-
-        if (val.lastName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-            score += 1;
-        }
-    }
-
-    // increase score if search input is included in the student's username
-    // increase more if student's username starts with the search input
-    if (val.username?.toLowerCase().includes(searchInput.toLowerCase())) {
+    // check if the firstname starts with the search input
+    if (val.firstName.toLowerCase().startsWith(searchInput.toLowerCase())) {
         score += 3;
+    }
 
-        if (val.username?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-            score += 1;
-        }
+    // check if the lastname starts with the search input
+    if (val.lastName.toLowerCase().startsWith(searchInput.toLowerCase())) {
+        score += 2;
+    }
+
+
+    // if the search input is just included in the username or firstname or lastname
+    if (val.username.toLowerCase().includes(searchInput.toLowerCase()) ||
+        val.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
+        val.lastName.toLowerCase().includes(searchInput.toLowerCase())){
+        score +=  1;
     }
 
     return score;
@@ -82,8 +73,7 @@ const SearchBar = ({ data }) => {
             //sort scoredData based on score
             const sortedResults = scoredData
                 .sort((a, b) => b.score - a.score)
-                .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3);
-
+                .filter((val) => val.score > 0)
 
             setSearchResults(sortedResults);
         }
