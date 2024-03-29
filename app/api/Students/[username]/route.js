@@ -14,7 +14,7 @@ export const GET = async (request, response) => {
 
         // fetch data from collection
         const data = await db
-            .collection("classList")
+            .collection("classlist")
             .find({})
             .toArray();
 
@@ -22,16 +22,16 @@ export const GET = async (request, response) => {
         // parse the data to only get the student arrays,
         // and not the entire object
         let parsedData = [];
-        const id = parseInt(response.params.id);
+        const username = response.params.username;
         for (let i = 0; i < data.length; i++) {
             parsedData = parsedData.concat(data[i].fileContentJson);
         }
 
         //get the student array that 
-        //match the id
+        //match the id / username
         let studentData = [];
         for (let i = 0; i < parsedData.length; i++) {
-            if (parsedData[i].id === id) {
+            if (parsedData[i].username.includes(username)) {
                 studentData = studentData.concat(parsedData[i]);
                 break;
             }

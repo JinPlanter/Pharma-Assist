@@ -3,6 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import FormFields from '../data/gradingForm.json';
 
+
+function randomNumber() {
+    return Math.floor(Math.random() * 1000);
+};
+
+
 async function fetchFormFields() {
     /* try {
         const response = await fetch('../data/gradingForm.json');
@@ -20,7 +26,13 @@ async function fetchFormFields() {
     return FormFields.criteria;
 }
 
-function Form() {
+function Form({student}) {
+    
+    // attach form to specific student
+    const studentId = student?.id;
+    const hasStudentId = studentId ? true : false;
+    //console.log('studentId:', studentId);
+
     const [formValues, setFormValues] = useState(() => {
         const initialFormStates = FormFields.criteria.reduce((acc, curr) => {
             acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
@@ -74,7 +86,8 @@ function Form() {
     };
 
     return (
-        <form>
+        /** Find a way to save this form form to a specific student */
+        <form key= {hasStudentId ? student.id : randomNumber()} >
             <div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
