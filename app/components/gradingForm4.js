@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import FormFields from '../data/gradingForm.json';
+import { removeHashtag } from '../Students/components/search-bar';
 
 
 // Note: since Form component takes in student as a prop, it should be passed down from the parent component
@@ -100,10 +101,10 @@ function Form({ student }) {
 
     return (
         /** use the key for saving the data of this form; change student.id for whatever identifier is used in the db*/
-        <form key= {generateFormKey(student.id)} data-testid= {generateFormKey(student.id)}>
+        <form key= {generateFormKey(removeHashtag(student.username))} data-testid= {generateFormKey(removeHashtag(student.username))}>
             <div>
                 {/** change student.name to student.firstName or what the student object's variable name for the name */}
-                <div>{student.name}</div>
+                <div>{`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}</div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
                         {FormFields.criteria.filter(field => field.type !== 'checkbox').map((field, index) => (

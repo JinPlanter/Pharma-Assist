@@ -141,7 +141,7 @@ const Grading = () => {
             // render the ClassList component with the class list data
             return (
                 <ClassList
-                    classList={classListData}
+                    classlist={classListData}
                     onStudentClick={handleStudentClick}
                 />
             );
