@@ -17,27 +17,40 @@ export const filterInitialData = (theData) => {
 
 // function to calculate the score of the search results
 export const calculateScore = (val, searchInput) => {
-    const nameScore = val.firstName?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-    // increase nameScore if the search input is included in the first part of the name
-    let nameScore2;
-    if (val.firstName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-        nameScore2 = nameScore + 1;
-    } else {
-        nameScore2 = nameScore;
+    let score = 0;
+
+    // increase score if search input is included in the student's first name
+    // increase more if student's first name starts with the search input
+    if (val.firstName?.toLowerCase().includes(searchInput.toLowerCase())) {
+        score += 2;
+
+        if (val.firstName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
+            score += 1;
+        }
     }
 
-    const lastNameScore = val.lastName?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-    // increase lastNameScore if the search input is included in the last part of the name
-    let lastNameScore2;
-    if (val.lastName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-        lastNameScore2 = lastNameScore + 1;
-    } else {
-        lastNameScore2 = lastNameScore;
+    
+    // increase score if search input is included in the student's last name
+    // increase more if student's last name starts with the search input
+    if (val.lastName?.toLowerCase().includes(searchInput.toLowerCase())) {
+        score += 2;
+
+        if (val.lastName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
+            score += 1;
+        }
     }
 
-    //const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
-    const userNameScore = searchInput.includes(val.username) ? 3 : 0;
-    return nameScore2 +lastNameScore2 + userNameScore;
+    // increase score if search input is included in the student's username
+    // increase more if student's username starts with the search input
+    if (val.username?.toLowerCase().includes(searchInput.toLowerCase())) {
+        score += 3;
+
+        if (val.username?.toLowerCase().startsWith(searchInput.toLowerCase())) {
+            score += 1;
+        }
+    }
+
+    return score;
 };
 
 
@@ -106,7 +119,9 @@ const SearchBar = ({ data }) => {
                         <tbody>
                             {searchResults.map((student) => (
                                 <tr
-                                    key={student.id}
+                                    role="row"
+                                    data-testid="result-row"
+                                    key={student.username}
                                     className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800"
                                     onClick={() => window.location.href = `/Students/${removeHashtag(student.username)}`}>
                                     <td>{student.firstName} {student.lastName}</td>

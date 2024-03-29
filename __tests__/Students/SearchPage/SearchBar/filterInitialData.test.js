@@ -4,6 +4,7 @@
 import { filterInitialData } from '../../../../app/Students/components/search-bar';
 
 
+describe('Tests for the filterInitialData function', () => {
     // 1. Returns an empty array if theData is empty (Edge case)
     test('should return an empty array when theData is empty', () => {
         const theData = [];
@@ -16,29 +17,19 @@ import { filterInitialData } from '../../../../app/Students/components/search-ba
     
 
     // 2. Filters out objects without id, name, or class properties
-    test('should filter out objects without id, name, or class properties', () => {
+    test('should filter out objects without firstName, lastName, or username', () => {
         const theData = [
-            { id: 1, name: 'John', class: 'A' },
-            { id: 2, class: 'B' },
-            { name: 'Jane', class: 'C' },
-            { id: 3, name: 'Doe' }
+            { username: '#233', firstName: 'John', lastName: 'Doe'},
+            { id: '#234', fName: 'Jane', lName: 'Does'},
+            { id: '#235', firName: 'Josh', latName: 'Doess'},
+            { id: '#236', firtName: 'Jordan', lasName: 'Doesss'},
+            { id: '#237', fistName: 'Jamie', lstName: 'Doessss'}
         ];
     
         const result = filterInitialData(theData);
     
-        expect(result).toEqual([{ id: 1, name: 'John', class: 'A' }]);
+        expect(result).toEqual([{ username: '#233', firstName: 'John', lastName: 'Doe'}]);
         });
     
-
-    // 3. Returns filtered data
-    test('should return the filtered data when theData contains valid student objects', () => {
-        const theData = [
-            { id: 1, name: 'John Doe', class: 'Math' },
-            { id: 2, name: 'Jane Smith', class: 'Science' },
-            { id: 3, name: 'Bob Johnson', class: 'English' }
-        ];
-    
-        const result = filterInitialData(theData);
-    
-        expect(result).toEqual(theData);
     });
+    

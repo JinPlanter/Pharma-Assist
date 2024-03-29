@@ -2,7 +2,7 @@
 // test functions in search bar component
 
 import SearchBar from '../../../../app/Students/components/search-bar';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 
 describe('Tests for the SearchBar component', () => {
@@ -42,6 +42,27 @@ describe('Tests for the SearchBar component', () => {
 
     expect(screen.queryByTestId('search-results')).toBeNull();
 
+  });
+
+
+  // Test case 3: Renders the correct number of rows in the search results
+  test('should render the correct number of rows in the search results', async () => {
+    const data = [
+      { username: '#233', firstName: 'John', lastName: 'Doe'},
+      { username: '#234', firstName: 'Jane', lastName: 'Does'},
+      { username: '#235', firstName: 'Josh', lastName: 'Doess'},
+      { username: '#236', firstName: 'Jordan', lastName: 'Doesss'},
+      { username: '#237', firstName: 'Jamie', lastName: 'Doessss'}
+    ];
+    
+    const { getByTestId, getAllByTestId } = render(<SearchBar data={data} />);
+
+    // simulate typing in the search input
+    fireEvent.change(getByTestId('search-bar'), { target: { value: 'john' } });
+
+    // wait for the search results to be displayed
+    const rows = await waitFor(() => getAllByTestId('result-row'));
+    expect(rows.length).toBe(1);
   });
 
 
