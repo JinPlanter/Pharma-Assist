@@ -54,10 +54,6 @@ function Form({ student }) {
     useEffect(() => {
         const initializeFormStates = async () => {
             const formFields = await fetchFormFields();
-            //const date = new Date();
-            //const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
-            //const currentDate = localDate.toISOString().slice(0, 10);
-            // const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
             const currentDate = getCurrentDate();
             console.log('currentDate:', currentDate);
 
