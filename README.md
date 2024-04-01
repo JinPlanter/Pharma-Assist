@@ -41,3 +41,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Attribution
 
 <a href="https://www.flaticon.com/free-icons/drug" title="drug icons">Drug icons created by justicon - Flaticon</a>
+
+<a href="https://www.freepik.com/free-photo/closeup-view-pharmacist-hand-taking-medicine-box-from-shelf-drug-store_11036160.htm#query=pharmacy&position=0&from_view=keyword&track=sph&uuid=8a67289b-54cb-4feb-98c8-93b6d0896469">Image by aleksandarlittlewolf</a>
