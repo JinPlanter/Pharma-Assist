@@ -122,7 +122,7 @@ const authOptions = {
         strategy: "jwt",
     },
     pages: {
-        signIn: "/signin", // specify the path to your custom sign-in page
+        signIn: "/Login", // specify the path to your custom sign-in page
     },
 };
 const handler = NextAuth(authOptions);
