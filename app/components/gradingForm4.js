@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect} from 'react';
 import { removeHashtag } from '../Students/components/search-bar';
 
 
@@ -39,9 +39,10 @@ export const getCurrentDate = () => {
 
 const  Form = ({ student }) => {
 
-    
     const [formFields, setFormFields] = useState([]);
-
+    const [formValues, setFormValues] = useState({});
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
+    const date = getCurrentDate();
 
     // Fetch form fields from the server
     const  fetchFormFields = async () => {
@@ -67,17 +68,16 @@ const  Form = ({ student }) => {
     // note: have to initialize the form fields before the form values are set
 
 
+
+
     useEffect(() => {
         const initializeFormStates = () => {
             console.log('formFields:', formFields);
-            const currentDate = getCurrentDate();
-            console.log('currentDate:', currentDate);
-
             const updatedFormStates = formFields.reduce((acc, curr) => {
                 if (curr.label === 'Date') {
-                    acc[curr.label] = currentDate; // Set the current date
+                    acc[curr.label] = getCurrentDate(); // Set the current date
                 } else {
-                    acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
+                    acc[curr.label] = curr.label.includes('Evaluation (total marks)') ? 3 : (curr.type === 'checkbox' ? false : '');
                 }
                 return acc;
             }, {});
@@ -85,53 +85,13 @@ const  Form = ({ student }) => {
             setFormValues(updatedFormStates);
         };
         
-        if (formFields.length > 0) {
-            initializeFormStates();
-        }
-    }, [formFields]);
-
-
-    const [formValues, setFormValues] = useState({
-        label: '',
-        type: '',
-        comment: false,
-    });
-
-    useEffect(() => {
-        if(formFields.length > 0){
-            const initialFormValues = formFields.reduce((acc, field) => {
-                acc[field.label] = field.type === 'checkbox' ? false : '';
-                return acc;
-            }, {});
-            setFormValues(initialFormValues);
-        }
+        initializeFormStates();
     }, [formFields]);
 
 
 
-    // initialize the date
-    useEffect(() => {
-        const initializeFormStates = () => {
-            const updatedFormStates = formFields.reduce((acc, curr) => {
-                if (curr.label === 'Date') {
-                    acc[curr.label] = getCurrentDate();; // Set the current date
-                } else {
-                    acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
-                }
-                return acc;
-            }, {});
 
-            setFormValues(updatedFormStates);
-        };
-
-        if (formFields.length > 0) {
-            initializeFormStates();
-        }
-    }, [formFields]);
-
-
-
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
+    
 
     const handleChange = (event) => {
         const { name, type, checked, value } = event.target;
@@ -157,39 +117,43 @@ const  Form = ({ student }) => {
 
     return (
         /** use the key for saving the data of this form; change student.id for whatever identifier is used in the db*/
-        <form key= {generateFormKey(removeHashtag(student.username))} data-testid= {generateFormKey(removeHashtag(student.username))}>
-            <div>
+        <form 
+        key= {generateFormKey(removeHashtag(student.username))} 
+        data-testid= {generateFormKey(removeHashtag(student.username))}
+        className='flex  flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-black'>
+            <div className='mb-4'>
                 {/** change student.name to student.firstName or what the student object's variable name for the name */}
-                <div>{`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}</div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className='mb-2 text-lg font-bold' >{`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}</div>
+                <div className="flex flex-row justify-between" >
+                    <div id="TypeA_Row1_Column1" className='flex flex-col justify-evenly'>
                         {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
-                            <label key={index}>
+                            <label key={index} className='block text-gray-700 text-sm font-bold mb-2'>
                                 {field.label}
                             </label>
                         ))}
                     </div>
 
-                    <div id="TypeA_Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div id="TypeA_Row1_Column2" className='flex flex-col'>
                         {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
-                            field.label === 'Evaluation (total marks)' ? (
-                                <p key={index}>{Math.max(0, formValues[field.label])}</p>
+                            field.label.includes('Evaluation (total marks)') ? (
+                                <p key={index} className='mb-2'>{Math.max(0, formValues[field.label])}</p>
                             ) : (
                                 <input
                                     type={field.type}
                                     name={field.label}
-                                    defaultValue={''}
-                                    value={formValues[field.label] || ''}
+                                    value={field.label.includes('Date') ? date : formValues[field.label]}
+                                    placeholder={field.label === 'Date ' ? `${getCurrentDate()}` : `Enter ${field.label}` } 
                                     onChange={handleChange}
                                     key={index}
+                                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 />
                             )
                         ))}
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <div id="TypeB_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className='flex flex-row'>
+                    <div id="TypeB_Row1_Column1" className='flex flex-col justify-between'>
                         {formFields.filter(field => field.type === 'checkbox').map((field, index) => (
                             <label key={index}>
                                 <input
@@ -199,6 +163,7 @@ const  Form = ({ student }) => {
                                     defaultChecked={false}
                                     checked={formValues[field.label]}
                                     onChange={handleChange}
+                                    className='mr-2 leading-tight' 
                                 />
                                 {field.label}<br />
                                 {formValues[field.label] &&
@@ -208,7 +173,7 @@ const  Form = ({ student }) => {
                                         defaultValue={''}
                                         onChange={handleChange}
                                         placeholder="Add comment..."
-                                        className="h-10 w-full p-2 border rounded-md resize"
+                                        className="h-10 w-full p-2 border rounded-md resize mt-2 shadow appearance-none appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     />
                                 }
                             </label>
