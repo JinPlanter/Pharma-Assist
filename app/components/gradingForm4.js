@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import FormFields from '../data/gradingForm.json';
+import React, { useState, useEffect, use } from 'react';
 import { removeHashtag } from '../Students/components/search-bar';
 
 
-// Note: since Form component takes in student as a prop, it should be passed down from the parent component
-// so perhaps the parent component should be responsible for fetching the student data and passing it down to the Form component
-async function fetchFormFields() {
-    return FormFields.criteria;
-}
+
+
 
 
 // function to generate the current date
@@ -40,20 +36,38 @@ export const getCurrentDate = () => {
 
 
 
-function Form({ student }) {
+const  Form = ({ student }) => {
 
-    const [formValues, setFormValues] = useState(() => {
-        const initialFormStates = FormFields.criteria.reduce((acc, curr) => {
-            acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
-            return acc;
-        }, {});
-        return initialFormStates;
-    });
+    
+    const [formFields, setFormFields] = useState([]);
+
+
+    // Fetch form fields from the server
+    const  fetchFormFields = async () => {
+        try {
+            const response = await fetch("/api/grading");
+            const data = await response.json();
+            console.log('formFields:', data);
+            // since the data has this structure:
+            //         [{criteria:[{label:"",type:string, comment:false}, ...]}]
+            // have to get just the criteria array
+            setFormFields(data[0].criteria);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            return [];
+        }
+    };
+
+    
+    useEffect(() => {
+        fetchFormFields();
+    }, []);
+    // note: have to initialize the form fields before the form values are set
 
 
     useEffect(() => {
-        const initializeFormStates = async () => {
-            const formFields = await fetchFormFields();
+        const initializeFormStates = () => {
+            console.log('formFields:', formFields);
             const currentDate = getCurrentDate();
             console.log('currentDate:', currentDate);
 
@@ -68,8 +82,38 @@ function Form({ student }) {
 
             setFormValues(updatedFormStates);
         };
-        initializeFormStates();
-    }, []);
+        
+        if (formFields.length > 0) {
+            initializeFormStates();
+        }
+    }, [formFields]);
+
+
+    const [formValues, setFormValues] = useState({});
+    useEffect(() => {
+        const initializeFormStates = () => {
+            console.log('formFields:', formFields);
+            const currentDate = getCurrentDate();
+            console.log('currentDate:', currentDate);
+
+            const updatedFormStates = formFields.reduce((acc, curr) => {
+                if (curr.label === 'Date') {
+                    acc[curr.label] = currentDate; // Set the current date
+                } else {
+                    acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
+                }
+                return acc;
+            }, {});
+
+            setFormValues(updatedFormStates);
+        };
+
+        if (formFields.length > 0) {
+            initializeFormStates();
+        }
+    }, [formFields]);
+
+
 
     const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
 
@@ -103,7 +147,7 @@ function Form({ student }) {
                 <div>{`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}</div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {FormFields.criteria.filter(field => field.type !== 'checkbox').map((field, index) => (
+                        {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
                             <label key={index}>
                                 {field.label}
                             </label>
@@ -111,7 +155,7 @@ function Form({ student }) {
                     </div>
 
                     <div id="TypeA_Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {FormFields.criteria.filter(field => field.type !== 'checkbox').map((field, index) => (
+                        {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
                             field.label === 'Evaluation (total marks)' ? (
                                 <p key={index}>{Math.max(0, formValues[field.label])}</p>
                             ) : (
@@ -129,7 +173,7 @@ function Form({ student }) {
 
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <div id="TypeB_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {FormFields.criteria.filter(field => field.type === 'checkbox').map((field, index) => (
+                        {formFields.filter(field => field.type === 'checkbox').map((field, index) => (
                             <label key={index}>
                                 <input
                                     type="checkbox"
