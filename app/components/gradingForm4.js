@@ -99,11 +99,11 @@ const  Form = ({ student }) => {
 
         // If the form field type is checkbox, adjust the "Evaluation (total marks)" value based on checkbox selection.
         if (type === 'checkbox') {
-            let evaluationTotalMarks = Number(newFormValues['Evaluation (total marks)']);
+            let evaluationTotalMarks = Number(newFormValues['Evaluation (total marks) ']);
             if (isNaN(evaluationTotalMarks)) {
                 evaluationTotalMarks = 0;
             }
-            newFormValues['Evaluation (total marks)'] = checked ? evaluationTotalMarks - 1 : evaluationTotalMarks + 1;
+            newFormValues['Evaluation (total marks) '] = checked ? evaluationTotalMarks - 1 : evaluationTotalMarks + 1;
 
             // Update the selectedCheckboxes state
             setSelectedCheckboxes({ ...selectedCheckboxes, [name]: checked });
@@ -160,7 +160,6 @@ const  Form = ({ student }) => {
                                     type="checkbox"
                                     name={field.label}
                                     value={field.label}
-                                    defaultChecked={false}
                                     checked={formValues[field.label]}
                                     onChange={handleChange}
                                     className='mr-2 leading-tight' 
