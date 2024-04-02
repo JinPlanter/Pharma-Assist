@@ -39,8 +39,8 @@ export default function FormValuesProvider({ children }) {
     const [comments, setComments] = useState(initialComments);
 
     useEffect(() => {
-        console.log("form values updated", formValues);
-        console.log("comments updated", comments);
+        //console.log("form values updated", formValues);
+        //console.log("comments updated", comments);
     }, [formValues, comments]);
 
     return (

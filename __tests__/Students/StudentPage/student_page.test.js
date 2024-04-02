@@ -14,9 +14,9 @@ global.fetch = jest.fn();
 describe('StudentPage component', () => {
   // Define a mock student data object
   const mockStudentData = [{
-    id: 1,
-    name: 'John Doe',
-    class: 'Class 1'
+    username: "233",
+    firstName: 'John',
+    lastName: 'Doe'
   }];
 
   // Mock the getStudentData function
@@ -28,7 +28,7 @@ describe('StudentPage component', () => {
   // Test Case 1: Renders loading text while fetching student data
     test('renders loading text while fetching student data', async () => {
         // mock params with the id
-        const mockParams = { id: '1' };
+        const mockParams = { username: '233' };
         
         // Render the StudentPage component with mock params
         render(<StudentPage params={mockParams} />);
@@ -44,7 +44,7 @@ describe('StudentPage component', () => {
     test('renders student page with student data', async () => {
         
         // mock params with the id
-        const mockParams = { id: '1' };
+        const mockParams = { username: '233' };
         
         // Render the StudentPage component with mock params
         render(<StudentPage params={mockParams} />);
@@ -58,10 +58,11 @@ describe('StudentPage component', () => {
         // after loading, wait for data to be displayed
         // then assertions
         await waitFor(() => {
-            expect(screen.queryByText('Loading...')).not.toBeInTheDocument(); // Check if the loading text is removed
-            expect(screen.getByText('John Doe')).toBeInTheDocument(); // Check if the student name is displayed
-            expect(screen.getByText('Class: Class 1')).toBeInTheDocument(); // Check if the student class is displayed
-            expect(screen.getByText('Id: 1')).toBeInTheDocument(); // Check if the student id is displayed
+            expect(screen.queryByText(/Loading.../)).not.toBeInTheDocument(); // Check if the loading text is removed
+            expect(screen.queryByText(/John Doe/)).toBeInTheDocument(); // Check if the student name is displayed
+            expect(screen.queryByText(/Id: 233/)).toBeInTheDocument(); // Check if the student username is displayed
+
+
         });
 
     }); // end of test 2
@@ -74,7 +75,7 @@ describe('StudentPage component', () => {
         global.fetch.mockRejectedValue(new Error('Failed to fetch student data'));
     
         // mock params with the id
-        const mockParams = { id: '1' };
+        const mockParams = { username: '233' };
     
         // Render the StudentPage component with mock params
         render(<StudentPage params={mockParams} />);
@@ -92,7 +93,5 @@ describe('StudentPage component', () => {
         });
     
     }); // end of test 3
-
-
 
 });

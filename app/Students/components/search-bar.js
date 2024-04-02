@@ -17,27 +17,31 @@ export const filterInitialData = (theData) => {
 
 // function to calculate the score of the search results
 export const calculateScore = (val, searchInput) => {
-    const nameScore = val.firstName?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-    // increase nameScore if the search input is included in the first part of the name
-    let nameScore2;
-    if (val.firstName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-        nameScore2 = nameScore + 1;
-    } else {
-        nameScore2 = nameScore;
+    let score = 0;
+
+    // check if the username starts with the search input
+    if (val.username.toLowerCase().startsWith(searchInput.toLowerCase())) {
+        score += 4;
+    }
+    // check if the firstname starts with the search input
+    if (val.firstName.toLowerCase().startsWith(searchInput.toLowerCase())) {
+        score += 3;
     }
 
-    const lastNameScore = val.lastName?.toLowerCase().includes(searchInput.toLowerCase()) ? 2 : 0;
-    // increase lastNameScore if the search input is included in the last part of the name
-    let lastNameScore2;
-    if (val.lastName?.toLowerCase().startsWith(searchInput.toLowerCase())) {
-        lastNameScore2 = lastNameScore + 1;
-    } else {
-        lastNameScore2 = lastNameScore;
+    // check if the lastname starts with the search input
+    if (val.lastName.toLowerCase().startsWith(searchInput.toLowerCase())) {
+        score += 2;
     }
 
-    //const classScore = val.class?.toLowerCase().includes(searchInput.toLowerCase()) ? 1 : 0;
-    const userNameScore = searchInput.includes(val.username) ? 3 : 0;
-    return nameScore2 +lastNameScore2 + userNameScore;
+
+    // if the search input is just included in the username or firstname or lastname
+    if (val.username.toLowerCase().includes(searchInput.toLowerCase()) ||
+        val.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
+        val.lastName.toLowerCase().includes(searchInput.toLowerCase())){
+        score +=  1;
+    }
+
+    return score;
 };
 
 
@@ -69,8 +73,7 @@ const SearchBar = ({ data }) => {
             //sort scoredData based on score
             const sortedResults = scoredData
                 .sort((a, b) => b.score - a.score)
-                .filter((val) => val.score > 0 || val.score > 1 || val.score > 2 || val.score > 3);
-
+                .filter((val) => val.score > 0)
 
             setSearchResults(sortedResults);
         }
@@ -106,7 +109,9 @@ const SearchBar = ({ data }) => {
                         <tbody>
                             {searchResults.map((student) => (
                                 <tr
-                                    key={student.id}
+                                    role="row"
+                                    data-testid="result-row"
+                                    key={student.username}
                                     className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800"
                                     onClick={() => window.location.href = `/Students/${removeHashtag(student.username)}`}>
                                     <td>{student.firstName} {student.lastName}</td>

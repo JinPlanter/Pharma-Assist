@@ -1,6 +1,6 @@
 // test search page
 
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Page from '../../../app/Students/page';
 
@@ -53,30 +53,18 @@ describe('Page component', () => {
 
     // 1. test that the page renders the search bar component
     test('renders the search bar component', async() => {
-        let component;
-        await act(async () => {
-            component = render(<Page />);
-        });
-
-        expect(component.getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
-    
-        //use data-testid to get the search bar
-        expect(screen.getByTestId('search-bar')).toBeInTheDocument();
+        const { getByPlaceholderText, getByTestId } = render(<Page />);
+        expect(getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
+        expect(getByTestId("search-bar")).toBeInTheDocument();
     });
 
 
 
     // 2. test that the search bar allows input
     test('allows input in the search bar', async() => {
-        let component;
-        await act(async () => {
-            component = render(<Page />);
-        });
-
-        const searchBar = component.getByPlaceholderText("Search by name, class or student ID");
-        await act(async() => {
-            fireEvent.change(searchBar, { target: { value: 'John' } });
-        });
+        const { getByPlaceholderText } = render(<Page />);
+        const searchBar = getByPlaceholderText("Search by name, class or student ID");
+        fireEvent.change(searchBar, { target: { value: 'John' } });
         expect(searchBar.value).toBe('John');
     });
 
@@ -89,12 +77,13 @@ describe('Page component', () => {
         // spy on console.error
         const errorSpy = jest.spyOn(console,'error');
 
+        // render the page
+        render(<Page />);
 
-        await act(async () => {
-            render(<Page />);
+        await waitFor(() => {
+            expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
         });
-
-        expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
+        
     });
 
 });

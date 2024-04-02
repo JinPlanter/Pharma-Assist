@@ -59,7 +59,7 @@ const StudentPage = ({ params }) => {
         <div className="bg-custom-black">
             <h1
                 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white ">
-                {student.firstName}{student.lastName}</h1>
+                {student.firstName} {student.lastName}</h1>
             <div className="text-center align-middle flex flex-col">
                 <p>Class: {student.class}</p>
                 <p>Id: {student.username}</p>
