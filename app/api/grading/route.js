@@ -1,4 +1,5 @@
 // this file is used to get the student data from the database
+//path: app/api/Students/route.js
 
 import clientPromise from "../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
@@ -13,7 +14,7 @@ export const GET = async (request, response) => {
 
         // fetch data from collection
         const data = await db
-            .collection("classlist")
+            .collection("gradingForm")
             .find({})
             .toArray();
 
