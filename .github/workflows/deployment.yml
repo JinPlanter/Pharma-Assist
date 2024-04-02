@@ -16,6 +16,8 @@ jobs:
             matrix:
                 node-version: [20.x]
         steps:
+            - name: Print working Directory
+              run: pwd
             - name: Checkout different repository
               uses: actions/checkout@v4
               with:
@@ -29,6 +31,7 @@ jobs:
               run: npm ci
             - name: Test
               run: npm test
+                ls -a
             - name: Build
               env:
                 MONGODB_URI: ${{ secrets.MONGODB_URI }}
