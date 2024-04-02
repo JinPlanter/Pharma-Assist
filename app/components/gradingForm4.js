@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect} from 'react';
 import { removeHashtag } from '../Students/components/search-bar';
-
+import { useFormValuesContext } from "../contexts/gradeform-context";
 
 
 //note: warning in uncontrolled input unresolved.
@@ -40,7 +40,8 @@ export const getCurrentDate = () => {
 const  Form = ({ student }) => {
 
     const [formFields, setFormFields] = useState([]);
-    const [formValues, setFormValues] = useState({});
+    //const [formValues, setFormValues] = useState({});
+    const { formValues, setFormValues, comments, setComments } = useFormValuesContext();
     const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
     const date = getCurrentDate();
 
