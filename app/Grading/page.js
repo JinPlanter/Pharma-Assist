@@ -5,12 +5,8 @@ import React, { useState, useEffect } from 'react';
 
 // Import components and data
 import ClassList from '../components/classList';
-//import GradingForm from '../components/gradingForm';
 import Form from '../components/gradingForm4';
 import DropdownMenu from '../components/dropdown';
-//import classA from '../data/classA.json';
-//import classB from '../data/classB.json';
-// change class A and class b to the data from the database
 import '../globals.css'
 import FormValuesProvider from '../contexts/gradeform-context';
 import PdfViewer from '../components/reactpdf';
