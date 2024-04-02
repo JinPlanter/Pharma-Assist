@@ -1,21 +1,13 @@
 "use client";
 
-<<<<<<< HEAD
+
 import React, { useState, useEffect} from 'react';
-=======
-import React, { useState, useEffect, use } from 'react';
->>>>>>> cf89fb9 (grading criteria pulled from db done)
 import { removeHashtag } from '../Students/components/search-bar';
 import { useFormValuesContext } from "../contexts/gradeform-context";
 
 
-<<<<<<< HEAD
 //note: warning in uncontrolled input unresolved.
 // reference for uncontrolled input warning: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
-=======
-
-
->>>>>>> cf89fb9 (grading criteria pulled from db done)
 
 
 // function to generate the current date
@@ -47,7 +39,6 @@ export const getCurrentDate = () => {
 
 
 const  Form = ({ student }) => {
-<<<<<<< HEAD
 
     const [formFields, setFormFields] = useState([]);
     //const [formValues, setFormValues] = useState({});
@@ -79,45 +70,10 @@ const  Form = ({ student }) => {
     // note: have to initialize the form fields before the form values are set
 
 
-=======
-
-    
-    const [formFields, setFormFields] = useState([]);
-
-
-    // Fetch form fields from the server
-    const  fetchFormFields = async () => {
-        try {
-            const response = await fetch("/api/grading");
-            const data = await response.json();
-            console.log('formFields:', data);
-            // since the data has this structure:
-            //         [{criteria:[{label:"",type:string, comment:false}, ...]}]
-            // have to get just the criteria array
-            setFormFields(data[0].criteria);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            return [];
-        }
-    };
-
-    
-    useEffect(() => {
-        fetchFormFields();
-    }, []);
-    // note: have to initialize the form fields before the form values are set
->>>>>>> cf89fb9 (grading criteria pulled from db done)
-
 
     useEffect(() => {
         const initializeFormStates = () => {
             console.log('formFields:', formFields);
-<<<<<<< HEAD
-=======
-            const currentDate = getCurrentDate();
-            console.log('currentDate:', currentDate);
-
->>>>>>> cf89fb9 (grading criteria pulled from db done)
             const updatedFormStates = formFields.reduce((acc, curr) => {
                 if (curr.label === 'Date') {
                     acc[curr.label] = getCurrentDate(); // Set the current date
@@ -129,48 +85,9 @@ const  Form = ({ student }) => {
 
             setFormValues(updatedFormStates);
         };
-        
-<<<<<<< HEAD
+    
         initializeFormStates();
     }, [formFields]);
-=======
-        if (formFields.length > 0) {
-            initializeFormStates();
-        }
-    }, [formFields]);
-
-
-    const [formValues, setFormValues] = useState({});
-    useEffect(() => {
-        const initializeFormStates = () => {
-            console.log('formFields:', formFields);
-            const currentDate = getCurrentDate();
-            console.log('currentDate:', currentDate);
-
-            const updatedFormStates = formFields.reduce((acc, curr) => {
-                if (curr.label === 'Date') {
-                    acc[curr.label] = currentDate; // Set the current date
-                } else {
-                    acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
-                }
-                return acc;
-            }, {});
-
-            setFormValues(updatedFormStates);
-        };
-
-        if (formFields.length > 0) {
-            initializeFormStates();
-        }
-    }, [formFields]);
-
-
->>>>>>> cf89fb9 (grading criteria pulled from db done)
-
-
-
-
-    
 
     const handleChange = (event) => {
         const { name, type, checked, value } = event.target;
@@ -196,7 +113,6 @@ const  Form = ({ student }) => {
 
     return (
         /** use the key for saving the data of this form; change student.id for whatever identifier is used in the db*/
-<<<<<<< HEAD
         <form 
         key= {generateFormKey(removeHashtag(student.username))} 
         data-testid= {generateFormKey(removeHashtag(student.username))}
@@ -220,33 +136,15 @@ const  Form = ({ student }) => {
                         .filter(field => field.type !== 'checkbox' & !field.label.includes('Evaluation (total marks)'))
                         .map((field, index) => (
                             <label key={index} className='text-right text-gray-700 text-sm font-bold py-2 px-3 m-2'>
-=======
-        <form key= {generateFormKey(removeHashtag(student.username))} data-testid= {generateFormKey(removeHashtag(student.username))}>
-            <div>
-                {/** change student.name to student.firstName or what the student object's variable name for the name */}
-                <div>{`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}</div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <div id="TypeA_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
-                            <label key={index}>
->>>>>>> cf89fb9 (grading criteria pulled from db done)
                                 {field.label}
                             </label>
                         ))}
                     </div>
 
-<<<<<<< HEAD
                     <div id="TypeA_Row1_Column2" className='flex flex-col justify-center ml-2 mr-10 flex-grow'>
                         {formFields
                         .filter(field => field.type !== 'checkbox' && !field.label.includes('Evaluation (total marks)'))
                         .map((field, index) => (
-=======
-                    <div id="TypeA_Row1_Column2" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
-                            field.label === 'Evaluation (total marks)' ? (
-                                <p key={index}>{Math.max(0, formValues[field.label])}</p>
-                            ) : (
->>>>>>> cf89fb9 (grading criteria pulled from db done)
                                 <input
                                     type={field.type}
                                     name={field.label}
@@ -260,7 +158,6 @@ const  Form = ({ student }) => {
                     </div>
                 </div>
 
-<<<<<<< HEAD
                 <div className='mt-5'>
                     <div id="TypeB_Row1_Column1" className='flex flex-col justify-between'>
                         {formFields
@@ -291,29 +188,6 @@ const  Form = ({ student }) => {
                                     }
                                 </div>
                             </div>
-=======
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <div id="TypeB_Row1_Column1" style={{ display: 'flex', flexDirection: 'column' }}>
-                        {formFields.filter(field => field.type === 'checkbox').map((field, index) => (
-                            <label key={index}>
-                                <input
-                                    type="checkbox"
-                                    name={field.label}
-                                    checked={formValues[field.label]}
-                                    onChange={handleChange}
-                                />
-                                {field.label}<br />
-                                {formValues[field.label] &&
-                                    <textarea
-                                        name={`${field.label}-input`}
-                                        value={formValues[`${field.label}-input`] || ''}
-                                        onChange={handleChange}
-                                        placeholder="Add comment..."
-                                        className="h-10 w-full p-2 border rounded-md resize"
-                                    />
-                                }
-                            </label>
->>>>>>> cf89fb9 (grading criteria pulled from db done)
                         ))}
                     </div>
                 </div>
