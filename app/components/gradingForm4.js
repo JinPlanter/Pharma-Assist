@@ -5,7 +5,8 @@ import { removeHashtag } from '../Students/components/search-bar';
 
 
 
-
+//note: warning in uncontrolled input unresolved.
+// reference for uncontrolled input warning: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
 
 
 // function to generate the current date
@@ -47,8 +48,9 @@ const  Form = ({ student }) => {
         try {
             const response = await fetch("/api/grading");
             const data = await response.json();
-            console.log('formFields:', data);
-            // since the data has this structure:
+            //console.log('formFields:', data);
+            
+            // note: since the data has this structure:
             //         [{criteria:[{label:"",type:string, comment:false}, ...]}]
             // have to get just the criteria array
             setFormFields(data[0].criteria);
@@ -89,16 +91,30 @@ const  Form = ({ student }) => {
     }, [formFields]);
 
 
-    const [formValues, setFormValues] = useState({});
+    const [formValues, setFormValues] = useState({
+        label: '',
+        type: '',
+        comment: false,
+    });
+
+    useEffect(() => {
+        if(formFields.length > 0){
+            const initialFormValues = formFields.reduce((acc, field) => {
+                acc[field.label] = field.type === 'checkbox' ? false : '';
+                return acc;
+            }, {});
+            setFormValues(initialFormValues);
+        }
+    }, [formFields]);
+
+
+
+    // initialize the date
     useEffect(() => {
         const initializeFormStates = () => {
-            console.log('formFields:', formFields);
-            const currentDate = getCurrentDate();
-            console.log('currentDate:', currentDate);
-
             const updatedFormStates = formFields.reduce((acc, curr) => {
                 if (curr.label === 'Date') {
-                    acc[curr.label] = currentDate; // Set the current date
+                    acc[curr.label] = getCurrentDate();; // Set the current date
                 } else {
                     acc[curr.label] = curr.label === 'Evaluation (total marks)' ? 3 : (curr.type === 'checkbox' ? false : '');
                 }
@@ -162,6 +178,7 @@ const  Form = ({ student }) => {
                                 <input
                                     type={field.type}
                                     name={field.label}
+                                    defaultValue={''}
                                     value={formValues[field.label] || ''}
                                     onChange={handleChange}
                                     key={index}
@@ -178,6 +195,8 @@ const  Form = ({ student }) => {
                                 <input
                                     type="checkbox"
                                     name={field.label}
+                                    value={field.label}
+                                    defaultChecked={false}
                                     checked={formValues[field.label]}
                                     onChange={handleChange}
                                 />
@@ -186,6 +205,7 @@ const  Form = ({ student }) => {
                                     <textarea
                                         name={`${field.label}-input`}
                                         value={formValues[`${field.label}-input`] || ''}
+                                        defaultValue={''}
                                         onChange={handleChange}
                                         placeholder="Add comment..."
                                         className="h-10 w-full p-2 border rounded-md resize"
