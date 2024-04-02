@@ -4,15 +4,15 @@ import ImportFileIcon from "./icons/importFile";
 import StudentsIcon from "./icons/studentsIcon";
 import GradingIcon from "./icons/gradingIcon";
 import LogOutIcon from "./icons/logOutIcon";
+import SignOutButton from "./signoutbutton";
 
 function Sidebar({ onNavigationClick }) {
     const pages = [
-        { path: "/ImportFile", name: "Import File", icon: <ImportFileIcon /> },
+        { path: "/ImportFile", name: "Import File", icon: < ImportFileIcon /> },
         { path: "/ImportClassList", name: "Class List Import", icon: <ImportFileIcon /> },
         { path: "/Students", name: "Students", icon: <StudentsIcon /> },
         { path: "/Grading", name: "Grading", icon: <GradingIcon /> },
         { path: "/GradingForm4", name: "FunctionalGradingForm", icon: <GradingIcon /> },
-        { path: "/LogOut", name: "Log Out", icon: <LogOutIcon /> },
     ];
 
     return (
@@ -43,6 +43,7 @@ function Sidebar({ onNavigationClick }) {
                             </li>
                         );
                     })}
+                    <SignOutButton />
                 </ul>
             </div>
         </aside>

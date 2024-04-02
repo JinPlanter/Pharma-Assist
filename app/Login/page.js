@@ -1,8 +1,7 @@
 "use client";
-
 // Import necessary modules from the React library
 import React, { useState } from "react";
-// import '../Styles/style.css'; // Import styles
+import { signIn } from "next-auth/react";
 import "../globals.css";
 
 // LoginPage component
@@ -12,28 +11,14 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
 
     // Event handler for form submission
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // Log the entered username and password to the console
-        console.log(`Username: ${username}, Password: ${password}`);
-
-        // Create a Blob containing the user input as JSON
-        const blob = new Blob([JSON.stringify({ username, password }, null, 2)], {
-            type: "application/json",
-        });
-
-        // Create a download link and trigger a click to download the JSON file
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "user-input.json";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Clear the username and password fields after submission
-        setUsername("");
-        setPassword("");
+        try {
+            await signIn("login", { email: username, password, callbackUrl: "/dashboard"});
+        } catch (error) {
+            console.error("Sign in failed:", error);
+            // Handle sign-in error
+        }
     };
 
     // JSX rendering for the LoginPage component
@@ -89,48 +74,12 @@ export default function LoginPage() {
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-start">
-                                            <div className="flex items-center h-5">
-                                                <input
-                                                    id="remember"
-                                                    aria-describedby="remember"
-                                                    type="checkbox"
-                                                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                                    required=""
-                                                />
-                                            </div>
-                                            <div className="ml-3 text-sm">
-                                                <label
-                                                    htmlFor="remember"
-                                                    className="text-gray-500 dark:text-gray-300"
-                                                >
-                                                    Remember me
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <a
-                                            href="#"
-                                            className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                        >
-                                            Forgot password?
-                                        </a>
-                                    </div>
                                     <button
                                         type="submit"
-                                        className=" btn btn-primary w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                        className="btn btn-primary w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                     >
                                         Sign in
                                     </button>
-                                    <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                        Don’t have an account yet?{" "}
-                                        <a
-                                            href="#"
-                                            className="btn btn-neutral font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                        >
-                                            Sign up
-                                        </a>
-                                    </p>
                                 </div>
                             </div>
                         </div>
