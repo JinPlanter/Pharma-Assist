@@ -32,7 +32,9 @@ jobs:
             - name: Build
               env:
                 MONGODB_URI: ${{ secrets.MONGODB_URI }}
-              run: npm run build
+              run: |
+                 echo "MONGODB_URI=$MONGODB_URI" > .env
+                 npm run build
             - name: Test Secret
               run: echo "The secret is $MY_SECRET"
 
