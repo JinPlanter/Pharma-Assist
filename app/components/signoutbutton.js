@@ -11,7 +11,7 @@ export default function SignOutButton() {
     }
 
     const handleSignOut = () => {
-        signOut({});
+        signOut({ callbackUrl: "/"});
     };
 
     return (

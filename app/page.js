@@ -46,11 +46,6 @@ export default function Home() {
                             <LoginPage />
                         </div>
                     )}
-
-                    {/*THIS BUTTON IS TEMPORARY, WE SHOULD REDIRECT TO THE DASHBOARD UPON LOGIN */}
-                    <Link className="btn btn-primary w-32" href="/dashboard">
-                        Dashboard
-                    </Link>
                 </div>
             </div>
 
