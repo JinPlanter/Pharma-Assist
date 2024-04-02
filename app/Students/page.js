@@ -1,9 +1,8 @@
-
 "use client";
-import React, { useState, useEffect } from 'react'
-import '../globals.css'
-import SearchBar from './components/search-bar';
 
+import React, { useState, useEffect } from 'react';
+import SearchBar from './components/search-bar';
+import '../globals.css';
 
 export default function Page() {
 

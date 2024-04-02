@@ -37,22 +37,17 @@ export const calculateScore = (val, searchInput) => {
     // if the search input is just included in the username or firstname or lastname
     if (val.username.toLowerCase().includes(searchInput.toLowerCase()) ||
         val.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
-        val.lastName.toLowerCase().includes(searchInput.toLowerCase())){
-        score +=  1;
+        val.lastName.toLowerCase().includes(searchInput.toLowerCase())) {
+        score += 1;
     }
 
     return score;
 };
 
-
 // function to remove the hashtag from the student username
 export const removeHashtag = (username) => {
     return username.replace("#", "");
 };
-
-
-
-
 
 // SearchBar component
 const SearchBar = ({ data }) => {
@@ -62,7 +57,6 @@ const SearchBar = ({ data }) => {
 
 
     useEffect(() => {
-
         // calculate the score of the search results each time
         const filteredData = filterInitialData(data);
         if (searchInput.length > 0) {
@@ -100,9 +94,11 @@ const SearchBar = ({ data }) => {
                     <table className="bg-primary table">
                         <thead className="font-extrabold text-custom-white">
                             <tr>
+                                <th>Student ID</th>
                                 <th>Name</th>
                                 <th>Class</th>
-                                <th>Student ID</th>
+                                <th>Avg Grade</th>
+                                <th>Last Mark</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -114,9 +110,11 @@ const SearchBar = ({ data }) => {
                                     key={student.username}
                                     className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800"
                                     onClick={() => window.location.href = `/Students/${removeHashtag(student.username)}`}>
+                                    <td>{student.username}</td>
                                     <td>{student.firstName} {student.lastName}</td>
                                     <td>{student.class}</td>
-                                    <td>{student.username}</td>
+                                    <td>{student.avgGrade}</td>
+                                    <td>{student.lastMark}</td>
                                     <td>
                                         <Link
                                             href={`/Students/${removeHashtag(student.username)}`}

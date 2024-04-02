@@ -1,16 +1,13 @@
-
 //path: app/Students/%5Bid%5D/page.js
 "use client"
-import React, { useState, useEffect } from 'react';
 
+import React, { useState, useEffect } from 'react';
 
 //get student data from api route
 export const getStudentData = async (username) => {
     const res = await fetch(`/api/Students/${username}`);
     return res.json();
 };
-
-
 
 const StudentPage = ({ params }) => {
 
@@ -64,7 +61,6 @@ const StudentPage = ({ params }) => {
                 <p>Class: {student.class}</p>
                 <p>Id: {student.username}</p>
             </div>
-
         </div>
     );
 }
