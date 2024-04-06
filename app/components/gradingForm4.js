@@ -146,7 +146,7 @@ const  Form = ({ student }) => {
                         ))}
                     </div>
 
-                    <div id="TypeA_Row1_Column2" className='flex flex-col justify-center ml-2'>
+                    <div id="TypeA_Row1_Column2" className='flex flex-col justify-center ml-2 mr-10 flex-grow'>
                         {formFields
                         .filter(field => field.type !== 'checkbox' && !field.label.includes('Evaluation (total marks)'))
                         .map((field, index) => (
@@ -188,7 +188,7 @@ const  Form = ({ student }) => {
                                             defaultValue={''}
                                             onChange={handleChange}
                                             placeholder="Add comment..."
-                                            className="h-10 w-full p-2 border rounded-md resize mt-2 shadow appearance-none appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            className="h-10 w-full p-2 border rounded-md resize mt-1 mb-5 shadow appearance-none appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         />
                                     }
                                 </div>

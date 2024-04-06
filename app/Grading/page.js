@@ -151,9 +151,9 @@ const Grading = () => {
     return (
         <FormValuesProvider>
             <div className='flex flex-col items-center justify-center'>
-                <div className='flex flex-row mb-4 mx-4 w-full justify-between'>
+                <div className='flex flex-col md:flex-row mb-4 mx-4 w-full justify-between'>
                     {/* DropdownMenu component for selecting a class + class list */}
-                    <div className='w-1/3'>
+                    <div className='w-full md:w-1/3'>
                         <DropdownMenu
                             classLists={classNames} // Add more class lists if needed
                             onSelectClass={handleClassSelect}
@@ -166,7 +166,7 @@ const Grading = () => {
                     </div>
 
                     {/* Right section for rendering the grading form */}
-                    <div className="w-2/3 ml-5">
+                    <div className="w-full md:w-2/3 ml-5 md:ml-5">
                         <div className="flex-grow mt-10 mr-5">
                             {selectedStudent && <Form student={selectedStudent} />}
                         </div>
