@@ -124,9 +124,9 @@ const Grading = () => {
     const renderClassList = () => {
         // find index of selected class in classNames
         const classIndex = classNames.indexOf(selectedClass);
-        console.log('class index: ', classIndex);
-        console.log('selected class: ', selectedClass);
-        console.log('class names: ', classNames);
+        //console.log('class index: ', classIndex);
+        //console.log('selected class: ', selectedClass);
+        //console.log('class names: ', classNames);
 
         // if selected class is found in classNames
         if (classIndex !== -1) {
@@ -150,10 +150,8 @@ const Grading = () => {
     // JSX rendering for the Grading component
     return (
         <FormValuesProvider>
-            <div>
-
-                <div className='flex flex-row mb-4 mx-4 justify-evenly'>
-
+            <div className='flex flex-col items-center justify-center'>
+                <div className='flex flex-row mb-4 mx-4 w-full justify-between'>
                     {/* DropdownMenu component for selecting a class + class list */}
                     <div className='w-1/3'>
                         <DropdownMenu
@@ -162,21 +160,21 @@ const Grading = () => {
                         />
 
                         {/* Left section for rendering the class list */}
-                        <div className=''>
+                        <div className='mt-4'>
                             {renderClassList()}
                         </div>
                     </div>
 
                     {/* Right section for rendering the grading form */}
                     <div className="w-2/3 ml-5">
-                        <div className="flex justify-between items-center mt-10 ">
+                        <div className="flex-grow mt-10 mr-5">
                             {selectedStudent && <Form student={selectedStudent} />}
                         </div>
                     </div>
+                </div>
 
-                    <PdfViewer>
-                    </PdfViewer>
-
+                <div className='flex justify-center w-full mt-4'>
+                    <PdfViewer />
                 </div>
 
             </div>
