@@ -20,11 +20,11 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
 
     // JSX rendering for the DropdownMenu component
     return (
-        <div className="classDropdown">
+        <div className="bg-primary p-4 rounded-md">
             {/* Label for the dropdown menu */}
             <label
                 htmlFor="classSelect"
-                className="classDropdownLabel"
+                className="block text-neutral font-semibold mb-2"
             >
                 Select a Class:
             </label>
@@ -34,7 +34,7 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
                 id="classSelect"
                 value={selectedClass}
                 onChange={handleClassChange}
-                className="classDropdownSelect"
+                className="text-lg font-bold text-primary w-full px-4 py-2 border border-neutral bg-white rounded-md shadow-inner focus:border-accent focus:ring-accent focus:outline-none"
             >
                 {/* Default option prompting the user to select a class */}
                 <option value="" disabled>
@@ -43,7 +43,7 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
 
                 {/* Map through classLists to create options for each class */}
                 {classLists.map((classList) => (
-                    <option className="classDropdownOption" key={classList} value={classList}>
+                    <option className="text-primary" key={classList} value={classList}>
                         {classList}
                     </option>
                 ))}

@@ -3,6 +3,8 @@ import React, {useState, useEffect } from "react";
 import { removeHashtag } from "../Students/components/search-bar";
 
 
+
+// Custom hook to get the window size
 function useWindowSize(){
     const [windowSize, setWindowSize] = useState({
         width: undefined,
@@ -33,7 +35,7 @@ const ClassList = ({ classlist, onStudentClick, selectedStudent }) => {
     const size = useWindowSize();
 
     return (
-        <ul className="" 
+        <ul className="bg-primary" 
         style={{
             height: size.width <= 768 ? '30vh': '80vh', 
             overflowY: 'auto'}}>
@@ -43,11 +45,11 @@ const ClassList = ({ classlist, onStudentClick, selectedStudent }) => {
             {classlist.map((student) => (
                 <li
                     key={removeHashtag(student.username)}
-                    className={`classListItem ${selectedStudent === student ? "bg-red-500" : ""}`}
+                    className={`rounded border-secondary text-center px-4 py-2 hover:bg-secondary dark:hover:bg-secondary cursor pointer ${selectedStudent === student ? 'bg-accent' : ''}`}
                     onClick={() => onStudentClick(student)}
                 >
                     {/* Display the name of the student */}
-                    <span className="classListStudent">
+                    <span className="text-custom-white font-semibold text-xl">
                         {`${student.firstName} ${student.lastName}`}
                     </span>
                 </li>

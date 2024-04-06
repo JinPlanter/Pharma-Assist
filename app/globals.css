@@ -70,12 +70,7 @@ p {
   border-width: 1px;
   border-radius: 0.375rem;
   cursor: pointer;
-  background-color: theme("colors.custom-neon-blue");
   text-align: center;
-}
-
-.classListItem:hover {
-  background-color: theme("colors.custom-light-blue");
 }
 
 .classListStudent {
