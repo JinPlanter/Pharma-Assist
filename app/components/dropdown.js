@@ -43,7 +43,7 @@ const DropdownMenu = ({ classLists, onSelectClass }) => {
 
                 {/* Map through classLists to create options for each class */}
                 {classLists.map((classList) => (
-                    <option className="text-primary" key={classList} value={classList}>
+                    <option className="text-primary text-lg font-semibold" key={classList} value={classList}>
                         {classList}
                     </option>
                 ))}
