@@ -7,7 +7,7 @@ const ClassList = ({ classlist, onStudentClick }) => {
     // JSX rendering for the ClassList component
 
     return (
-        <ul className="classList">
+        <ul className="classList" style={{height: '80vh', overflowY: 'auto'}}>
             {" "}
             {/* Added margin-top here for styling */}
             {/* Map through classlist to create list items for each student */}
