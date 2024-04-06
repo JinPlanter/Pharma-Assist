@@ -122,23 +122,34 @@ const  Form = ({ student }) => {
         key= {generateFormKey(removeHashtag(student.username))} 
         data-testid= {generateFormKey(removeHashtag(student.username))}
         className='flex  flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-black'>
-            <div className='mb-4'>
-                {/** change student.name to student.firstName or what the student object's variable name for the name */}
-                <div className='mb-2 text-lg font-bold' >{`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}</div>
-                <div className="flex flex-row justify-between" >
-                    <div id="TypeA_Row1_Column1" className='flex flex-col justify-evenly'>
-                        {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
-                            <label key={index} className='block text-gray-700 text-sm font-bold mb-2'>
+            <div className='mb-4 p-10'>
+                <div className='mb-4 text-lg font-bold text-center' >
+                    {`${student.firstName} ${student.lastName} (${removeHashtag(student.username)})`}
+                </div>
+                <div className='flex justify-between'>
+                    <div></div>
+                    <div className='flex flex-row'>
+                        <label className='text-right text-gray-700 text-md font-bold m-2'>
+                            Evaluation (total marks):
+                        </label>
+                        <p className='m-2 text-red-600 text-md font-bold'>{Math.max(0, formValues['Evaluation (total marks) '])}</p>
+                    </div>
+                </div>
+                <div className="flex flex-row items-start" >
+                    <div id="TypeA_Row1_Column1" className='flex flex-col justify-center'>
+                        {formFields
+                        .filter(field => field.type !== 'checkbox' & !field.label.includes('Evaluation (total marks)'))
+                        .map((field, index) => (
+                            <label key={index} className='text-right text-gray-700 text-sm font-bold py-2 px-3 m-2'>
                                 {field.label}
                             </label>
                         ))}
                     </div>
 
-                    <div id="TypeA_Row1_Column2" className='flex flex-col'>
-                        {formFields.filter(field => field.type !== 'checkbox').map((field, index) => (
-                            field.label.includes('Evaluation (total marks)') ? (
-                                <p key={index} className='mb-2'>{Math.max(0, formValues[field.label])}</p>
-                            ) : (
+                    <div id="TypeA_Row1_Column2" className='flex flex-col justify-center ml-2'>
+                        {formFields
+                        .filter(field => field.type !== 'checkbox' && !field.label.includes('Evaluation (total marks)'))
+                        .map((field, index) => (
                                 <input
                                     type={field.type}
                                     name={field.label}
@@ -146,37 +157,42 @@ const  Form = ({ student }) => {
                                     placeholder={field.label === 'Date ' ? `${getCurrentDate()}` : `Enter ${field.label}` } 
                                     onChange={handleChange}
                                     key={index}
-                                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                                    className='shadow appearance-none border rounded w-full m-2 ml-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 />
-                            )
                         ))}
                     </div>
                 </div>
 
-                <div className='flex flex-row'>
+                <div className='mt-5'>
                     <div id="TypeB_Row1_Column1" className='flex flex-col justify-between'>
-                        {formFields.filter(field => field.type === 'checkbox').map((field, index) => (
-                            <label key={index}>
-                                <input
-                                    type="checkbox"
-                                    name={field.label}
-                                    value={field.label}
-                                    checked={formValues[field.label]}
-                                    onChange={handleChange}
-                                    className='mr-2 leading-tight' 
-                                />
-                                {field.label}<br />
-                                {formValues[field.label] &&
-                                    <textarea
-                                        name={`${field.label}-input`}
-                                        value={formValues[`${field.label}-input`] || ''}
-                                        defaultValue={''}
-                                        onChange={handleChange}
-                                        placeholder="Add comment..."
-                                        className="h-10 w-full p-2 border rounded-md resize mt-2 shadow appearance-none appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    />
-                                }
-                            </label>
+                        {formFields
+                        .filter(field => field.type === 'checkbox')
+                        .map((field, index) => (
+                            <div key={index} className="items-start">
+                                <div className='flex flex-col mr-2'>
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            name={field.label}
+                                            value={field.label}
+                                            checked={formValues[field.label]}
+                                            onChange={handleChange}
+                                            className='mr-2 leading-tight' 
+                                        />
+                                        <label className='mr-2'>{field.label}</label>
+                                    </div>
+                                    {formValues[field.label] &&
+                                        <textarea
+                                            name={`${field.label}-input`}
+                                            value={formValues[`${field.label}-input`] || ''}
+                                            defaultValue={''}
+                                            onChange={handleChange}
+                                            placeholder="Add comment..."
+                                            className="h-10 w-full p-2 border rounded-md resize mt-2 shadow appearance-none appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        />
+                                    }
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
