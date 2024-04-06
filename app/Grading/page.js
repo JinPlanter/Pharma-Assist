@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import ClassList from '../components/classList';
 import Form from '../components/gradingForm4';
 import DropdownMenu from '../components/dropdown';
-import '../globals.css'
+//import '../globals.css'
 import FormValuesProvider from '../contexts/gradeform-context';
 import PdfViewer from '../components/reactpdf';
 
@@ -102,8 +102,8 @@ const Grading = () => {
     }, []);
 
     // check state variables
-    console.log('class lists: ', classLists);
-    console.log('class names: ', classNames);
+    //console.log('class lists: ', classLists);
+    //console.log('class names: ', classNames);
 
     // State variables to track selected class and student
     const [selectedClass, setSelectedClass] = useState(null);
@@ -132,13 +132,14 @@ const Grading = () => {
         if (classIndex !== -1) {
             // get the class list data for the selected class
             const classListData = classLists[classIndex];
-            console.log('class list data: ', classListData);
+            //console.log('class list data: ', classListData);
 
             // render the ClassList component with the class list data
             return (
                 <ClassList
                     classlist={classListData}
                     onStudentClick={handleStudentClick}
+                    selectedStudent={selectedStudent}
                 />
             );
         }
