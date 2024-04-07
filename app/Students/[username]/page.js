@@ -58,6 +58,7 @@ const StudentPage = ({ params }) => {
     return (
         <div className="bg-primary p-4 rounded-md justify-between">
             <h1
+                data-testid="student-name"
                 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white md:text-2xl ">
                 {student.firstName} {student.lastName}</h1>
             <table className="table-auto text-white w-full mb-5">
@@ -66,7 +67,7 @@ const StudentPage = ({ params }) => {
                         <td className="border px-4 py-2">Id:</td>
                         <td className="border px-4 py-2">
                             <div className="flex flex-row justify-between">
-                                <div>{student.username}</div>
+                                <div data-testid="student-username">{student.username}</div>
                                 <button
                                 className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
                                 onClick={() => {}}>Edit</button>
