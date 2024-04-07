@@ -1,6 +1,7 @@
 // test search page
 
 import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Page from '../../../app/Students/page';
 
@@ -42,20 +43,7 @@ describe('Page component', () => {
 
     //0. test that the page renders the heading: Student Search Page
     test('renders Student Search Page', async() => {
-    test('renders Student Search Page', async() => {
         render(<Page />);
-
-        // Wait for the "Loading..." text to disappear
-        await waitFor(() => {
-            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-        });
-
-
-        // Wait for the "Loading..." text to disappear
-        await waitFor(() => {
-            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-        });
-
         const heading = screen.getByText(/Student Search Page/i);
         expect(heading).toBeInTheDocument();
 
@@ -83,17 +71,9 @@ describe('Page component', () => {
 
     // 2. test that the search bar allows input
     test('allows input in the search bar', async() => {
-        const { getByPlaceholderText } = render(<Page />);
-
-        // Wait for the "Loading..." text to disappear
-        await waitFor(() => {
-            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-        });
-
-
-        // Wait for the "Loading..." text to disappear
-        await waitFor(() => {
-            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+        let component;
+        await act(async () => {
+            component = render(<Page />);
         });
 
         const searchBar = getByPlaceholderText("Search by name, class or student ID");
@@ -119,7 +99,8 @@ describe('Page component', () => {
         await waitFor(() => {
             expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
         });
-        
+
+        expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
     });
 
 });

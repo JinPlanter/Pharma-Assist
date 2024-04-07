@@ -49,17 +49,14 @@ const StudentPage = ({ params }) => {
 
     if (loading) {
         return <div className="text-neutral">Loading...</div>;
-        return <div className="text-neutral">Loading...</div>;
     }
     
 
     if (error) {
         return <div className="text-error">Error: {error.message}</div>;
-        return <div className="text-error">Error: {error.message}</div>;
     }
 
     return (
-        <div className="bg-primary p-4 rounded-md justify-between">
         <div className="bg-primary p-4 rounded-md justify-between">
             <h1
                 data-testid="student-name"
