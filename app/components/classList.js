@@ -34,6 +34,20 @@ const ClassList = ({ classlist, onStudentClick, selectedStudent }) => {
     
     const size = useWindowSize();
 
+    // sort the students in alphabetical order by their first and last name
+    const sortedClassList = [...classlist].sort((a, b) => {
+        // compare first names
+        const firstNameComparison = a.firstName.localeCompare(b.firstName);
+
+        // if first names are the same, compare last names
+        if (firstNameComparison === 0) {
+            return a.lastName.localeCompare(b.lastName);
+        }
+
+        // otherwise, return the comparison of first names
+        return firstNameComparison;
+    });
+
     return (
         <ul className="bg-primary" 
         style={{
@@ -42,7 +56,7 @@ const ClassList = ({ classlist, onStudentClick, selectedStudent }) => {
             {" "}
             {/* Added margin-top here for styling */}
             {/* Map through classlist to create list items for each student */}
-            {classlist.map((student) => (
+            {sortedClassList.map((student) => (
                 <li
                     key={removeHashtag(student.username)}
                     className={`rounded border-secondary text-center px-4 py-2 hover:bg-secondary dark:hover:bg-secondary cursor pointer ${selectedStudent === student ? 'bg-accent' : ''}`}
