@@ -89,8 +89,8 @@ describe('Page component', () => {
     //3. test that the page handles fetch error as expected
     test('handles fetch error', async() => {
         //mock console error
-        console.error = jest.fn();
-        
+        console.error = jest.fn(); // this suppresses console.error from printing to the console as it is what we want to test
+
         global.fetch.mockImplementationOnce(() => Promise.reject("Fetch error"));
        
         // spy on console.error
