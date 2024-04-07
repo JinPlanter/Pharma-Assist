@@ -24,9 +24,26 @@ export const GET = async (request, response) => {
             parsedData = parsedData.concat(data[i].fileContentJson);
         }
 
+        // function to sort the properties of the object
+        const sortObjectProperties = (obj) => {
+            return Object.keys(obj)
+                .sort()
+                .reduce(function (result, key) {
+                    result[key] = obj[key];
+                    return result;
+                }, {});
+        };
+
         // remove duplicate data
         // once input validation in the db is implemented, this code will be removed
-        parsedData = [...new Set(parsedData.map(JSON.stringify))].map(JSON.parse);
+        parsedData = [...new Set(parsedData.map(item => JSON.stringify(sortObjectProperties(item))))].map(JSON.parse);
+
+        parsedData = parsedData.filter((obj, index, self) => 
+            index === self.findIndex((t) => (
+                t.username === obj.username && 
+                t.firstName === obj.firstName && 
+                t.lastName === obj.lastName))
+        );
 
 
         return NextResponse.json(parsedData);
