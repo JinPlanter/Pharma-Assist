@@ -42,7 +42,14 @@ describe('Page component', () => {
 
     //0. test that the page renders the heading: Student Search Page
     test('renders Student Search Page', async() => {
+    test('renders Student Search Page', async() => {
         render(<Page />);
+
+        // Wait for the "Loading..." text to disappear
+        await waitFor(() => {
+            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+        });
+
 
         // Wait for the "Loading..." text to disappear
         await waitFor(() => {
@@ -64,6 +71,10 @@ describe('Page component', () => {
         await waitFor(() => {
             expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
         });
+        // Wait for the "Loading..." text to disappear
+        await waitFor(() => {
+            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+        });
         expect(getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
         expect(getByTestId("search-bar")).toBeInTheDocument();
     });
@@ -73,6 +84,12 @@ describe('Page component', () => {
     // 2. test that the search bar allows input
     test('allows input in the search bar', async() => {
         const { getByPlaceholderText } = render(<Page />);
+
+        // Wait for the "Loading..." text to disappear
+        await waitFor(() => {
+            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+        });
+
 
         // Wait for the "Loading..." text to disappear
         await waitFor(() => {
