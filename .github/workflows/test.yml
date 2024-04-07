@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - test-cypress
+      - gFormMoreUpdates
+      - main
   pull_request:
     branches:
-      - master
+      - main
   
 jobs:
   unit-tests:
