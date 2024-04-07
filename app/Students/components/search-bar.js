@@ -119,7 +119,7 @@ const SearchBar = ({ data }) => {
                                     role="row"
                                     data-testid="result-row"
                                     key={student.username}
-                                    className=" text-white hover:bg-gray-400 dark:hover:bg-gray-800 text-lg font-semibold cursor-pointer"
+                                    className=" text-white hover:bg-secondary dark:hover:bg-secondary text-lg font-semibold cursor-pointer"
                                     onClick={() => window.location.href = `/Students/${removeHashtag(student.username)}`}>
                                     <td>{student.firstName} {student.lastName}</td>
                                     <td>{student.class}</td>
