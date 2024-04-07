@@ -50,6 +50,7 @@ const StudentPage = ({ params }) => {
     if (loading) {
         return <div className="text-neutral">Loading...</div>;
     }
+    
 
     if (error) {
         return <div className="text-error">Error: {error.message}</div>;
