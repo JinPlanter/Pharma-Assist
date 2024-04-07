@@ -44,7 +44,10 @@ describe('Page component', () => {
     test('renders Student Search Page', async() => {
         render(<Page />);
         const heading = screen.getByText(/Student Search Page/i);
+
+        await waitFor(() => {
         expect(heading).toBeInTheDocument();
+        });
 
         
     });
@@ -58,8 +61,14 @@ describe('Page component', () => {
         await waitFor(() => {
             expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
         });
+
+        await waitFor(() => {
         expect(getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
-        expect(getByTestId("search-bar")).toBeInTheDocument();
+        });
+
+        await waitFor(() => {
+            expect(getByTestId("search-bar")).toBeInTheDocument();
+        });
     });
 
 
@@ -73,7 +82,9 @@ describe('Page component', () => {
 
         const searchBar = component.getByPlaceholderText("Search by name, class or student ID");
         fireEvent.change(searchBar, { target: { value: 'John' } });
-        expect(searchBar.value).toBe('John');
+        await waitFor(() =>{
+            expect(searchBar.value).toBe('John');
+        });
     });
 
 
@@ -95,7 +106,7 @@ describe('Page component', () => {
             expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
         });
 
-        expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
+        
     });
 
 });
