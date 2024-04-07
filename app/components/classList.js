@@ -5,7 +5,7 @@ import { removeHashtag } from "../Students/components/search-bar";
 
 
 // Custom hook to get the window size
-function useWindowSize(){
+export function useWindowSize(){
     const [windowSize, setWindowSize] = useState({
         width: undefined,
         height: undefined,
