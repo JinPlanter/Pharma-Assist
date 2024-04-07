@@ -58,10 +58,6 @@ describe('Page component', () => {
         await waitFor(() => {
             expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
         });
-        // Wait for the "Loading..." text to disappear
-        await waitFor(() => {
-            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-        });
         expect(getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
         expect(getByTestId("search-bar")).toBeInTheDocument();
     });
