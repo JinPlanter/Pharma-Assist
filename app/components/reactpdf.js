@@ -41,8 +41,10 @@ const PdfViewer = () => {
 
     return (
         <div>
-            <h2>Your PDF Viewer App</h2>
-            <button onClick={generatePdf}>Generate PDF</button>
+            <h2 className="px-3 py-3 text-white">PDF Viewer App</h2>
+            <button
+            className="bg-accent px-3 py-3  text-white rounded-md hover:bg-secondary"
+            onClick={generatePdf}>Generate PDF</button>
         </div>
     );
 };
