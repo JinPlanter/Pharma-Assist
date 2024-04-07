@@ -71,7 +71,7 @@ describe('Page component', () => {
             component = render(<Page />);
         });
 
-        const searchBar = getByPlaceholderText("Search by name, class or student ID");
+        const searchBar = component.getByPlaceholderText("Search by name, class or student ID");
         fireEvent.change(searchBar, { target: { value: 'John' } });
         expect(searchBar.value).toBe('John');
     });
