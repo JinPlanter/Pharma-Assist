@@ -10,6 +10,7 @@ import DropdownMenu from '../components/dropdown';
 //import '../globals.css'
 import FormValuesProvider from '../contexts/gradeform-context';
 import PdfViewer from '../components/reactpdf';
+import { useWindowSize } from '../components/classList';
 
 
 
@@ -69,6 +70,9 @@ const Grading = () => {
     const [classLists, setClassLists] = useState([]);
     // state variables to hold class names
    const [classNames, setClassNames] = useState([]);
+
+   // custom hook to get the window size
+   const size = useWindowSize();
 
 
     // Fetch class data from the database when component mounts
@@ -164,6 +168,14 @@ const Grading = () => {
                         <div className='mt-4'>
                             {renderClassList()}
                         </div>
+
+                        {/** conditionally render pdf viewer based on window size */}
+                        {size.width >= 768 && (
+                            <div className='flex justify-center w-full mt-4'>
+                                <PdfViewer />
+                            </div>
+                        )
+                        }
                     </div>
 
                     {/* Right section for rendering the grading form */}
@@ -174,10 +186,14 @@ const Grading = () => {
                     </div>
                 </div>
 
-                <div className='flex justify-center w-full mt-4'>
-                    <PdfViewer />
-                </div>
-
+                {/** conditionally render pdf viewer based on window size */}
+                {
+                    size.width < 768 && (
+                        <div className='flex justify-center w-full mt-4'>
+                            <PdfViewer />
+                        </div>
+                    )
+                }
             </div>
         </FormValuesProvider>
     );
