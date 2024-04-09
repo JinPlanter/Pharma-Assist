@@ -19,14 +19,10 @@ function Dashboard() {
         switch (activeComponent) {
             case "Grading":
                 return <Grading />;
-            case "Login":
-                return <LoginPage />;
             case "Students":
                 return <Students />;
             case "Import File":
                 return <ImportFile />;
-            case "Log Out":
-                <LogoutPage />
             default:
                 return <Grading />;
         }
