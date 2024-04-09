@@ -195,7 +195,7 @@ const Form = ({ student }) => {
                                                 value={field.label}
                                                 checked={formValues[field.label]}
                                                 onChange={handleChange}
-                                                className='mr-2 leading-tight'
+                                                className='mr-2 leading-tight toggle toggle-error'
                                             />
                                             <label className='mr-2'>{field.label}</label>
                                         </div>
