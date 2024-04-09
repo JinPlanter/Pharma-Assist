@@ -2,10 +2,8 @@
 //path: app/Students/%5Bid%5D/page.js
 "use client"
 import React, { useState, useEffect } from 'react';
-import handleEditStudent from '@/app/customHooks/handleEditStudent';
-import handleInputChange from '@/app/customHooks/handleInputChange';
-import handleSaveStudent from '@/app/customHooks/handleSaveStudent';
-import EditableField from '@/app/components/inputEditStudentInfo';
+import handleSaveStudent from '../../customHooks/handleSaveStudent';
+import EditableField from '../../components/inputEditStudentInfo';
 
 
 //get student data from api route
@@ -37,6 +35,7 @@ const StudentPage = ({ params }) => {
             try {
                 const data = await getStudentData(username);
                 setStudent(data[0]);
+                setEditedStudent({...data[0]}); // copy student data to editedStudent
                 // student is an array of one object, so we can access the object at index 0
                 // could change if database is collection / document changes
             } catch (error) {
@@ -60,10 +59,21 @@ const StudentPage = ({ params }) => {
     //handlers for editing student data
 
     const handleInputChange = (e) => {
-        setEditedStudent({
-            ...editedStudent,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+    
+        if (name === "name") {
+            const [firstName, lastName] = value.split(" ");
+            setEditedStudent(prevState => ({
+                ...prevState,
+                firstName,
+                lastName
+            }));
+        } else {
+            setEditedStudent(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
 
     const handleEdit= () => {
@@ -81,8 +91,9 @@ const StudentPage = ({ params }) => {
             // call api to save student data
             
             await handleSaveStudent({
+                editingStudent: student,
                 setEditingStudent: setEditedStudent,
-                setEditedData: setEditedStudent,
+                setEditedStudent: setEditedStudent,
                 setRefreshTimestamp: Date.now(),
             });
             setIsEditing(false);
@@ -111,7 +122,7 @@ const StudentPage = ({ params }) => {
                     type="text"
                     name= "name"
                     placeholder={student.firstName + " " + student.lastName}
-                    value={student.firstName + " " + student.lastName}
+                    value={editedStudent.firstName + " " + editedStudent.lastName}
                     onChange={handleInputChange}
                 />
             ) : (
