@@ -18,7 +18,7 @@ export default function SignOutButton() {
         <div className="flex items-center">
             <p className="mr-2">Signed in as: {session.user.email}</p>
             <p className="mr-2">Role: {session.user.privileges}</p>
-            <button className="btn btn-warning" onClick={handleSignOut}>
+            <button className="btn btn-error" onClick={handleSignOut}>
                 Sign out!
             </button>
         </div>
