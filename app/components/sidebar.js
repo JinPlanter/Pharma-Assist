@@ -41,7 +41,6 @@ function Sidebar({ onNavigationClick }) {
                             </li>
                         );
                     })}
-                    <SignOutButton />
                 </ul>
             </div>
         </aside>
