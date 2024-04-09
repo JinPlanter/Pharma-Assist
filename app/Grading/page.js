@@ -5,15 +5,12 @@ import React, { useState, useEffect } from 'react';
 
 // Import components and data
 import ClassList from '../components/classList';
-//import GradingForm from '../components/gradingForm';
 import Form from '../components/gradingForm4';
 import DropdownMenu from '../components/dropdown';
-//import classA from '../data/classA.json';
-//import classB from '../data/classB.json';
-// change class A and class b to the data from the database
-import '../globals.css'
+//import '../globals.css'
 import FormValuesProvider from '../contexts/gradeform-context';
 import PdfViewer from '../components/reactpdf';
+import { useWindowSize } from '../components/classList';
 
 
 
@@ -74,6 +71,9 @@ const Grading = () => {
     // state variables to hold class names
    const [classNames, setClassNames] = useState([]);
 
+   // custom hook to get the window size
+   const size = useWindowSize();
+
 
     // Fetch class data from the database when component mounts
     useEffect(() => {
@@ -106,8 +106,8 @@ const Grading = () => {
     }, []);
 
     // check state variables
-    console.log('class lists: ', classLists);
-    console.log('class names: ', classNames);
+    //console.log('class lists: ', classLists);
+    //console.log('class names: ', classNames);
 
     // State variables to track selected class and student
     const [selectedClass, setSelectedClass] = useState(null);
@@ -128,21 +128,22 @@ const Grading = () => {
     const renderClassList = () => {
         // find index of selected class in classNames
         const classIndex = classNames.indexOf(selectedClass);
-        console.log('class index: ', classIndex);
-        console.log('selected class: ', selectedClass);
-        console.log('class names: ', classNames);
+        //console.log('class index: ', classIndex);
+        //console.log('selected class: ', selectedClass);
+        //console.log('class names: ', classNames);
 
         // if selected class is found in classNames
         if (classIndex !== -1) {
             // get the class list data for the selected class
             const classListData = classLists[classIndex];
-            console.log('class list data: ', classListData);
+            //console.log('class list data: ', classListData);
 
             // render the ClassList component with the class list data
             return (
                 <ClassList
                     classlist={classListData}
                     onStudentClick={handleStudentClick}
+                    selectedStudent={selectedStudent}
                 />
             );
         }
@@ -154,35 +155,45 @@ const Grading = () => {
     // JSX rendering for the Grading component
     return (
         <FormValuesProvider>
-            <div>
-
-                <div className='flex flex-row mb-4 mx-4'>
-
+            <div className='flex flex-col items-center justify-center'>
+                <div className='flex flex-col md:flex-row mb-4 mx-4 w-full justify-between'>
                     {/* DropdownMenu component for selecting a class + class list */}
-                    <div className='w-1/3'>
+                    <div className='w-full md:w-1/3'>
                         <DropdownMenu
                             classLists={classNames} // Add more class lists if needed
                             onSelectClass={handleClassSelect}
                         />
 
                         {/* Left section for rendering the class list */}
-                        <div className=''>
+                        <div className='mt-4'>
                             {renderClassList()}
                         </div>
+
+                        {/** conditionally render pdf viewer based on window size */}
+                        {size.width >= 768 && (
+                            <div className='flex justify-center w-full mt-4'>
+                                <PdfViewer />
+                            </div>
+                        )
+                        }
                     </div>
 
                     {/* Right section for rendering the grading form */}
-                    <div className="w-2/3">
-                        <div className="mt-10">
+                    <div className="w-full md:w-2/3 ml-5 md:ml-5">
+                        <div className="flex-grow mt-10 mr-5">
                             {selectedStudent && <Form student={selectedStudent} />}
                         </div>
                     </div>
-
-                    <PdfViewer>
-                    </PdfViewer>
-
                 </div>
 
+                {/** conditionally render pdf viewer based on window size */}
+                {
+                    size.width < 768 && (
+                        <div className='flex justify-center w-full mt-4'>
+                            <PdfViewer />
+                        </div>
+                    )
+                }
             </div>
         </FormValuesProvider>
     );

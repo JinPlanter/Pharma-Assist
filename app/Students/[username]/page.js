@@ -48,22 +48,123 @@ const StudentPage = ({ params }) => {
     }, [username]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="text-neutral">Loading...</div>;
     }
+    
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div className="text-error">Error: {error.message}</div>;
     }
 
     return (
-        <div className="bg-custom-black">
+        <div className="bg-primary p-4 rounded-md justify-between">
             <h1
-                className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white ">
+                data-testid="student-name"
+                className="text-xl font-bold leading-tight tracking-tight text-gray-900 md-text-2xl dark:text-white md:text-2xl ">
                 {student.firstName} {student.lastName}</h1>
-            <div className="text-center align-middle flex flex-col">
-                <p>Class: {student.class}</p>
-                <p>Id: {student.username}</p>
-            </div>
+            <table className="table-auto text-white w-full mb-5">
+                <tbody>
+                    <tr className="">
+                        <td className="border px-4 py-2">Id:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                                <div data-testid="student-username">{student.username}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">Email:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                                <div>{student.email}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">Phone:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                                <div>{student.phone}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">Emergency Contact:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                            <div>{student.emergencyContact}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">Address:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                            <div>{student.address}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">City:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                            <div>{student.city}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">Province:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                            <div>{student.province}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="border px-4 py-2">Zip:</td>
+                        <td className="border px-4 py-2">
+                            <div className="flex flex-row justify-between">
+                            <div>{student.zip}</div>
+                                <button
+                                className="bg-accent pl-2 pr-2 text-white rounded-md hover:bg-secondary"
+                                onClick={() => {}}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+        <div className='mb-5'>
+            <h2 className="text-xl font-bold leading-tight tracking-tight text-white md-text-2xl dark:text-white">
+                Courses</h2>
+        </div>
+
+        <div className='mb-5'>
+            <h2 className="text-xl font-bold leading-tight tracking-tight text-white md-text-2xl dark:text-white">Labs completed</h2>
+        
+        </div>
 
         </div>
     );
