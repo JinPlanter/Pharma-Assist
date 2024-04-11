@@ -58,3 +58,68 @@ export const GET = async (request, response) => {
         );
     }
 }
+
+
+
+//update student data
+export const PUT = async (request, response) => {
+    try {
+        // connect to db
+        const client = await clientPromise;
+        const db = client.db("capstone"); //db name
+
+        //check if connection is successful
+        if (!db) {
+            return NextResponse.error(
+                new Error("Unable to connect to database"),
+                { status: 500 }
+            );
+        } else{
+            console.log("Connected to database successfully");
+        }
+
+        
+
+        //extract updated data from request
+        //console.log("Res.body: ", request.body);
+        //const updatedData = request.body;
+
+        // read request body 
+        const chunks = [];
+        for await (const chunk of request.body) {
+            chunks.push(chunk);
+        }
+
+        // parse the request body as JSON
+        const updatedData = JSON.parse(Buffer.concat(chunks).toString());
+        console.log("Updated data: ", updatedData);
+        
+
+        
+        //update student data in collection
+
+        const result = await db.collection("classlist").findOneAndUpdate(
+            { "fileContentJson.username": {$regex: `#${response.params.username}$ `} },
+            { $set: { "fileContentJson.$[elem]": updatedData } },
+            { arrayFilters: [{ "elem.username": {$regex: `#${response.params.username}$ `} }], returnOriginal: false}
+        );
+
+
+        if (result) {
+            // if the update was successful, return a success response
+            return NextResponse.json({ message: "Student data updated successfully" }, { status: 200 });
+        } else{
+            // if no document was modified, return a not found response
+            return NextResponse.error(
+                new Error("No student found"),
+                { status: 404 }
+            );
+        }
+    } catch (error) {
+        console.log("Error: ", error);
+        return NextResponse.error(
+            new Error("Unable to update student data"),
+            { status: 500 }
+        );
+    }
+}
