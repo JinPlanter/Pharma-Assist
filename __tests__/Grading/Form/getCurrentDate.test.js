@@ -5,13 +5,18 @@ import { getCurrentDate } from '../../../app/components/gradingForm4';
 describe('Tests for the getCurrentDate function', () => {
 
     // Test case 1. Returns the correct date
-    test('should return the correct date', () => {
-        const result = getCurrentDate();
-        const date = new Date();
-        const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
-        const expected = localDate.toISOString().slice(0, 10);
+    // Mock Date.now to return a fixed date
+    beforeEach(() => {
+        jest.spyOn(Date, 'now').mockImplementation(() => new Date('2024-04-11T00:00:00Z').getTime());
+    });
     
-        expect(result).toBe(expected);
+    // Clean up the mock to make sure tests are completely isolated
+    afterEach(() => {
+        jest.spyOn(Date, 'now').mockRestore();
+    });
+    
+    test('getCurrentDate returns the current date', () => {
+        expect(getCurrentDate()).toBe('2024-04-11');
     });
 
 });

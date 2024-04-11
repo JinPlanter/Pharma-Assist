@@ -61,10 +61,10 @@ describe('StudentPage component', () => {
             expect(screen.queryByText(/Loading.../)).not.toBeInTheDocument(); // Check if the loading text is removed
         }, { timeout: 5000 });
 
-        const nameCell = screen.getByTestId('student-name');
+        const nameCell = screen.getByTestId('name');
         expect(nameCell).toBeInTheDocument();
 
-        const usernameCell = screen.getByTestId('student-username');
+        const usernameCell = screen.getByTestId('username');
         expect(usernameCell).toBeInTheDocument();
 
     }); // end of test 2

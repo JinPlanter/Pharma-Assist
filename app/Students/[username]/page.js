@@ -118,6 +118,7 @@ const StudentPage = ({ params }) => {
                 <div className="flex flex-row justify-between">
                 {isEditing ? (
                 <input
+                    data-testid="name"
                     className='text-lg bg-transparent rounded-md border border-white py-3 px-4'
                     type="text"
                     name= "name"
@@ -126,7 +127,7 @@ const StudentPage = ({ params }) => {
                     onChange={handleInputChange}
                 />
             ) : (
-                <h1 className="text-2xl font-bold leading-tight tracking-tight text-white md-text-3xl dark:text-white">
+                <h1 data-testid="name" className="text-2xl font-bold leading-tight tracking-tight text-white md-text-3xl dark:text-white">
                     {student.firstName} {student.lastName}
                 </h1>
             )}
@@ -149,8 +150,9 @@ const StudentPage = ({ params }) => {
                 <tbody>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Username:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="username" className="border px-4 py-4">
                             <EditableField
+                                data-testid="username"
                                 isEditing={isEditing}
                                 name="username"
                                 placeholder={student.username}
@@ -161,8 +163,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Email:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="email" className="border px-4 py-4">
                             <EditableField
+                                data-testid="email"
                                 isEditing={isEditing}
                                 name="email"
                                 placeholder={student.email}
@@ -173,8 +176,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Phone:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="phone" className="border px-4 py-4">
                             <EditableField
+                                data-testid="phone"
                                 isEditing={isEditing}
                                 name="phone"
                                 placeholder={student.phone}
@@ -186,8 +190,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Emergency Contact:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="emergency-contact" className="border px-4 py-4">
                             <EditableField
+                                data-testid="emergency-contact"
                                 isEditing={isEditing}
                                 name="emergencyContact"
                                 placeholder={student.emergencyContact}
@@ -199,8 +204,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Address:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="address" className="border px-4 py-4">
                            <EditableField
+                                data-testid="address"
                                 isEditing={isEditing}
                                 name="address"
                                 placeholder={student.address}
@@ -211,8 +217,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">City:</td>
-                        <td className="border px-4 py-4">
+                        <td  data-testid="city" className="border px-4 py-4">
                             <EditableField
+                                data-testid="city"
                                 isEditing={isEditing}
                                 name="city"
                                 placeholder={student.city}
@@ -223,8 +230,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Province:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="province" className="border px-4 py-4">
                             <EditableField
+                                data-testid="province"
                                 isEditing={isEditing}
                                 name="province"
                                 placeholder={student.province}
@@ -235,8 +243,9 @@ const StudentPage = ({ params }) => {
                     </tr>
                     <tr className="py-4">
                         <td className="border px-4 py-4">Zip:</td>
-                        <td className="border px-4 py-4">
+                        <td data-testid="zip" className="border px-4 py-4">
                             <EditableField
+                                data-testid="zip"
                                 isEditing={isEditing}
                                 name="zip"
                                 placeholder={student.zip}
