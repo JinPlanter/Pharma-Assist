@@ -41,10 +41,13 @@ describe('Page component', () => {
 
 
     //0. test that the page renders the heading: Student Search Page
-    test('renders Student Search Page', () => {
+    test('renders Student Search Page', async() => {
         render(<Page />);
         const heading = screen.getByText(/Student Search Page/i);
+
+        await waitFor(() => {
         expect(heading).toBeInTheDocument();
+        });
 
         
     });
@@ -54,24 +57,43 @@ describe('Page component', () => {
     // 1. test that the page renders the search bar component
     test('renders the search bar component', async() => {
         const { getByPlaceholderText, getByTestId } = render(<Page />);
+        // Wait for the "Loading..." text to disappear
+        await waitFor(() => {
+            expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+        });
+
+        await waitFor(() => {
         expect(getByPlaceholderText("Search by name, class or student ID")).toBeInTheDocument();
-        expect(getByTestId("search-bar")).toBeInTheDocument();
+        });
+
+        await waitFor(() => {
+            expect(getByTestId("search-bar")).toBeInTheDocument();
+        });
     });
 
 
 
     // 2. test that the search bar allows input
     test('allows input in the search bar', async() => {
-        const { getByPlaceholderText } = render(<Page />);
-        const searchBar = getByPlaceholderText("Search by name, class or student ID");
+        let component;
+        await act(async () => {
+            component = render(<Page />);
+        });
+
+        const searchBar = component.getByPlaceholderText("Search by name, class or student ID");
         fireEvent.change(searchBar, { target: { value: 'John' } });
-        expect(searchBar.value).toBe('John');
+        await waitFor(() =>{
+            expect(searchBar.value).toBe('John');
+        });
     });
 
 
 
     //3. test that the page handles fetch error as expected
     test('handles fetch error', async() => {
+        //mock console error
+        console.error = jest.fn(); // this suppresses console.error from printing to the console as it is what we want to test
+
         global.fetch.mockImplementationOnce(() => Promise.reject("Fetch error"));
        
         // spy on console.error
@@ -83,6 +105,7 @@ describe('Page component', () => {
         await waitFor(() => {
             expect(errorSpy).toHaveBeenCalledWith('Error fetching data:', 'Fetch error');
         });
+
         
     });
 

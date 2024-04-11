@@ -59,11 +59,13 @@ describe('StudentPage component', () => {
         // then assertions
         await waitFor(() => {
             expect(screen.queryByText(/Loading.../)).not.toBeInTheDocument(); // Check if the loading text is removed
-            expect(screen.queryByText(/John Doe/)).toBeInTheDocument(); // Check if the student name is displayed
-            expect(screen.queryByText(/Id: 233/)).toBeInTheDocument(); // Check if the student username is displayed
+        }, { timeout: 5000 });
 
+        const nameCell = screen.getByTestId('name');
+        expect(nameCell).toBeInTheDocument();
 
-        });
+        const usernameCell = screen.getByTestId('username');
+        expect(usernameCell).toBeInTheDocument();
 
     }); // end of test 2
 

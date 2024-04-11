@@ -4,10 +4,10 @@ name: Test App
 on:
   push:
     branches:
-      - test-cypress
+      - main
   pull_request:
     branches:
-      - master
+      - main
   
 jobs:
   unit-tests:
