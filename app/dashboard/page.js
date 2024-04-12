@@ -7,6 +7,8 @@ import ImportFile from "../ImportFile/page";
 import LogoutPage from "../Logout/page";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
+import UploadClassList from "../uploadclasslist/page";
+import DisplayFilePage from "../displayFile/page";
 
 function Dashboard() {
     const [activeComponent, setActiveComponent] = useState("");
@@ -19,14 +21,10 @@ function Dashboard() {
         switch (activeComponent) {
             case "Grading":
                 return <Grading />;
-            case "Login":
-                return <LoginPage />;
             case "Students":
                 return <Students />;
             case "Import File":
-                return <ImportFile />;
-            case "Log Out":
-                <LogoutPage />
+                return <UploadClassList />
             default:
                 return <Grading />;
         }
