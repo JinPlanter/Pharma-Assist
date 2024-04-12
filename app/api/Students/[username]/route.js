@@ -102,7 +102,13 @@ export const PUT = async (request, response) => {
         const updateDoc = {
             $set: { "fileContentJson.$.firstName": updatedData.firstName,
                     "fileContentJson.$.lastName": updatedData.lastName,
-                    "fileContentJson.$.email": updatedData.email
+                    "fileContentJson.$.email": updatedData.email,
+                    "fileContentJson.$.phone": updatedData.phone,
+                    "fileContentJson.$.emergencyContact": updatedData.emergencyContact,
+                    "fileContentJson.$.address": updatedData.address,
+                    "fileContentJson.$.city": updatedData.city,
+                    "fileContentJson.$.province": updatedData.province,
+                    "fileContentJson.$.zip": updatedData.zip,
                 },
         };
         
