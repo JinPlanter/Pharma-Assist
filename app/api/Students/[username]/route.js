@@ -98,14 +98,28 @@ export const PUT = async (request, response) => {
         
         //update student data in collection
 
-        const result = await db.collection("classlist").findOneAndUpdate(
-            { "fileContentJson.username": {$regex: `#${response.params.username}$ `} },
-            { $set: { "fileContentJson.$[elem]": updatedData } },
-            { arrayFilters: [{ "elem.username": {$regex: `#${response.params.username}$ `} }], returnOriginal: false}
-        );
+        const students = await db.collection("classlist")
+        // create a filter to find the student with the username in the request
+        console.log("fileContentJson.username: ", `#${response.params.username}` );
+        const filter = { "fileContentJson": { $elemMatch: { "username": `#${response.params.username}` } } };
 
+        // specify the update to set a value for the student with the username in the request
+        // updatedData is a json object that contains the updated student data
+        // do we have to unpack the updatedData object?
+        const updateDoc = {
+            $set: { "fileContentJson.$.firstName": updatedData.firstName,
+                    "fileContentJson.$.lastName": updatedData.lastName,
+                    "fileContentJson.$.email": updatedData.email
+                },
+        };
+        
+        // update the first document that matches the filter
+        const result = await students.updateOne(filter, updateDoc);
 
         if (result) {
+            // check if updated
+            const updatedStudent = await students.findOne(filter);
+            console.log("Updated student: ", updatedStudent);
             // if the update was successful, return a success response
             return NextResponse.json({ message: "Student data updated successfully" }, { status: 200 });
         } else{

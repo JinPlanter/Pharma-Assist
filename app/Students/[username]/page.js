@@ -111,6 +111,7 @@ const StudentPage = ({ params }) => {
             console.log("username: ", username, "editedStudent: ", editedStudent)
             await updateStudentData(username, editedStudent);
             setIsEditing(false);
+            setStudent(editedStudent);
         } catch (error) {
             console.error("Error saving student data:", error);
         }
