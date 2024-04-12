@@ -13,6 +13,28 @@ export const getStudentData = async (username) => {
 };
 
 
+//update the student data in the database through the api route
+export const updateStudentData = async (username, student) => {
+    console.log("student: ", student);
+    console.log("username: ", username);
+    console.log('route: ', `/api/Students/${username}`)
+    const res = await fetch(`/api/Students/${username}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(student)
+    });
+
+
+    if (!res.ok) {
+        throw new Error(`Server responded with the status code ${res.status}`);
+    }
+
+    return res.json();
+};
+
+
 
 const StudentPage = ({ params }) => {
 
@@ -88,15 +110,11 @@ const StudentPage = ({ params }) => {
 
     const handleSave = async () => {
         try {
-            // call api to save student data
-            
-            await handleSaveStudent({
-                editingStudent: student,
-                setEditingStudent: setEditedStudent,
-                setEditedStudent: setEditedStudent,
-                setRefreshTimestamp: Date.now(),
-            });
+            // use the function updateStudentData to update student data in the db
+            console.log("username: ", username, "editedStudent: ", editedStudent)
+            await updateStudentData(username, editedStudent);
             setIsEditing(false);
+            setStudent(editedStudent);
         } catch (error) {
             console.error("Error saving student data:", error);
         }
