@@ -66,7 +66,7 @@ export default function UploadClassList() {
                 accept=".csv"
                 onChange={handleFileChange}
             />
-            <button onClick={handleUpload}>Upload</button>
+            <button className="btn btn-ghost border-white" onClick={handleUpload}>Upload</button>
         </div>
     );
 }
