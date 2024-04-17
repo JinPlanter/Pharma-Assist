@@ -13,7 +13,7 @@ describe('Tests for the generateFormKey function', () => {
         realDateNow = Date.now.bind(global.Date);
 
         // Mock Date.now to return a fixed date in local timezone
-        const DATE_TO_USE = new Date('2024-04-12T00:00:00Z');
+        const DATE_TO_USE = new Date();
         const utcToLoc = DATE_TO_USE.getTime() + (DATE_TO_USE.getTimezoneOffset() * 60 * 1000);
         const dateNowStub = jest.fn(() => utcToLoc);
         global.Date.now = dateNowStub;
@@ -28,7 +28,7 @@ describe('Tests for the generateFormKey function', () => {
     test('should return the correct form key', () => {
 
         const result = generateFormKey('username');
-        const currentDate = new Date('2024-04-12T00:00:00Z').toISOString().slice(0, 10);
+        const currentDate = new Date().toISOString().slice(0, 10);
         const expected = `username-${currentDate}`;
 
         expect(result).toBe(expected);

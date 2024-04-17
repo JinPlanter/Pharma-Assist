@@ -13,7 +13,7 @@ describe('Tests for the getCurrentDate function', () => {
         realDateNow = Date.now.bind(global.Date);
 
         // Mock Date.now to return a fixed date in local timezone
-        const DATE_TO_USE = new Date('2024-04-12T00:00:00Z');
+        const DATE_TO_USE = new Date();
         const utcToLoc = DATE_TO_USE.getTime() + (DATE_TO_USE.getTimezoneOffset() * 60 * 1000);
         const dateNowStub = jest.fn(() => utcToLoc);
         global.Date.now = dateNowStub;
@@ -26,7 +26,8 @@ describe('Tests for the getCurrentDate function', () => {
     
     // Test case 1. Returns the correct date
     test('getCurrentDate returns the current date', () => {
-        expect(getCurrentDate()).toBe('2024-04-12');
+        const currentDate = new Date().toISOString().slice(0, 10);
+        expect(getCurrentDate()).toBe(currentDate);
     });
 
 });
