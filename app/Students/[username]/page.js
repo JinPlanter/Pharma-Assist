@@ -2,7 +2,6 @@
 //path: app/Students/%5Bid%5D/page.js
 "use client"
 import React, { useState, useEffect } from 'react';
-import handleSaveStudent from '../../customHooks/handleSaveStudent';
 import EditableField from '../../components/inputEditStudentInfo';
 
 
@@ -122,7 +121,7 @@ const StudentPage = ({ params }) => {
 
 
     if (loading) {
-        return <div className="text-neutral">Loading...</div>;
+        return <div data-testid="loading" className="text-neutral">Loading...</div>;
     }
     
 
@@ -133,10 +132,10 @@ const StudentPage = ({ params }) => {
     return (
         <div className="bg-primary p-4 rounded-md justify-between">
             <div className='flex flex-row justify-between items-center mb-4'>
-                <div className="flex flex-row justify-between">
+                <div data-testid="name" className="flex flex-row justify-between">
                 {isEditing ? (
                 <input
-                    data-testid="name"
+                    data-testid="name-input"
                     className='text-lg bg-transparent rounded-md border border-white py-3 px-4'
                     type="text"
                     name= "name"
@@ -145,7 +144,7 @@ const StudentPage = ({ params }) => {
                     onChange={handleInputChange}
                 />
             ) : (
-                <h1 data-testid="name" className="text-2xl font-bold leading-tight tracking-tight text-white md-text-3xl dark:text-white">
+                <h1 data-testid="name-header" className="text-2xl font-bold leading-tight tracking-tight text-white md-text-3xl dark:text-white">
                     {student.firstName} {student.lastName}
                 </h1>
             )}
