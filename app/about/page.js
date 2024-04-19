@@ -68,7 +68,7 @@ export default function About() {
                     </div>
                 </footer>
 
-                <Link href="./dashboard" className="text-blue-500 hover:underline">
+                <Link href="./" className="text-blue-500 hover:underline">
                     Back
                 </Link>
             </div>
