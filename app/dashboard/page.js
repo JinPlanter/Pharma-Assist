@@ -26,7 +26,7 @@ function Dashboard() {
             case "Import File":
                 return <UploadClassList />
             default:
-                return <Grading />;
+                return <UploadClassList />;
         }
     };
 
